@@ -1,0 +1,17 @@
+How to connect to Digital Ocean
+-> ssh client : http://www.putty.org/ (windows)
+-> hostname : 188.166.11.187
+-> port : 22
+
+SFTP credentials
+-> Host: 188.166.11.187
+-> User: django
+-> Pass: c7clnPWfg3
+
+You can use the following Postgres database credentials:
+-> DB: django
+-> User: django
+-> Pass: uuHGAO1ip0
+
+Use Django
+cd /home/django/django_project
