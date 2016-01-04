@@ -20,6 +20,17 @@ parts/
 sdist/
 var/
 API/node_modules
+angular-phonecat/node_modules
+angular-phonecat/scripts
+angular-phonecat/test
+angular-phonecat/.bowerrc
+angular-phonecat/.jshintrc
+angular-phonecat/.travis.yml
+angular-phonecat/bower.json
+angular-phonecat/package.json
+angular-phonecat/README.md
+angular-phonecat/LICENSE
+
 *.egg-info/
 .installed.cfg
 *.egg
