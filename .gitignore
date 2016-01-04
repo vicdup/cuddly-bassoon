@@ -23,6 +23,9 @@ API/node_modules
 angular-phonecat/node_modules
 angular-phonecat/scripts
 angular-phonecat/test
+angular-phonecat/app/bower_components
+angular-phonecat/app/phones
+angular-phonecat/app/.bowerrc
 angular-phonecat/.bowerrc
 angular-phonecat/.jshintrc
 angular-phonecat/.travis.yml
