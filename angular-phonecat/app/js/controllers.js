@@ -9,5 +9,5 @@ cuddlyControllers.controller('tvShowPageCtrl', ['$scope', 'apiTmdb',
     apiTmdb.getTvShowById(550).then (function(d){
       $scope.tvshow=d;
     })
-  };
+  }
   ]);

@@ -2,27 +2,23 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var cuddlyApp = angular.module('cuddlyApp', [
   'ngRoute',
-  'phonecatAnimations',
-
-  'phonecatControllers',
-  'phonecatFilters',
-  'phonecatServices'
+  'cuddlyControllers',
+  'cuddlyServices'
 ]);
 
-phonecatApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
-      }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
-      }).
-      otherwise({
-        redirectTo: '/phones'
+cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('home', {
+        url: '/home',
+        templateUrl: 'partials/home.html'
+      })
+      .state('serie', {
+        url: '/series/:serieId',
+        templateUrl: 'partials/serie.html',
+        controller: 'tvShowPageCtrl'
       });
+      $urlRouterProvider.otherwise('/home');
   }]);
