@@ -1,12 +1,85 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url(../fonts/CaviarDreams.ttf) format("truetype");
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+body {
+	font-family: "Caviar Dreams", Verdana, Tahoma;
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    z-index: 0;
+    color: #bdbdbd;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h1 {
+
+}
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
 .AvatarIcon {
 max-width:20%;
 }
 
 .header{
-line-height:70px;
+line-height:40px;
 
+}
+
+.serie_eps, .serie_info {
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.category_content {
+    
+}
+
+.darkened{
+    border-radius: 3px;
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+
+.scrollable {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+/* Series page */ 
+.serie_name {
+    margin-bottom: 20px;
 }
 
 .serie_pic > img{
@@ -14,8 +87,7 @@ max-width: 100%;
 }
 
 .serie_content, .episode_content, .research_content{
-background: #c6c6c6;
-    
+
 }
 
 .episode_content{
