@@ -11,7 +11,9 @@ function ConfigurationsRepository () {
         else {filter = JSON.parse(req.query.filter);}
 
 		Users.find(query,filter, function(err, configurations) {
-		  if (err) throw err;
+		  if (err){
+            throw err;
+        }
 		  res.json(configurations);
 		});
     }
@@ -20,8 +22,13 @@ function ConfigurationsRepository () {
         console.log(req.body);
         var newUser = new Users(req.body);
         newUser.save(function (err, newService){
-        	if (err) throw err;
-            res.json({'message': 'success'});
+            if(err){
+        	if (err.name == 'ValidationError') {
+                res.statusCode = 400;
+                res.json(err.errors);
+            }
+            else throw err;}
+            else res.json({'message': 'success'});
         });
         return;
     }
