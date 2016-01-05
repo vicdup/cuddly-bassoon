@@ -3,7 +3,7 @@
 /* App Module */
 
 var cuddlyApp = angular.module('cuddlyApp', [
-  'ngRoute',
+  'ui.router',
   'cuddlyControllers',
   'cuddlyServices'
 ]);
@@ -16,9 +16,9 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'partials/home.html'
       })
       .state('serie', {
-        url: '/series/:serieId',
+        url: '/serie/:serieId',
         templateUrl: 'partials/serie.html',
-        controller: 'tvShowPageCtrl'
+        controller: 'seriePageCtrl'
       });
       $urlRouterProvider.otherwise('/home');
   }]);

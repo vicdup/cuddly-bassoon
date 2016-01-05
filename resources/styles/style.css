@@ -36,3 +36,7 @@ max-width: 100%;
 height:400px;
 overflow-y: scroll;
 }
+
+.tracked{
+display:none;
+}
