@@ -4,10 +4,10 @@
 
 var cuddlyControllers = angular.module('cuddlyControllers', []);
 
-cuddlyControllers.controller('tvShowPageCtrl', ['$scope', 'apiTmdb',
+cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb',
   function($scope, apiTmdb) {
-    apiTmdb.getTvShowById(550).then (function(d){
-      $scope.tvshow=d;
+    apiTmdb.getSerieById(550).then (function(d){
+      $scope.serie=d;
     })
   }
   ]);

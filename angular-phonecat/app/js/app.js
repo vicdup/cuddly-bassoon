@@ -18,7 +18,7 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
       .state('serie', {
         url: '/series/:serieId',
         templateUrl: 'partials/serie.html',
-        controller: 'tvShowPageCtrl'
+        controller: 'seriePageCtrl'
       });
       $urlRouterProvider.otherwise('/home');
   }]);
