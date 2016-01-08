@@ -112,3 +112,49 @@ overflow-y: scroll;
 .tracked{
 display:none;
 }
+
+
+
+
+
+
+
+/*Paramètre pour les notations*/
+/*Général*/
+.stars, .empty_stars > img , .filled_stars > img{
+width:200px;
+height : 40px;
+box-sizing: border-box;
+}
+.stars{    
+position : relative;
+display: inline-block;
+}
+.empty_stars, .filled_stars {   
+position: absolute;
+box-sizing: border-box;
+width:inherit;
+height:inherit; 
+}
+
+/*Pour regler sur les différentes pages*/
+.search_stars, .search_stars > img{
+width:125px;
+height : 25px;
+}
+/*General*/
+.stars > img{
+position: absolute;
+box-sizing: border-box;
+}
+.empty_stars {
+  z-index: 0;
+opacity: 0%;
+overflow : hidden;
+}
+.filled_stars {
+  z-index: 1;
+overflow: hidden;
+width: 90%;
+}
+
