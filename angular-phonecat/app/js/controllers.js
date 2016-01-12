@@ -59,11 +59,18 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 
 
 cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
-  function($scope,apiUserDb,$stateParams){
+  function($scope,apiUserDb,apiTmdb,$stateParams){
     $scope.emailUser = $stateParams.emailUser;
 
     apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
       $scope.user = r;
+      $scope.series = $scope.user.series.tmdbId;
+      var seriesIds = [];
+      for (var i = $scope.user.series.length - 1; i >= 0; i--) {
+        seriesIds.push($scope.user.series[i].tmdbId);
+      };
+
+      $scope.seriesIds = seriesIds;
     });
   }
 
