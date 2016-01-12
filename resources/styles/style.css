@@ -200,8 +200,16 @@ display:none;
     max-width:100%;
 }
 .avatar-choice > div > img {
-max-width: 100px;
+    max-width: 100px;
 }
+
+.avatar-choice {
+    text-align: center;
+}
+.pseudo-input > div > input {
+    width:100%;
+}
+
 .passed ,.passed > a {
     color: #8d8d8d;
 }
