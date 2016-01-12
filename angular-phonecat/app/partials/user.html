@@ -1,13 +1,10 @@
 <div class="container-fluid">
-    <p>Info User :
+ <!--    <p>Info User :
     {{user}}</p>
-    <p>Info Séries suivies :
-
-    {{seriesIds}}</p>
 
     <p>JSON des séries :
-    {{followed_series}}</p>
-    <!-- <div class="header container">
+    {{followed_series}}</p> -->
+    <div class="header container">
             <div class="row">
                 <div class="col-md-6">
                     Séries suivies
@@ -25,18 +22,18 @@
         <div class="content container">
             <div class="row research_content">
 
-                <div class="returned_serie col-md-6">
+                <div class="returned_serie col-md-6" ng-repeat="serie in followed_series">
                     <div class="row">
                         <div class="col-md-4 serie_search_pic">
-                            <img src="../app/img/Mi3x5.jpg">
+                            <img src="../app/images/Mi3x5.jpg">
                         </div>
                         
                         <div class="col-md-4 serie_info_followed">
                             <div class="row serie_followed_title">
-                                <a href="serie.html">Dexter</a>
+                                <a href="serie.html">{{serie.name}}</a>
                             </div>
-                            <div class="row serie_followed_tags">
-                                Drame, Violent, Thriller
+                            <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
+                                {{genre.name}}
                             </div>
                             <div class="row serie_followed_status">
                                 En cours : S03E02
@@ -49,7 +46,7 @@
                     </div>
                 </div> 
                 
-                <div class="returned_serie col-md-6">
+                <!-- <div class="returned_serie col-md-6">
                     <div class="row">
                         <div class="col-md-4 serie_search_pic">
                             <img src="../app/img/Mi3x5.jpg">
@@ -360,11 +357,10 @@
                         </div>
                     </div>
                 </div>
-           
+            -->
                 
                 
             </div>
 
         </div>
- -->
 </div>

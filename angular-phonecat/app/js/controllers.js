@@ -88,16 +88,16 @@ cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 
       for (var i = $scope.user.series.length - 1; i >= 0; i--) {
         seriesIds.push($scope.user.series[i].tmdbId);
       };
-      $scope.seriesIds = seriesIds;
 
-      // var followed_series = [];
-      // var id = 0;
-      // for (id in seriesIds){
-      //   followed_series.push(apiTmdb.getSerieById(seriesIds[id]));
-      // };
+      var followed_series = [];
+      var id = 0;
+      for (id in seriesIds){
+        apiTmdb.getSerieById(seriesIds[id]).then(function(d){
+        followed_series.push(d);
+        });
+      }
 
-      // $scope.followed_series = followed_series;
-      
+      $scope.followed_series = followed_series;  
     });
   }
 
