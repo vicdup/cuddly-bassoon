@@ -34,3 +34,19 @@ cuddlyServices.service('apiTmdb', function($http){
 	return apiTmdb;
 
 });
+
+
+cuddlyServices.service('apiUserDb', function($http){
+	var apiUserDb = {
+		getUserByEmail: function(emailUser){
+			var promise = $http.get('').then(function(response){
+				console.log(response);
+				return response.data;
+			})
+			return promise;
+		}
+
+	};
+	return apiUserDb;
+
+});
