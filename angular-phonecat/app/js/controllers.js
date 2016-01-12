@@ -39,3 +39,20 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParam
     })
   }
 ]);
+
+cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
+  function($scope,apiTmdb, $stateParams){
+    $scope.serieId = $stateParams.serieId;
+    $scope.seasonNumber = $stateParams.seasonNumber;
+    $scope.episodeNumber = $stateParams.episodeNumber;
+
+    apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber,$scope.serieId,$scope.episodeNumber).then(function(d){
+      $scope.episode=d;
+    });
+
+    apiTmdb.getSerieById($scope.serieId).then(function(r){
+      $scope.serie = r;
+    });
+  }
+
+]);
