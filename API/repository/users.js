@@ -34,7 +34,7 @@ function UsersRepository () {
     }
 
     this.getUserByEmail= function(req, res, next) {
-        Users.find({'email':req.params.email}, function(err, configurations) {
+        Users.find({'email':req.params.email}, function(err, users) {
           if (err) throw err;
           res.json(users[0]);
         });
