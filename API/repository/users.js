@@ -1,6 +1,6 @@
 var Users = require ('../models/users');
 
-function ConfigurationsRepository () {
+function UsersRepository () {
     "use strict";    
 
     this.getUsers = function(req, res, next) {
@@ -32,8 +32,34 @@ function ConfigurationsRepository () {
         });
         return;
     }
+
+    this.getUserByEmail= function(req, res, next) {
+        Users.find({'email':req.params.email}, function(err, configurations) {
+          if (err) throw err;
+          res.json(users[0]);
+        });
+    }
+
+    this.deleteUserByEmail= function(req, res, next) {
+        Users.remove({'email':req.params.email}, function(err) {
+            if (err) throw err;
+            else res.json({'message': 'successly removed'});
+        });
+    }
+
+    this.putUserByEmail= function(req, res, next) {
+        var users = {'email':req.params.email}
+          , update = req.body
+          , options = { multi: false };
+
+        Users.update(conditions, update, options, function(err, configurations) {
+          if (err) throw err;
+          res.json(req.body);
+        });
+    }
+
 }
 
-module.exports = ConfigurationsRepository;
+module.exports = UsersRepository;
 
 //Repository
