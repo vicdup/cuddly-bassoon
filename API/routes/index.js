@@ -12,7 +12,7 @@ router.get('/users/:email', userHandler.getUserByEmail);
 router.put('/users/:email', userHandler.putUserByEmail);
 router.delete('/users/:email', userHandler.deleteUserByEmail);
 
-router.put('/users/:email/series', userHandler.putUsersByEmailSeries);
+// router.put('/users/:email/series', userHandler.putUsersByEmailSeries);
 // router.get('/users/:email/series', userHandler.getUsersByEmailSeries);
 // router.delete('/users/:email/series/:serieId', userHandler.deleteUsersByEmailSeries);
 
