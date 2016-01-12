@@ -42,7 +42,10 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParam
 
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope,apiTmdb, $stateParams){
-    
+    $scope.serieId = $stateParams.serieId;
+    apiTmdb.getSerieById($scope.serieId).then(function(d){
+      
+    })
   }
 
 ]);

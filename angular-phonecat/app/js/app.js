@@ -21,7 +21,7 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         controller: 'seriePageCtrl'
       });
       .state('episode',{
-        url: '/epiose/:serieId/:episodeId',
+        url: '/epiose/:serieId/:seasonNumber/:episodeId',
         templateUrl: 'partials/episode.html',
         controller: 'episodePageCtrl'
       });

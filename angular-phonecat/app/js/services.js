@@ -21,6 +21,14 @@ cuddlyServices.service('apiTmdb', function($http){
 			return promise;
 		}
 
+		getEpisodeByNumberSeasonByEpisodeId: function(seasonNumber,idSerie,episodeNumber){
+			var promise = $http.get('https://api.themoviedb.org/3/tv/'+idSerie+'/season/'+seasonNumber+'/episode/'+episodeNumber+'?api_key=1a3f1b0a8620851f42d4b1a95494d44d').then(function(response){
+				console.log(response);
+				return response.data
+			})
+			return promise
+		}
+
 
 	};
 	return apiTmdb;
