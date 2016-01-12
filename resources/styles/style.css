@@ -20,6 +20,15 @@ body {
     color: #bdbdbd;
 }
 
+a{
+    color: #bdbdbd;
+}
+
+a:hover{
+    color: #808080;
+    text-decoration: none;
+}
+
 h1, h2, h3, h4, h5 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -158,3 +167,36 @@ overflow: hidden;
 width: 90%;
 }
 
+
+
+.released-episode > a > img , .followed-serie > a > img , .recommanded-serie > a > img {
+max-width:100%;
+}
+.passed ,.passed > a {
+color: #8d8d8d;
+}
+.last_episode ,.last-episode > a{
+color: lightcoral;
+}
+.first_episode , .first-episode > a{
+color:lightgreen;
+}
+.Followed > div {
+padding: 0px;
+}
+
+.recommanded-serie {
+padding: 0px 3px 10px 3px;
+}
+
+.first-episode > a:hover{
+color:forestgreen;
+}
+
+.last-episode > a:hover{
+color:#a75858;
+}
+
+.passed > a:hover{
+color:#5a5a5a;
+}
