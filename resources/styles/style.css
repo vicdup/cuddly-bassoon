@@ -20,6 +20,15 @@ body {
     color: #bdbdbd;
 }
 
+a {
+    color: #bdbdbd;
+}
+
+a:hover {
+    color: #808080;
+    text-decoration: none;
+}
+
 h1, h2, h3, h4, h5 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -43,18 +52,24 @@ h3 {
 	margin-left: 0px;
 	margin-right: 0px;
 }
+
 .AvatarIcon {
-max-width:20%;
+    max-width:20%;
 }
 
-.header{
-line-height:40px;
-
+.header {
+    line-height:40px;
 }
 
 .serie_eps, .serie_info {
-	padding-left: 2%;
-	padding-right: 2%;
+    position: relative;
+    min-height: 400px;
+}
+
+.bottom-buttons {
+    position: absolute;
+    bottom: 0;
+
 }
 
 .category_content {
@@ -66,7 +81,7 @@ line-height:40px;
     /* Fallback for web browsers that don't support RGBa */
     background-color: rgb(0, 0, 0);
     /* RGBa with 0.6 opacity */
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.35);
     /* For IE 5.5 - 7*/
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
     /* For IE 8*/
@@ -75,6 +90,8 @@ line-height:40px;
 
 .scrollable {
     max-height: 400px;
+    padding-left: 5%;
+    padding-right: 5%;
     overflow-y: scroll;
 }
 /* Series page */ 
@@ -116,45 +133,97 @@ display:none;
 
 
 
+/*Calender*/
+
+.cal-month-title {
 
 
+}
+
+
+.cal-month-content {
+    line-height: 25px;
+
+
+}
+
+.alert_manager_link {
+    text-align: center;
+
+}
 
 /*Paramètre pour les notations*/
 /*Général*/
-.stars, .empty_stars > img , .filled_stars > img{
-width:200px;
-height : 40px;
-box-sizing: border-box;
+.stars, .empty_stars > img , .filled_stars > img {
+    width:200px;
+    height : 40px;
+    box-sizing: border-box;
 }
-.stars{    
-position : relative;
-display: inline-block;
+.stars {    
+    position : relative;
+    display: inline-block;
 }
+
 .empty_stars, .filled_stars {   
-position: absolute;
-box-sizing: border-box;
-width:inherit;
-height:inherit; 
+    position: absolute;
+    box-sizing: border-box;
+    width:inherit;
+    height:inherit; 
 }
 
 /*Pour regler sur les différentes pages*/
-.search_stars, .search_stars > img{
-width:125px;
-height : 25px;
-}
-/*General*/
-.stars > img{
-position: absolute;
-box-sizing: border-box;
-}
-.empty_stars {
-  z-index: 0;
-opacity: 0%;
-overflow : hidden;
-}
-.filled_stars {
-  z-index: 1;
-overflow: hidden;
-width: 90%;
+.search_stars, .search_stars > img {
+    width:125px;
+    height : 25px;
 }
 
+/*General*/
+.stars > img {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.empty_stars {
+    z-index: 0;
+    overflow : hidden;
+}
+
+.filled_stars {
+    z-index: 1;
+    overflow: hidden;
+    width: 90%;
+}
+
+
+
+.released-episode > a > img , .followed-serie > a > img , .recommanded-serie > a > img {
+    max-width:100%;
+}
+.passed ,.passed > a {
+    color: #8d8d8d;
+}
+.last_episode ,.last-episode > a{
+    color: lightcoral;
+}
+.first_episode , .first-episode > a{
+    color:lightgreen;
+}
+.Followed > div {
+    padding: 0px;
+}
+
+.recommanded-serie {
+    padding: 0px 3px 10px 3px;
+}
+
+.first-episode > a:hover{
+    color:forestgreen;
+}
+
+.last-episode > a:hover{
+    color:#a75858;
+}
+
+.passed > a:hover{
+    color:#5a5a5a;
+}

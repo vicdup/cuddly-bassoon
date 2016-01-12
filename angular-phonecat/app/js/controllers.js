@@ -56,3 +56,15 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
   }
 
 ]);
+
+
+cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
+  function($scope,apiUserDb,$stateParams){
+    $scope.emailUser = $stateParams.emailUser;
+
+    apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
+      $scope.user = r;
+    });
+  }
+
+]);
