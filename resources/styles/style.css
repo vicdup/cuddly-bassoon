@@ -133,7 +133,7 @@ display:none;
 
 
 
-/*Calender*/
+/* Calender */
 
 .cal-month-title {
 
@@ -152,11 +152,14 @@ display:none;
 
 }
 
+/* Episode */
+
+
 /*Paramètre pour les notations*/
 /*Général*/
 .stars, .empty_stars > img , .filled_stars > img {
-    width:200px;
-    height : 40px;
+    width: 150px;
+    height : 30px;
     box-sizing: border-box;
 }
 .stars {    
@@ -173,7 +176,7 @@ display:none;
 
 /*Pour regler sur les différentes pages*/
 .search_stars, .search_stars > img {
-    width:125px;
+    width: 125px;
     height : 25px;
 }
 
