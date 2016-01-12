@@ -1,57 +1,58 @@
-<div class="header container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2> Fiche Episode </h2>
-                </div>
-                <div class="col-md-2 col-md-offset-2">
-                    <a href="index.html"><button class="btn btn-default">Tableau de bord</button></a>
-                </div>
-                <div class="Account col-md-2">
-                    <img class="AvatarIcon" src="../resources/images/Mi3x5.jpg"><a href="account.html"><button class="btn btn-default">Mon compte</button></a>
-                </div>
+<div class="container-fluid">
+    <div class="header container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2> Fiche Episode </h2>
             </div>
-
+            <div class="col-md-2 col-md-offset-2">
+                <a href="index.html"><button class="btn btn-default">Tableau de bord</button></a>
+            </div>
+            <div class="Account col-md-2">
+                <img class="AvatarIcon" src="../app/img/Mi3x5.jpg"><a href="account.html"><button class="btn btn-default">Mon compte</button></a>
+            </div>
         </div>
+
+    </div>
         
         <div class="content container">
             <div class="row serie_name">
                 <div class="col-md-12">
-                    <h1> Breaking Bad - {{serie.name}} </h1>
+                    <h1> {{serie.name}} </h1>
                 </div>
             </div>
             <div class="row episode_name">
                 <div class="col-md-12">
-                    S02E01 - Seven Thirty Seven - {{season.episode.}}
+                    S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
                 </div>
             </div>
             <div class="row category_content">
                 <div class="episode_info col-md-7">
                     <div class="row">
                         <div class="col-md-12 episode_description">
-                            C'est très très bien cet épisode.
+                            {{episode.overview.substring(0,200)}}...
                         </div>
                         <div class="col-md-12 episode_grade">
                             Note : 
                             <div class="stars">
-                                    <div class="empty_stars">
+                                   <!--  <div class="empty_stars">
                                         <img src='../resources/images/empty_stars.png' > 
                                     </div>
                                     <div class="filled_stars">
                                         <img src='../resources/images/filled_stars.png' > 
-                                    </div>
+                                    </div> -->
                             </div>
-                            4.5/5
+                            {{episode.vote_average}}/10 avec {{episode.vote_count}} votes
                         </div>
                         <div class="col-md-12 episode_release">
-                            Sortie : 8 mars 2009
+                            Sortie : {{episode.air_date}}
                         </div>
                     </div>
                 </div>
                 <div class="episode_preview col-md-5">
                     <a onclick="prev-ep()"> Prev </a>
-                    <img src="../resources/images/Mi3x5.jpg">
+                    <img ng-src="http://image.tmdb.org/t/p/w500/{{episode.still_path}}">
                     <a onclick="next-ep()"> Next </a>
                 </div>
             </div>
         </div>
-        
+</div>
