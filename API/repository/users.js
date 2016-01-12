@@ -48,7 +48,7 @@ function UsersRepository () {
     }
 
     this.putUserByEmail= function(req, res, next) {
-        var users = {'email':req.params.email}
+        var conditions = {'email':req.params.email}
           , update = req.body
           , options = { multi: false };
 
@@ -57,6 +57,17 @@ function UsersRepository () {
           res.json(req.body);
         });
     }
+
+    // this.putUsersByEmailSeries= function(req, res, next) {
+    //     Users.findOneAndUpdate(
+    //         {'email':req.params.email},
+    //         {$push: {series: req.body}},
+    //         {safe: true, upsert: true},
+    //         function(err, model) {
+    //             console.log(err);
+    //         }
+    //     );
+    // }
 
 }
 

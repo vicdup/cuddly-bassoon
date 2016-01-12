@@ -76,14 +76,14 @@ describe('API testing', function() {
         });
     });
   });
-
+  newTime = Date.now();
   describe('PUT', function() {
     it('should correctly update an existing user', function(done){
   var body = {
-    name: 'Victor test'
+    name: newTime
   };
   request(url)
-    .put('/api/users/vicdup@gmail.com')
+    .put('/api/users/'+time+'@test.com')
     .send(body)
     .expect('Content-Type', /json/)
     .expect(200) //Status code
@@ -92,8 +92,7 @@ describe('API testing', function() {
         throw err;
       }
       // Should.js fluent syntax applied
-        res.body.should.have.property('_id');
-        res.body.name.should.equal('Victor test');
+        res.body.name.should.equal(newTime);
       done();
     });
   });
@@ -121,7 +120,7 @@ describe('API testing', function() {
     it('should correctly delete an existing user', function(done){
   request(url)
     .delete('/api/users/'+time+'@test.com')
-    .send(body)
+    .send()
     .expect('Content-Type', /json/)
     .expect(200) //Status code
     .end(function(err,res) {
