@@ -199,6 +199,9 @@ display:none;
 .released-episode > a > img , .followed-serie > a > img , .recommanded-serie > a > img {
     max-width:100%;
 }
+.avatar-choice > div > img {
+max-width: 100px;
+}
 .passed ,.passed > a {
     color: #8d8d8d;
 }
