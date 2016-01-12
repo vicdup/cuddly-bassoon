@@ -5,7 +5,8 @@
 var cuddlyApp = angular.module('cuddlyApp', [
   'ui.router',
   'cuddlyControllers',
-  'cuddlyServices'
+  'cuddlyServices',
+  'angularMoment'
 ]);
 
 cuddlyApp.config(['$stateProvider', '$urlRouterProvider',

@@ -1,99 +1,160 @@
-/* app css stylesheet */
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url(../fonts/CaviarDreams.ttf) format("truetype");
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
 
 body {
-  padding-top: 20px;
+	font-family: "Caviar Dreams", Verdana, Tahoma;
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    z-index: 0;
+    color: #bdbdbd;
 }
 
-
-.phone-images {
-  background-color: white;
-  width: 450px;
-  height: 450px;
-  overflow: hidden;
-  position: relative;
-  float: left;
-}
-
-.phones {
-  list-style: none;
-}
-
-.thumb {
-  float: left;
-  margin: -0.5em 1em 1.5em 0;
-  padding-bottom: 1em;
-  height: 100px;
-  width: 100px;
-}
-
-.phones li {
-  clear: both;
-  height: 115px;
-  padding-top: 15px;
-}
-
-/** Detail View **/
-img.phone {
-  float: left;
-  margin-right: 3em;
-  margin-bottom: 2em;
-  background-color: white;
-  padding: 2em;
-  height: 400px;
-  width: 400px;
-  display: none;
-}
-
-img.phone:first-child {
-  display: block;
-}
-
-
-ul.phone-thumbs {
-  margin: 0;
-  list-style: none;
-}
-
-ul.phone-thumbs li {
-  border: 1px solid black;
-  display: inline-block;
-  margin: 1em;
-  background-color: white;
-}
-
-ul.phone-thumbs img {
-  height: 100px;
-  width: 100px;
-  padding: 1em;
-}
-
-ul.phone-thumbs img:hover {
-  cursor: pointer;
-}
-
-
-ul.specs {
-  clear: both;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-ul.specs > li{
-  display: inline-block;
-  width: 200px;
-  vertical-align: top;
-}
-
-ul.specs > li > span{
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-ul.specs dt {
-  font-weight: bold;
+h1, h2, h3, h4, h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 h1 {
-  border-bottom: 1px solid gray;
+
 }
+
+h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.AvatarIcon {
+max-width:20%;
+}
+
+.header{
+line-height:40px;
+
+}
+
+.serie_eps, .serie_info {
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.category_content {
+    
+}
+
+.darkened{
+    border-radius: 3px;
+    /* Fallback for web browsers that don't support RGBa */
+    background-color: rgb(0, 0, 0);
+    /* RGBa with 0.6 opacity */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+
+.scrollable {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+/* Series page */ 
+.serie_name {
+    margin-bottom: 20px;
+}
+
+.serie_pic > img{
+max-width: 100%;
+}
+
+.serie_content, .episode_content, .research_content{
+
+}
+
+.episode_content{
+min-height: 300px;
+}
+
+
+.episode_preview > img{
+max-height: 100%;
+max-width: 70%;
+}
+
+.serie_search_pic > img{
+max-width: 100%;
+}
+
+.research_content{
+height:400px;
+overflow-y: scroll;
+}
+
+.tracked{
+display:none;
+}
+
+
+
+
+
+
+
+/*Paramètre pour les notations*/
+/*Général*/
+.stars, .empty_stars > img , .filled_stars > img{
+width:200px;
+height : 40px;
+box-sizing: border-box;
+}
+.stars{    
+position : relative;
+display: inline-block;
+}
+.empty_stars, .filled_stars {   
+position: absolute;
+box-sizing: border-box;
+width:inherit;
+height:inherit; 
+}
+
+/*Pour regler sur les différentes pages*/
+.search_stars, .search_stars > img{
+width:125px;
+height : 25px;
+}
+/*General*/
+.stars > img{
+position: absolute;
+box-sizing: border-box;
+}
+.empty_stars {
+  z-index: 0;
+opacity: 0%;
+overflow : hidden;
+}
+.filled_stars {
+  z-index: 1;
+overflow: hidden;
+width: 90%;
+}
+
