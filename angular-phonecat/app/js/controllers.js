@@ -79,8 +79,18 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 
 cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
   function($scope,apiUserDb,apiTmdb,$stateParams){
-    $scope.emailUser = $stateParams.emailUser;
+    var getMaxSeason = function(serie){
+        var seasons = serie.seasons;
+        var maxseason=0;
+        for (var i=0; i < seasons.length;i++){
+          if (seasons[i].season_number > maxseason){
+            maxseason = seasons[i].season_number;
+          }
+        }
+        return maxseason;
+      }
 
+    $scope.emailUser = $stateParams.emailUser;
     apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
       $scope.user = r;
       $scope.series = $scope.user.series.tmdbId;
@@ -89,15 +99,29 @@ cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 
         seriesIds.push($scope.user.series[i].tmdbId);
       };
 
+      //NE FONCTIONNE PAS !!!
       var followed_series = [];
       var id = 0;
+      var etats_series = [];
       for (id in seriesIds){
         apiTmdb.getSerieById(seriesIds[id]).then(function(d){
         followed_series.push(d);
+        $scope.maxseason = getMaxSeason(d);
+        $scope.currentdate= new Date();
+        apiTmdb.getSeasonByNumberSeason($scope.maxseason,d.id).then(function(r){
+            $scope.season=r; 
+            var lastepisodedate = new Date( $scope.season.episodes[$scope.season.episodes.length-1].air_date);
+            if ($scope.currentdate.getTime() > lastepisodedate.getTime()){
+              etats_series[d.id] = "Finished";
+            }
+            else{
+              etats_series[d.id] = "On going";
+            }
+          })
         });
       }
-
-      $scope.followed_series = followed_series;  
+      $scope.followed_series = followed_series;
+      $scope.etats_series = etats_series;  
     });
   }
 
