@@ -117,6 +117,9 @@ max-height: 100%;
 max-width: 70%;
 }
 
+
+/* Research */
+
 .serie_search_pic > img{
 max-width: 100%;
 }
@@ -130,7 +133,10 @@ overflow-y: scroll;
 display:none;
 }
 
+.returned_serie {
+    padding: 4px;
 
+}
 
 
 /* Calender */
