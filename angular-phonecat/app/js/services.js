@@ -39,7 +39,7 @@ cuddlyServices.service('apiTmdb', function($http){
 cuddlyServices.service('apiUserDb', function($http){
 	var apiUserDb = {
 		getUserByEmail: function(emailUser){
-			var promise = $http.get('').then(function(response){
+			var promise = $http.get('http://188.166.78.202:3000/API/users/'+emailUser).then(function(response){
 				console.log(response);
 				return response.data;
 			})
