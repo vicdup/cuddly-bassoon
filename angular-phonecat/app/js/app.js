@@ -24,6 +24,11 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         url: '/serie/:serieId',
         templateUrl: 'partials/serie.html',
         controller: 'seriePageCtrl'
+      })
+      .state('user',{
+        url: '/user/:emailUser',
+        templateUrl: 'partials/user.html',
+        controller: 'userPageCtrl'
       });
       $urlRouterProvider.otherwise('/home');
   }]);
