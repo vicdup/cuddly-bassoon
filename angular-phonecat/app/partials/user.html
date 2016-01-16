@@ -24,7 +24,10 @@
 
                 <div class="returned_serie col-md-6" ng-repeat="serie in followed_series">
                     <div class="row">
-                        <div class="col-md-4 serie_search_pic">
+                        <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
+                            <img src="../app/images/Mi3x5.jpg">
+                        </div>
+                        <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
                             <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
                         </div>
                         
