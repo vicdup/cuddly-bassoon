@@ -77,7 +77,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 ]);
 
 
-cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
+cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
   function($scope,apiUserDb,apiTmdb,$stateParams){
     var getMaxSeason = function(serie){
         var seasons = serie.seasons;
