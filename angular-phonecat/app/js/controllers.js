@@ -102,25 +102,41 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
       var followed_series = [];
       var id = 0;
       var etats_series = [];
+      var maxseasons = [];
+      var nextepisodes = [];
       for (id in seriesIds){
         apiTmdb.getSerieById(seriesIds[id]).then(function(d){
         followed_series.push(d);
-        $scope.maxseason = getMaxSeason(d);
+        maxseasons[d.id]= getMaxSeason(d);
         $scope.currentdate= new Date();
-        apiTmdb.getSeasonByNumberSeason($scope.maxseason,d.id).then(function(r){
+        apiTmdb.getSeasonByNumberSeason(getMaxSeason(d),d.id).then(function(r){
             $scope.season=r; 
             var lastepisodedate = new Date( $scope.season.episodes[$scope.season.episodes.length-1].air_date);
             if ($scope.currentdate.getTime() > lastepisodedate.getTime()){
               etats_series[d.id] = "Finished";
+              nextepisodes[d.id] = $scope.season.episodes[$scope.season.episodes.length-1].episode_number;
             }
             else{
               etats_series[d.id] = "On going";
-            }
+              var nextepisode = $scope.season.episodes[$scope.season.episodes.length - 1];
+              for (var i = $scope.season.episodes.length - 1; i >= 0; i--) {
+                var episodeairdate = new Date($scope.season.episodes[i].air_date);
+                var nextepisodeairdate = new Date(nextepisode.air_date);
+                if (episodeairdate.getTime() < nextepisodeairdate.getTime()){
+                  if (episodeairdate.getTime() >= $scope.currentdate.getTime()){
+                    nextepisode = $scope.season.episodes[i];
+                  } 
+                }
+              };
+              nextepisodes[d.id] = nextepisode.episode_number;
+            }   
           })
         });
       }
       $scope.followed_series = followed_series;
       $scope.etats_series = etats_series;  
+      $scope.maxseasons = maxseasons;
+      $scope.nextepisodes = nextepisodes
     });
   }
 
