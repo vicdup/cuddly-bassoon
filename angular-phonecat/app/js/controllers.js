@@ -99,7 +99,6 @@ cuddlyControllers.controller('userPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 
         seriesIds.push($scope.user.series[i].tmdbId);
       };
 
-      //NE FONCTIONNE PAS !!!
       var followed_series = [];
       var id = 0;
       var etats_series = [];
