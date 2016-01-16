@@ -26,10 +26,10 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'partials/serie.html',
         controller: 'seriePageCtrl'
       })
-      .state('user',{
-        url: '/user/:emailUser',
-        templateUrl: 'partials/user.html',
-        controller: 'userPageCtrl'
+      .state('followed_series',{
+        url: '/followed_series/:emailUser',
+        templateUrl: 'partials/followed_series.html',
+        controller: 'followedSeriesPageCtrl'
       });
       $urlRouterProvider.otherwise('/home');
   }]);
