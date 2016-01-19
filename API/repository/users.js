@@ -68,8 +68,8 @@ function UsersRepository () {
                 if (err) throw err;
                 else res.json({'message': 'successly added serie'});
             }
-        );
-    }
+        });
+    
 
 
     // this.putUsersByEmailSeries= function(req, res, next) {
