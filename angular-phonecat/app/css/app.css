@@ -248,3 +248,7 @@ display:none;
 .passed > a:hover{
     color:#5a5a5a;
 }
+
+.logo {
+    height: 50px;
+}
