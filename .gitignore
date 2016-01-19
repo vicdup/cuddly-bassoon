@@ -29,7 +29,8 @@ angular-phonecat/.jshintrc
 angular-phonecat/.travis.yml
 angular-phonecat/README.md
 angular-phonecat/LICENSE
-
+API/sublime.sublime-project
+API/sublime.sublime-workspace
 *.egg-info/
 .installed.cfg
 *.egg

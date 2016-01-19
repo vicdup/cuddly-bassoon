@@ -70,6 +70,18 @@ function UsersRepository () {
             });
     }
 
+    this.deleteSeriesByEmailOfUsers = function(req, res, next) {
+        console.log(req.body);
+        var conditions = {'email':req.params.email}
+        Users.update(conditions,
+            {$pull: {"series": {tmdbId: req.body.tmdbId}}},
+            {safe: true, upsert: true},
+            function(err, model) {
+                if (err) throw err;
+                else res.json({'message': 'successly deleted serie'});
+            });
+    }
+
 
     // this.putUsersByEmailSeries= function(req, res, next) {
     //     Users.findOneAndUpdate(
