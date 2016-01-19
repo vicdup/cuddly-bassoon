@@ -142,11 +142,37 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 
 ]);
 
-cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 'stateParams',
-   function($scope, apiUserDb, apiTmdb, $stateParams) {
+cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
+   function($scope,apiUserDb,apiTmdb,$stateParams) {
     $scope.emailUser = $stateParams.emailUser;
     apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
       $scope.user = r;
       $scope.series = $scope.user.series.tmdbId;
-   }
+      var seriesIds = [];
+      for (var i = $scope.user.series.length - 1; i >= 0; i--) {
+        seriesIds.push($scope.user.series[i].tmdbId);
+      };
+      var currentdate = new Date();
+      $scope.currentmonth = currentdate.getMonth();
+      var episodes = []
+      for (var i = seriesIds.length - 1; i >= 0; i--) {
+        apiTmdb.getSerieById(seriesIds[i]).then(function(d){
+          var serie = d;
+          for (var j = serie.seasons.length - 1; j >= 0; j--) {
+            apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number,serie.id).then(function(t){
+              for (var k = t.episodes.length - 1; k >= 0; k--) {
+                var episodedate = new Date(t.episodes[k].air_date);
+                if (episodedate.getMonth() <= currentmonth+ 3 && episodedate.getMonth() >= currentmonth - 3) {
+                  episodes.append(t.episodes[k]);
+                };
+              };
+          })
+        };
+
+        });
+       
+      };
+      $scope.episodes  = episodes;
+    });
+  }
 ]);
