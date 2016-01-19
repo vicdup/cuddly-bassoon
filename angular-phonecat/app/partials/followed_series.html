@@ -1,23 +1,15 @@
 <div class="container-fluid">
-    <div class="header container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2> Séries suivies </h2>
-                </div>
-                <div class="col-md-2 col-md-offset-2">
-                    <a href="index.html"><button class="btn btn-default">Tableau de bord</button></a>
-                </div>
-                <div class="Account col-md-2">
-                    <img class="AvatarIcon" src="../app/images/Mi3x5.jpg"><a href="account.html"><button class="btn btn-default">Mon compte</button></a>
-                </div>
-            </div>
-
-        </div>
         
-        <div class="content container">
-            <div class="row research_content">
-
-                <div class="returned_serie col-md-6" ng-repeat="serie in followed_series">
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2> Séries suivies </h2>
+            </div>
+        </div>
+        <div class="row research_content">
+            <div class="returned_serie col-md-12" ng-repeat="serie_pair in followed_series_pairs">
+                <div class="row">
+                    <div class="returned_serie col-md-6" ng-repeat="serie in serie_pair">
                         <!-- 
                         Filtrer sur le serie.status pour la couleur
                         serie.status -->
@@ -29,7 +21,7 @@
                                 <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
                             </div>
                             
-                            <div class="col-md-4 serie_info_followed">
+                            <div class="col-md-8 serie_info_followed">
                                 <div class="row serie_followed_title">
                                     <a href="serie.html">{{serie.name}}</a>
                                 </div>
@@ -45,10 +37,9 @@
                                 </div>
                             </div>
                         </div>
-                   
-                </div>           
-                
+                    </div>           
+                </div>
             </div>
-
         </div>
+    </div>
 </div>

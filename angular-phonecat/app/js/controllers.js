@@ -7,15 +7,15 @@ var cuddlyControllers = angular.module('cuddlyControllers', []);
 
 cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope, apiTmdb, $stateParams) {
-  	var getMaxSeason = function(serie){
-      	var seasons = serie.seasons;
-      	var maxseason=0;
-      	for (var i=0; i < seasons.length;i++){
-      		if (seasons[i].season_number > maxseason){
-      			maxseason = seasons[i].season_number;
-      		}
-      	}
-      	return maxseason;
+    var getMaxSeason = function(serie){
+        var seasons = serie.seasons;
+        var maxseason=0;
+        for (var i=0; i < seasons.length;i++){
+          if (seasons[i].season_number > maxseason){
+            maxseason = seasons[i].season_number;
+          }
+        }
+        return maxseason;
       }
 
     $scope.previous_season = function() {
@@ -36,26 +36,26 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParam
       }
     }
 
-  	$scope.serieId = $stateParams.serieId;
+    $scope.serieId = $stateParams.serieId;
     apiTmdb.getSerieById($scope.serieId).then (function(d){
-	    $scope.serie=d;
-	    $scope.maxseason = getMaxSeason($scope.serie);
-	    $scope.currentdate= new Date();
+      $scope.serie=d;
+      $scope.maxseason = getMaxSeason($scope.serie);
+      $scope.currentdate= new Date();
       $scope.serieFollowed = true;
 
-	    
-	    apiTmdb.getSeasonByNumberSeason($scope.maxseason,$scope.serie.id).then(function(r){
-	    	$scope.season=r;
+      
+      apiTmdb.getSeasonByNumberSeason($scope.maxseason,$scope.serie.id).then(function(r){
+        $scope.season=r;
         $scope.seasonToShow = r;
         $scope.seasonNumberToShow = $scope.seasonToShow.season_number;  
-	    	var lastepisodedate = new Date( $scope.season.episodes[$scope.season.episodes.length-1].air_date);
-	    	if ($scope.currentdate.getTime() > lastepisodedate.getTime()){
-	    		$scope.serieStatus = "Finished";
-		    }
-		    else{
-		    	$scope.serieStatus = "On going";
-		    }
-	    })
+        var lastepisodedate = new Date( $scope.season.episodes[$scope.season.episodes.length-1].air_date);
+        if ($scope.currentdate.getTime() > lastepisodedate.getTime()){
+          $scope.serieStatus = "Finished";
+        }
+        else{
+          $scope.serieStatus = "On going";
+        }
+      })
     })
   }
 ]);
@@ -100,6 +100,7 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
       };
 
       var followed_series = [];
+      var followed_series_pairs = []
       var id = 0;
       var etats_series = [];
       var maxseasons = [];
@@ -107,6 +108,12 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
       for (id in seriesIds){
         apiTmdb.getSerieById(seriesIds[id]).then(function(d){
         followed_series.push(d);
+        if ((followed_series_pairs.length == 0) || (followed_series_pairs[followed_series_pairs.length - 1].length != 1)) {
+          followed_series_pairs.push([d])
+        }
+        else {
+          followed_series_pairs[followed_series_pairs.length - 1].push(d)
+        }
         maxseasons[d.id]= getMaxSeason(d);
         $scope.currentdate= new Date();
         apiTmdb.getSeasonByNumberSeason(getMaxSeason(d),d.id).then(function(r){
@@ -133,7 +140,9 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
           })
         });
       }
+      console.log(followed_series_pairs)
       $scope.followed_series = followed_series;
+      $scope.followed_series_pairs = followed_series_pairs;
       $scope.etats_series = etats_series;  
       $scope.maxseasons = maxseasons;
       $scope.nextepisodes = nextepisodes
