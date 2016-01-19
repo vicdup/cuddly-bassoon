@@ -56,7 +56,21 @@ function UsersRepository () {
           if (err) throw err;
           res.json(req.body);
         });
+
+    this.postSeriesByEmailOfUsers = function(req, res, next) {
+        console.log(req.body);
+
+        Users.findByIdAndUpdate(
+            req.params.email,
+            {$push: {"series": {tmdbId: req.body.tmdbId, notification:req.body.notification}}},
+            {safe: true, upsert: true},
+            function(err, model) {
+                if (err) throw err;
+                else res.json({'message': 'successly added serie'});
+            }
+        );
     }
+
 
     // this.putUsersByEmailSeries= function(req, res, next) {
     //     Users.findOneAndUpdate(
