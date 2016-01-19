@@ -144,6 +144,9 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 
 cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 'stateParams',
    function($scope, apiUserDb, apiTmdb, $stateParams) {
-
+    $scope.emailUser = $stateParams.emailUser;
+    apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
+      $scope.user = r;
+      $scope.series = $scope.user.series.tmdbId;
    }
 ]);
