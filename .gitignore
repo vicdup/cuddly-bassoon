@@ -29,8 +29,6 @@ angular-phonecat/app/.bowerrc
 angular-phonecat/.bowerrc
 angular-phonecat/.jshintrc
 angular-phonecat/.travis.yml
-angular-phonecat/bower.json
-angular-phonecat/package.json
 angular-phonecat/README.md
 angular-phonecat/LICENSE
 
