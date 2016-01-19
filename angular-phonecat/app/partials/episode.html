@@ -14,45 +14,50 @@
 
     </div>
         
-        <div class="content container">
-            <div class="row serie_name">
-                <div class="col-md-12">
+    <div class="content container">
+        <div class="row serie_name">
+            <div class="col-md-12">
+                <a ui-sref="serie({serieId : serie.id})">
                     <h1> {{serie.name}} </h1>
-                </div>
-            </div>
-            <div class="row episode_name">
-                <div class="col-md-12">
-                    S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
-                </div>
-            </div>
-            <div class="row category_content">
-                <div class="episode_info col-md-7">
-                    <div class="row">
-                        <div class="col-md-12 episode_description">
-                            {{episode.overview.substring(0,200)}}...
-                        </div>
-                        <div class="col-md-12 episode_grade">
-                            Note : 
-                            <div class="stars">
-                                   <!--  <div class="empty_stars">
-                                        <img src='../resources/images/empty_stars.png' > 
-                                    </div>
-                                    <div class="filled_stars">
-                                        <img src='../resources/images/filled_stars.png' > 
-                                    </div> -->
-                            </div>
-                            {{episode.vote_average}}/10 avec {{episode.vote_count}} votes
-                        </div>
-                        <div class="col-md-12 episode_release">
-                            Sortie : {{episode.air_date}}
-                        </div>
-                    </div>
-                </div>
-                <div class="episode_preview col-md-5">
-                    <a onclick="prev-ep()"> Prev </a>
-                    <img ng-src="http://image.tmdb.org/t/p/w500/{{episode.still_path}}">
-                    <a onclick="next-ep()"> Next </a>
-                </div>
+                </a>
             </div>
         </div>
+        <div class="row episode_name">
+            <div class="col-md-12">
+                <h2>
+                    <a onclick="prev-ep()"> &lt; </a>
+                    S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
+                    <a onclick="next-ep()"> &gt; </a>
+                </h2>
+
+            </div>
+        </div>
+        <div class="row category_content">
+            <div class="episode_info col-md-7">
+                <div class="row">
+                    <div class="col-md-12 episode_description">
+                        {{episode.overview.substring(0,200)}}...
+                    </div>
+                    <div class="col-md-12 episode_grade">
+                        Note : 
+                        <div class="stars">
+                                 <div class="empty_stars">
+                                    <img src='images/empty_stars.png' > 
+                                </div>
+                                <div class="filled_stars">
+                                    <img src='images/filled_stars.png' > 
+                                </div> 
+                        </div>
+                        {{episode.vote_average}}/10 avec {{episode.vote_count}} votes
+                    </div>
+                    <div class="col-md-12 episode_release">
+                        Sortie : {{episode.air_date}}
+                    </div>
+                </div>
+            </div>
+            <div class="episode_preview col-md-5">
+                <img ng-src="http://image.tmdb.org/t/p/w500/{{episode.still_path}}">
+            </div>
+        </div>
+    </div>
 </div>

@@ -20,8 +20,9 @@ body {
     color: #bdbdbd;
 }
 
-a {
+a , a:visited, a:active, a:visited{
     color: #bdbdbd;
+    text-decoration: none;
 }
 
 a:hover {

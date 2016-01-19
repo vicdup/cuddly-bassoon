@@ -75,7 +75,7 @@
                       <div class="col-md-12 next_releases">
                           <div class="row">
                               <div class="col-md-12" ng-repeat="episode in season.episodes.slice().reverse().slice(0,5)">
-                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4>
+                                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4></a>
                                   <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} > 0">
                                     &nbsp Up in {{ episode.air_date | amDifference : currentdate: 'days' }} days
                                   </h4>
@@ -95,8 +95,8 @@
               <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
               <div class="darkened scrollable">
                 <div class="row" ng-repeat="episode in seasonToShow.episodes">
-                  <h4>Episode {{episode.episode_number}}</h4>
-                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">{{episode.name}}</a>
+                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">
+                  <h4>Episode {{episode.episode_number}}</h4>{{episode.name}}</a>
                 </div>
               </div>
           </div>
