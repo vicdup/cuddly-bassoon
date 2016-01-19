@@ -30,6 +30,11 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         url: '/followed_series/:emailUser',
         templateUrl: 'partials/followed_series.html',
         controller: 'followedSeriesPageCtrl'
+      })
+      .state('calendar',{
+        url : '',
+        templateUrl: '',
+        controller: ''
       });
       $urlRouterProvider.otherwise('/home');
   }]);

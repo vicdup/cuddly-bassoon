@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="header container">
+        <div class="row">
+            <div class="col-md-6">
+                Prochaines sorties
+            </div>
+            <div class="col-md-2 col-md-offset-2">
+                <a href="index.html"><button class="btn btn-default">Tableau de bord</button></a>
+
+            </div>
+            <div class="Account col-md-2">
+                <img class="AvatarIcon" src="../resources/images/Mi3x5.jpg"><a href="account.html"><button class="btn btn-default">Mon compte</button></a>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="content container">
+        <div class="row serie_content">
+            <div class="serie_pic col-md-4" ng-repeat="">
+                <div class="row">
+                    <div class="col-md-12">
+                        Janvier
+                    </div>
+                    <div class="col-md-12 release_month">
+                        <div class="row">
+                            <div ng-repeat="">
+                                <div class="col-md-12 passed">
+                                    {{day}} - {{serie.name}} S{{season.season_numer}}E{{episode.episode_number}} 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
