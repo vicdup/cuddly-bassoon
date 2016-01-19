@@ -154,6 +154,7 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
       };
       var currentdate = new Date();
       $scope.currentmonth = currentdate.getMonth();
+      $scope.currentyear = currentdate.getYear();
       var episodes = []
       for (var i = seriesIds.length - 1; i >= 0; i--) {
         apiTmdb.getSerieById(seriesIds[i]).then(function(d){
@@ -162,15 +163,30 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
             apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number,serie.id).then(function(t){
               for (var k = t.episodes.length - 1; k >= 0; k--) {
                 var episodedate = new Date(t.episodes[k].air_date);
-                if (episodedate.getMonth() <= currentmonth+ 3 && episodedate.getMonth() >= currentmonth - 3) {
-                  episodes.append(t.episodes[k]);
+                if ($scope.currentmonth == 1){
+                  if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth) || (episodedate.getYear() == $scope.currentyear  && episodedate.getMonth() == $scope.currentmonth + 1)){
+                      episodes.push(t.episodes[k])
+                  };
+                  if (episodedate.getMonth() == 12 && episodedate.getYear() == $scope.currentyear - 1) {
+                    episodes.push(t.episodes[k]);
+                  };
+                };
+                if ($scope.currentmonth == 12){
+                  if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth) || (episodedate.getYear() == $scope.currentyear  && episodedate.getMonth() == $scope.currentmonth - 1)){
+                      episodes.push(t.episodes[k])
+                  };
+                  if (episodedate.getMonth() == 1 && episodedate.getYear() == $scope.currentyear + 1) {
+                    episodes.push(t.episodes[k]);
+                  };
+                };
+                if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() >= $scope.currentmonth - 1 && episodedate.getMonth() <= $scope.currentmonth + 1){
+                  episodes.push(t.episodes[k]);
                 };
               };
-          })
-        };
-
-        });
-       
+              // };
+            })
+          };
+        });      
       };
       $scope.episodes  = episodes;
     });
