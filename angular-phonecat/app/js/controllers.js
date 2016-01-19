@@ -183,11 +183,14 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                   episodes.push(t.episodes[k]);
                 };
               };
-              // };
             })
           };
         });      
       };
+      $scope.months = []
+      $scope.months.push($scope.currentmonth - 1);  
+      $scope.months.push($scope.currentmonth);  
+      $scope.months.push($scope.currentmonth + 1);  
       $scope.episodes  = episodes;
     });
   }

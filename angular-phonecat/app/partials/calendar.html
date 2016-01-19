@@ -16,24 +16,22 @@
     </div>
     
     <div class="content container">
-    {{episodes}}
-        <!-- <div class="row serie_content">
-            <div class="serie_pic col-md-4" ng-repeat="">
+        <div class="row serie_content">
+            <div class="serie_pic col-md-4" ng-repeat="episode in episodes">
                 <div class="row">
                     <div class="col-md-12">
-                        Janvier
+                        Mois
                     </div>
                     <div class="col-md-12 release_month">
                         <div class="row">
-                            <div ng-repeat="">
                                 <div class="col-md-12 passed">
-                                    {{day}} - {{serie.name}} S{{season.season_numer}}E{{episode.episode_number}} 
+                                    {{episode.air_date}} - Name -  SNumberE{{episode.episode_number}} 
                                 </div>
-                            </div>
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
