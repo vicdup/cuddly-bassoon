@@ -141,3 +141,9 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
   }
 
 ]);
+
+cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', 'stateParams',
+   function($scope, apiUserDb, apiTmdb, $stateParams) {
+
+   }
+]);
