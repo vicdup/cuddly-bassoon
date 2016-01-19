@@ -25,8 +25,6 @@ angular-phonecat/scripts
 angular-phonecat/test
 angular-phonecat/app/bower_components
 angular-phonecat/app/phones
-angular-phonecat/app/.bowerrc
-angular-phonecat/.bowerrc
 angular-phonecat/.jshintrc
 angular-phonecat/.travis.yml
 angular-phonecat/README.md
