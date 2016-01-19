@@ -66,7 +66,7 @@
                           </div>
                       </div>
                   </div>
-
+                  <!-- serieFollowed not dynamic yet -->
                   <div ng-show="serieFollowed">
                       <div class="col-md-12">
                           <a href="calendar.html">Calendar</a>
@@ -92,7 +92,7 @@
               </div>
           </div>
           <div class="serie_eps col-md-4">
-              <h3> <a ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a ng-click="next_season()">&gt;</a> </h3>
+              <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
               <div class="darkened scrollable">
                 <div class="row" ng-repeat="episode in seasonToShow.episodes">
                   <h4>Episode {{episode.episode_number}}</h4>
