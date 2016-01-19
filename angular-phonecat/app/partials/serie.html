@@ -96,7 +96,7 @@
               <div class="darkened scrollable">
                 <div class="row" ng-repeat="episode in seasonToShow.episodes">
                   <h4>Episode {{episode.episode_number}}</h4>
-                  {{episode.name}}
+                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">{{episode.name}}</a>
                 </div>
               </div>
           </div>
