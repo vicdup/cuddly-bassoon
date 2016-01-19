@@ -60,9 +60,8 @@ function UsersRepository () {
 
     this.postSeriesByEmailOfUsers = function(req, res, next) {
         console.log(req.body);
-
-        Users.findByIdAndUpdate(
-            req.params.email,
+        var conditions = {'email':req.params.email}
+        Users.update(conditions,
             {$push: {"series": {tmdbId: req.body.tmdbId, notification:req.body.notification}}},
             {safe: true, upsert: true},
             function(err, model) {
