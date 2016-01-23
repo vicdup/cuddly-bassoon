@@ -38,14 +38,32 @@ cuddlyServices.service('apiTmdb', function($http){
 
 cuddlyServices.service('apiUserDb', function($http){
 	var user = {};
+	var authenticated = false;
 	var apiUserDb = {
 		getUserByEmail: function(emailUser){
-			var promise = $http.get('http://188.166.78.202:3000/API/users/'+emailUser).then(function(response){
+			var promise = $http.get('http://188.166.78.202:3000/API/users/'+emailUser).then(function successCallback(response) {
 				console.log(response);
 				user = response.data;
+				if (response.data == ""){
+					authenticated = false;
+				}
+				else {
+					authenticated = true;
+				}
+				console.log(authenticated);
 				return response.data;
+
+			}, function errorCallback(response) {
+				console.log("Mauvais user");
 			})
 			return promise;
+		},
+		getCurrentUser: function(){
+			console.log(user);
+			return user;
+		},
+		isAuthenticated: function() {
+			return authenticated;
 		}
 
 	};

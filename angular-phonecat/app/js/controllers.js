@@ -59,6 +59,39 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParam
     })
   }
 ]);
+
+cuddlyControllers.controller('loginCtrl', ['$scope', '$state', '$stateParams', 'apiUserDb',
+  function($scope, $state, $stateParams, apiUserDb){
+    $scope.answer = "";
+    $scope.doLogin = function(pseudo) {
+      apiUserDb.getUserByEmail(pseudo).then(function successCallBack(){
+          console.log(apiUserDb.isAuthenticated())
+          if (apiUserDb.isAuthenticated() == true) {
+            $state.go('home');
+          }
+          else {
+            $scope.answer = "Wrong pseudo, Try again"
+          }
+        },
+        function errorCallBack(){
+          $scope.answer = "Something went wrong, Try again"
+        }
+      )
+    }
+  }
+]);
+
+cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state',
+  function($scope, apiUserDb, $state) {
+    if (apiUserDb.isAuthenticated() == true){
+      $scope.user = apiUserDb.getCurrentUser();
+    }
+    else {
+      $state.go('login');
+    }
+  }
+]);
+
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope,apiTmdb, $stateParams){
     $scope.serieId = $stateParams.serieId;

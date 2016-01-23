@@ -12,9 +12,15 @@ var cuddlyApp = angular.module('cuddlyApp', [
 cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'partials/login.html',
+        controller: 'loginCtrl'
+      })
       .state('home', {
         url: '/home',
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'homeCtrl'
       })
       .state('episode',{
         url: '/episode/:serieId/:seasonNumber/:episodeNumber',
