@@ -110,8 +110,8 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 ]);
 
 
-cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
-  function($scope,apiUserDb,apiTmdb,$stateParams){
+cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams','$state',
+  function($scope,apiUserDb,apiTmdb,$stateParams,$state){
     var getMaxSeason = function(serie){
         var seasons = serie.seasons;
         var maxseason=0;
@@ -123,7 +123,12 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
         return maxseason;
       }
 
-    $scope.emailUser = $stateParams.emailUser;
+    if (apiUserDb.isAuthenticated() == true){
+      $scope.emailUser = apiUserDb.getCurrentUser().email;
+    }
+    else {
+      $state.go('login');
+    }
     apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
       $scope.user = r;
       $scope.series = $scope.user.series.tmdbId;
@@ -184,9 +189,14 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 
 ]);
 
-cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams',
-   function($scope,apiUserDb,apiTmdb,$stateParams) {
-    $scope.emailUser = $stateParams.emailUser;
+cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams','$state',
+   function($scope,apiUserDb,apiTmdb,$stateParams,$state) {
+    if (apiUserDb.isAuthenticated() == true){
+      $scope.emailUser = apiUserDb.getCurrentUser().email;
+    }
+    else {
+      $state.go('login');
+    }
     apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
       $scope.user = r;
       $scope.series = $scope.user.series.tmdbId;
