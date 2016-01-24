@@ -85,6 +85,7 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state',
   function($scope, apiUserDb, $state) {
     if (apiUserDb.isAuthenticated() == true){
       $scope.user = apiUserDb.getCurrentUser();
+      $scope.series = apiUserDb.getCurrentUserSeriesDetails();
     }
     else {
       $state.go('login');

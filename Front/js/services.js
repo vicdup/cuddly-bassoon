@@ -36,7 +36,7 @@ cuddlyServices.service('apiTmdb', function($http){
 });
 
 
-cuddlyServices.service('apiUserDb', function($http){
+cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 	var user = {};
 	var authenticated = false;
 	var apiUserDb = {
@@ -46,6 +46,7 @@ cuddlyServices.service('apiUserDb', function($http){
 				user = response.data;
 				if (response.data == ""){
 					authenticated = false;
+
 				}
 				else {
 					authenticated = true;
@@ -57,6 +58,16 @@ cuddlyServices.service('apiUserDb', function($http){
 				console.log("Mauvais user");
 			})
 			return promise;
+		},
+		getCurrentUserSeriesDetails: function(){
+			var series = [];
+			var i;
+			for (i in user.series){
+				apiTmdb.getSerieById(user.series[i]['tmdbId']).then(function(r){
+					series.push(r);
+				});
+			}
+			return series
 		},
 		getCurrentUser: function(){
 			console.log(user);
