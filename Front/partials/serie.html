@@ -88,7 +88,7 @@
               <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
               <div class="darkened scrollable">
                 <div class="row" ng-repeat="episode in seasonToShow.episodes">
-                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">
+                  <a ui-sref="episode({serieId : serie.id, seasonNumber : seasonToShow.season_number, episodeNumber : episode.episode_number})">
                   <h4>Episode {{episode.episode_number}}</h4>{{episode.name}}</a>
                 </div>
               </div>
