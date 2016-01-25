@@ -110,8 +110,8 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', '$stateParams', '
   }
 ]);
 
-cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state',
-  function($scope, apiUserDb, $state) {
+cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state', 'recommendations',
+  function($scope, apiUserDb, $state, recommendations) {
     if (apiUserDb.isAuthenticated() == true){
       $scope.user = apiUserDb.getCurrentUser();
       $scope.series = apiUserDb.getCurrentUserSeriesDetails();
@@ -119,6 +119,8 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state',
     else {
       $state.go('login');
     }
+
+
   }
 ]);
 
