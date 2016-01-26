@@ -23,7 +23,7 @@
                             
                             <div class="col-md-8 serie_info_followed">
                                 <div class="row serie_followed_title">
-                                    <a href="serie.html">{{serie.name}}</a>
+                                    <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
                                 </div>
                                 <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
                                     {{genre.name}}
