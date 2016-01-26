@@ -307,9 +307,9 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 ]);
 
 cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state','$cookies',
-    function($scope, apiUserDb, apiTmdb, $stateParams, $state) {
+    function($scope, apiUserDb, apiTmdb, $stateParams, $state, $cookies) {
         if (apiUserDb.isAuthenticated() == true) {
-            $scope.emailUser = apiUserDb.getCurrentUser().email;
+            $scope.emailUser =  $cookies.get('CBemail');
         } else {
             $state.go('login');
         }
