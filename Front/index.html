@@ -6,7 +6,10 @@
     <title>Cuddly-Bassoon</title>
     <meta name="Main" content="Dashboard">
     <link rel="stylesheet" href="css/app.css">
-    <link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="images/favicon32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon64.png" sizes="64x64">
+    <link rel="icon" type="image/png" href="images/favicon128.png" sizes="128x128">
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -21,7 +24,7 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -31,14 +34,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="pull-left" href="#"><img src="images/logo.png" class="logo"> CuddlyBassoon &nbsp &nbsp</a>
+          <div class="divLogo">
+          <img src="images/logo.png" class="logo navbar-left">
+          <a class="pull-left navbar-brand" href="#">CuddlyBassoon</a> &nbsp &nbsp
+        </div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a ui-sref="home">Accueil</a></li>
-             <li><a ui-sref="calendar">Calendrier</a></li>
-             <li><a ui-sref="followed_series">Mes séries</a></li>
+            <li><a ui-sref="calendar">Calendrier</a></li>
+            <li><a ui-sref="followed_series">Mes séries</a></li>
           </ul>
           
           <form ng-controller="indexCtrl" class="navbar-form navbar-right" role="search">

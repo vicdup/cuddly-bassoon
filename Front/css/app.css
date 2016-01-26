@@ -252,3 +252,14 @@ display:none;
 .logo {
     height: 50px;
 }
+
+.navbar-inverse .navbar-brand{
+    color: #DC2987;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #FFFFFF;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #DC2987;
+}
