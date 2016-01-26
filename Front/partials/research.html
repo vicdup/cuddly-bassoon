@@ -4,41 +4,43 @@
             <div class="returned_serie col-md-6" ng-repeat="serie in series">
                 <div class="row">
                     <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
-                            <img src="images/Mi3x5.jpg">
+                        <img src="images/Mi3x5.jpg">
                     </div>
                     <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
                         <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
                     </div>
-
                     <div class="col-md-4 serie_info_search">
+                    {{user}}
                         <div class="row serie_search_title">
                             <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
+                            
                         </div>
+                    <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)"><i class="fa fa-check"></i> followed</div>
                         <div class="row serie_search_tags">
-                           <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
-                            {{genre.name}}
-                        </div>
+                            <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
+                                {{genre.name}}
+                            </div>
                         </div>
                         <div class="row serie_search_grade">
-                            Note : 
-                        <div class="stars">
-                                    <div class="empty_stars">
-                                        <img src='images/empty_stars.png' > 
-                                    </div>
-                                    <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
-                                        <img src='images/filled_stars.png' > 
-                                    </div>
+                            Note :
+                            <div class="stars">
+                                <div class="empty_stars">
+                                    <img src='images/empty_stars.png' >
+                                </div>
+                                <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
+                                    <img src='images/filled_stars.png' >
+                                </div>
                             </div>
                             {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
                         </div>
                         
                         <div class="row serie_search_description">
-                             {{serie.overview.substring(0,200)}}...
+                            {{serie.overview.substring(0,200)}}...
                         </div>
                     </div>
                 </div>
-            </div>    
-        </div> 
+            </div>
+        </div>
         <div ng-hide="test">
             <div class="returned_serie col-md-6">
                 <div class="row">

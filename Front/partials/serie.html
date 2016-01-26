@@ -25,8 +25,7 @@
                       <p>{{serie.overview.substring(0,200)}}...</p>
                   </div>
 
-
-                  <div ng-hide="serieFollowed">
+                  <div ng-hide="(userFollowedSeries.indexOf(serie.id) > -1)">
                       <div class="col-md-12 serie_grade">
                                 Note : 
                                 <div class="stars">
@@ -51,17 +50,11 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-12">
-                          <div class="btn-group btn-group-justified" role="group">
-                              <div class="btn-group" role="group">
-                                  <button class="btn btn-primary">Lancer la recomandation</button>
-                              </div>
-                          </div>
-                      </div>
                   </div>
-                  <!-- serieFollowed not dynamic yet -->
-                  <div ng-show="serieFollowed">
+
+                  <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)">
                       <div class="col-md-12">
+                             <p><i class="fa fa-check"></i> followed</p>
                           <a href="calendar.html">Calendar</a>
                       </div>
                       

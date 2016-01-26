@@ -90,7 +90,7 @@ h3 {
 }
 
 .scrollable {
-    max-height: 400px;
+    max-height: 900px;
     padding-left: 5%;
     padding-right: 5%;
     overflow-y: scroll;

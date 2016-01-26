@@ -64,6 +64,15 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 	var user = {};
 	var authenticated = false;
 	var apiUserDb = {
+		getFollowedSeriesIds: function(){
+			var followedSeriesIds = [];
+			var i;
+			for (i in user.series){
+				followedSeriesIds.push(user.series[i]['tmdbId']);
+			}
+			console.log(followedSeriesIds);
+			return followedSeriesIds
+		},
 		getUserByEmail: function(emailUser){
 			var promise = $http.get('http://188.166.78.202:3000/API/users/'+emailUser).then(function successCallback(response) {
 				console.log(response);
