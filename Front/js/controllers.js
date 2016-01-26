@@ -17,12 +17,9 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
         apiTmdb.getSerieByName($stateParams.query).then(function(r) {
             if (r.results.length == 0) {
                 $scope.filled = false;
-
-                console.log($scope.message);
             }
             if (r.results.length == 1) {
                 var idSerie = r.results[0].id;
-                console.log(idSerie);
                 $location.path('serie/' + idSerie);
             } else {
                 $scope.empty = false;
@@ -45,7 +42,12 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
             }
             return maxseason;
         }
-
+        $scope.addSerie = function(tmdbId) {
+            var emailUser = apiUserDb.getCurrentUser().email;
+            apiUserDb.postSerie(emailUser,tmdbId).then(function(r) {
+                $scope.userFollowedSeries.push(tmdbId);
+            })
+        }
         $scope.previous_season = function() {
             if ($scope.seasonNumberToShow > 1) {
                 $scope.seasonNumberToShow -= 1;

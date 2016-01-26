@@ -3,7 +3,7 @@
 /* Services */
 
 var cuddlyServices = angular.module('cuddlyServices', ['ngResource']);
-
+var addressIp = 'http://188.166.78.202:3000';
 //cuddlyServices.service('serieService', function(){
 //    var serieService = {
 //        getMaxSeason: function(serie) {
@@ -74,7 +74,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 			return followedSeriesIds
 		},
 		getUserByEmail: function(emailUser){
-			var promise = $http.get('http://188.166.78.202:3000/API/users/'+emailUser).then(function successCallback(response) {
+			var promise = $http.get(addressIp+'/API/users/'+emailUser).then(function successCallback(response) {
 				console.log(response);
 				user = response.data;
 				if (response.data == ""){
@@ -89,6 +89,17 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 
 			}, function errorCallback(response) {
 				console.log("Mauvais user");
+			})
+			return promise;
+		},
+		postSerie: function(emailUser, tmdbId){
+			console.log("post serie");
+			var content = {"tmdbId":tmdbId};
+			var promise = $http.post(addressIp+'/API/users/'+emailUser+'/series', content).then(function(response){
+				console.log(response.data);
+				console.log(emailUser);
+				console.log(tmdbId);
+				return response.data;
 			})
 			return promise;
 		},
