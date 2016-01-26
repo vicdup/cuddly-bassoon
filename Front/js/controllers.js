@@ -2,13 +2,20 @@
 
 /* Controllers */
 
-var cuddlyControllers = angular.module('cuddlyControllers', []);
+var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
-cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location',
-    function($scope, apiTmdb, $location) {
+cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state',
+    function($scope, apiTmdb, $location, apiUserDb, $state) {
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
         }
+        $scope.disconnect = function(){
+          console.log("disconnecting");
+          apiUserDb.disconnect();
+          $state.go('login');
+          $scope.isConnected = false;
+        }
+        $scope.isConnected = apiUserDb.isAuthenticated();
     }
 ]);
 
@@ -30,8 +37,8 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
     }
 ]);
 
-cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb','$stateParams',
-    function($scope, apiTmdb, apiUserDb, $stateParams) {
+cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb','$stateParams', '$cookies',
+    function($scope, apiTmdb, apiUserDb, $stateParams, $cookies) {
         var getMaxSeason = function(serie) {
             var seasons = serie.seasons;
             var maxseason = 0;
@@ -43,13 +50,13 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
             return maxseason;
         }
         $scope.addSerie = function(tmdbId) {
-            var emailUser = apiUserDb.getCurrentUser().email;
+            var emailUser = $cookies.get('CBemail');
             apiUserDb.postSerie(emailUser,tmdbId).then(function(r) {
             $scope.userFollowedSeries.push(tmdbId);
             })
         }
       $scope.deleteSerie = function(tmdbId) {
-            var emailUser = apiUserDb.getCurrentUser().email;
+            var emailUser = $cookies.get('CBemail');
             apiUserDb.deleteSerie(emailUser,tmdbId).then(function(r) {
               $scope.userFollowedSeries.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
             })
@@ -95,13 +102,16 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
     }
 ]);
 
-cuddlyControllers.controller('loginCtrl', ['$scope', '$state', '$stateParams', 'apiUserDb',
-    function($scope, $state, $stateParams, apiUserDb) {
+cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies',
+    function($scope, $state, apiUserDb, $stateParams, $cookies) {
         $scope.answer = "";
         $scope.doLogin = function(pseudo) {
+          $cookies.put('CBemail', pseudo);
+
             apiUserDb.getUserByEmail(pseudo).then(function successCallBack() {
-                    console.log(apiUserDb.isAuthenticated())
+                    console.log(1);
                     if (apiUserDb.isAuthenticated() == true) {
+                        $scope.isConnected = true;
                         $state.go('home');
                     } else {
                         $scope.answer = "Wrong pseudo, Try again"
@@ -115,22 +125,30 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', '$stateParams', '
     }
 ]);
 
-cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state', 'recommendations',
-    function($scope, apiUserDb, $state, recommendations) {
+cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb','$cookies', '$state', 'recommendations',
+    function($scope, apiUserDb, $cookies, $state, recommendations) {
+      console.log(apiUserDb.isAuthenticated());
         if (apiUserDb.isAuthenticated() == true) {
-            $scope.user = apiUserDb.getCurrentUser();
-            $scope.series = apiUserDb.getCurrentUserSeriesDetails();
+          $scope.isConnected=true;
+          console.log("coucouc ici" + $cookies.get('CBemail'));
+            apiUserDb.getUserByEmail($cookies.get('CBemail')).then(function(r){
+              $scope.user = r;
+              console.log($scope.user);
+              $scope.series = apiUserDb.getCurrentUserSeriesDetails();
+            recommendations.updateFollowedSeries($scope.user.series, apiUserDb.isAuthenticated).then(function successCallBack(value) {
+                console.log(value);
+                recommendations.updateRecommendations(apiUserDb.isAuthenticated).then(function successCallBack(value) {
+                    $scope.recommendedSeries = recommendations.getRecommendations();
+                    console.log($scope.recommendedSeries);
+                })
+            });
+            });
+            
+            
         } else {
             $state.go('login');
         }
         //$scope.user.series = {0: {tmdbId: 34307}, 1: {tmdbId: 1906}};
-        recommendations.updateFollowedSeries($scope.user.series, apiUserDb.isAuthenticated).then(function successCallBack(value) {
-            console.log(value);
-            recommendations.updateRecommendations(apiUserDb.isAuthenticated).then(function successCallBack(value) {
-                $scope.recommendedSeries = recommendations.getRecommendations();
-                console.log($scope.recommendedSeries);
-            })
-        });
 
 
     }
@@ -213,8 +231,8 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 ]);
 
 
-cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state',
-    function($scope, apiUserDb, apiTmdb, $stateParams, $state) {
+cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$cookies', '$state',
+    function($scope, apiUserDb, apiTmdb, $stateParams, $cookies, $state) {
         var getMaxSeason = function(serie) {
             var seasons = serie.seasons;
             var maxseason = 0;
@@ -227,7 +245,7 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
         }
 
         if (apiUserDb.isAuthenticated() == true) {
-            $scope.emailUser = apiUserDb.getCurrentUser().email;
+            $scope.emailUser = $cookies.get('CBemail');
         } else {
             $state.go('login');
         }
@@ -288,7 +306,7 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
     }
 ]);
 
-cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state',
+cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state','$cookies',
     function($scope, apiUserDb, apiTmdb, $stateParams, $state) {
         if (apiUserDb.isAuthenticated() == true) {
             $scope.emailUser = apiUserDb.getCurrentUser().email;

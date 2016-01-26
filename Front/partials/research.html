@@ -15,7 +15,7 @@
                             <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
                             
                         </div>
-                    <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)"><i class="fa fa-check"></i> followed</div>
+                    <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)"><i class="fa fa-check"></i> suivie</div>
                         <div class="row serie_search_tags">
                             <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
                                 {{genre.name}}

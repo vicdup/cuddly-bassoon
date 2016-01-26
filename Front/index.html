@@ -15,6 +15,7 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="../node_modules/moment/moment.js"></script>
     <script src="../node_modules/angular-moment/angular-moment.js"></script>
     <script src="bower_components\angular-ui-router\release\angular-ui-router.js"></script>
@@ -52,7 +53,9 @@
               <input type="text" class="form-control" placeholder="Série" ng-model="serieName">
             </div>
             <button type="submit" class="btn btn-default" ng-click="searchSerieByName(serieName)">Rechercher</button>
+            <button class="btn btn-default" ng-click="disconnect()" ng-show="isConnected">Disconnect</button>
           </form>
+          
         </li>
       </ul>
       </div><!-- /.navbar-collapse -->
