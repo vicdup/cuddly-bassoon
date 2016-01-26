@@ -119,6 +119,14 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state', 'reco
     else {
       $state.go('login');
     }
+    //$scope.user.series = {0: {tmdbId: 34307}, 1: {tmdbId: 1906}};
+    recommendations.updateFollowedSeries($scope.user.series, apiUserDb.isAuthenticated).then(function successCallBack(value) {
+      console.log(value);
+      recommendations.updateRecommendations(apiUserDb.isAuthenticated).then(function successCallBack(value) {
+        $scope.recommendedSeries = recommendations.getRecommendations();
+        console.log($scope.recommendedSeries);
+      })
+    });
 
 
   }

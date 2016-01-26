@@ -106,42 +106,66 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 
 });
 
-cuddlyServices.service('recommendations', function(){
+cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $q){
 	// not ready yet
 
 	
-	// var recommendedSeries = {};
-	// var followedSeries = {};
-	// var recommendationService = {};
-	// recommendationService.getRecommendations = function() {
-	// 	return recommendedSeries;
-	// };
-	// recommendationService.getFollowedSeries = function () {
-	// 	return followedSeries;
-	// };
-	// recommendationService.updateFollowedSeries = function(series) {
-	// 	for (serie in series) {
-	// 		followedSeries[serie.tmdbId] = true;
-	// 	};
-	// };
-	// recommendationService.updateRecommendations = function() {
-	// 	var recommendations = {};
-	// 	for (serieId in followedSeries) {
-	// 		$http.get('https://api.themoviedb.org/3/tv/'+serieId+'similar?api_key=1a3f1b0a8620851f42d4b1a95494d44d&page=1').then(function(response){
-	// 			var tempSimilars = response.data.results;
-	// 			for (var i = 0; i < response.data.results.length; i++) {
-	// 				currentId = tempSimilars[i].id
-	// 				if (currentId in recommendations) {
-	// 					recommendations[currentId].score += 1;
-	// 				}
-	// 				else {
-	// 					recommendations[currentId].score = 1;
-	// 					recommendations[currentId].popularity = tempSimilars[i].popularity;
-	// 				}
-	// 			};
-	// 		});
-	// 	};
-	// 	recommendedSeries = recommendations;
-	// };
-	// return recommendationService;
+	var recommendedSeries = {};
+	var followedSeries = {};
+	var recommendationService = {};
+	recommendationService.getRecommendations = function() {
+		return recommendedSeries;
+	};
+	recommendationService.getFollowedSeries = function () {
+		return followedSeries;
+	};
+	recommendationService.updateFollowedSeries = function(series, condition) {
+		var deferred = $q.defer();
+		if (condition) {
+			for (var serie in series) {
+				console.log(serie)
+				followedSeries[series[serie].tmdbId] = true;
+			};
+			console.log(followedSeries);
+			deferred.resolve("Success");
+		}
+		else {
+			deferred.resolve("Error");
+		}
+		return deferred.promise;
+	};
+	recommendationService.updateRecommendations = function(condition) {
+		var deferred = $q.defer();
+		if (condition) {
+			var recommendations = {};
+			var completed_request = 0;
+			for (var serieId in followedSeries) {
+				$http.get('https://api.themoviedb.org/3/tv/'+serieId+'/similar?api_key=1a3f1b0a8620851f42d4b1a95494d44d&page=1').then(function(response){
+					var tempSimilars = response.data.results;
+					console.log(tempSimilars);
+					for (var i = 0; i < response.data.results.length; i++) {
+						var currentId = tempSimilars[i].id
+						if (currentId in recommendations) {
+							recommendations[currentId].score += 1;
+						}
+						else {
+							recommendations[currentId] = {};
+							recommendations[currentId].score = 1;
+							recommendations[currentId].popularity = tempSimilars[i].popularity;
+						}
+					};
+					completed_request++;
+					if (completed_request == Object.keys(followedSeries).length) {	
+						recommendedSeries = recommendations;
+						deferred.resolve("Success");
+					}
+				});
+			};
+		}
+		else {
+			deferred.reject("Error");
+		}
+		return deferred.promise;
+	};
+	return recommendationService;
 })
