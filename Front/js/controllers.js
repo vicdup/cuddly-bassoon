@@ -30,7 +30,7 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParam
         }
         return maxseason;
       }
-
+    
     $scope.previous_season = function() {
       if ($scope.seasonNumberToShow > 1) {
         $scope.seasonNumberToShow -= 1;
@@ -108,17 +108,79 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$state',
 
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope,apiTmdb, $stateParams){
+    var getMaxSeason = function(serie){
+        var seasons = serie.seasons;
+        var maxseason=0;
+        for (var i=0; i < seasons.length;i++){
+          if (seasons[i].season_number > maxseason){
+            maxseason = seasons[i].season_number;
+          }
+        }
+        return maxseason;
+      }
+    
+    
     $scope.serieId = $stateParams.serieId;
     $scope.seasonNumber = $stateParams.seasonNumber;
     $scope.episodeNumber = $stateParams.episodeNumber;
+    
+    apiTmdb.getSerieById($scope.serieId).then(function(r){
+        $scope.serie = r;
+        var maxSeasonNumber = getMaxSeason(r);
+        console.log(maxSeasonNumber) 
 
+        apiTmdb.getSeasonByNumberSeason($scope.seasonNumber,$scope.serieId).then(function(r){
+            var maxEpisodeNumber = r.episodes.length;
+
+            $scope.previous_episode = function() {
+                if ($scope.episodeNumber > 1) {
+                    $scope.episodeNumber = parseInt($scope.episodeNumber) - 1;
+                }
+                else {
+                    if ($scope.seasonNumber > 1) {
+                        $scope.seasonNumber = parseInt($scope.seasonNumber) - 1;
+                        apiTmdb.getSeasonByNumberSeason($scope.seasonNumber,$scope.serieId).then(function(r){
+                            maxEpisodeNumber=r.episodes.length;
+                            $scope.episodeNumber= maxEpisodeNumber;
+                        })
+                    }
+                }
+
+                apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber,$scope.serieId,$scope.episodeNumber).then(function(d){
+                  $scope.episode=d;
+                });
+            }
+            $scope.next_episode = function() {
+                if ($scope.episodeNumber < maxEpisodeNumber) {
+                    $scope.episodeNumber = parseInt($scope.episodeNumber) +1 ;
+                }
+                else { //On est au dernier episode de la saison
+                    if ($scope.seasonNumber < maxSeasonNumber) {
+                        $scope.seasonNumber = parseInt($scope.seasonNumber) + 1;
+                        apiTmdb.getSeasonByNumberSeason($scope.seasonNumber,$scope.serieId).then(function(r){
+                            maxEpisodeNumber=r.episodes.length;
+                            $scope.episodeNumber= 1 ;
+                        })
+                    }
+                }
+
+                apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber,$scope.serieId,$scope.episodeNumber).then(function(d){
+                  $scope.episode=d;
+                });
+
+                apiTmdb.getSerieById($scope.serieId).then(function(r){
+                  $scope.serie = r;
+                });
+            }
+        })
+    });
+      
+    
+    
     apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber,$scope.serieId,$scope.episodeNumber).then(function(d){
       $scope.episode=d;
     });
 
-    apiTmdb.getSerieById($scope.serieId).then(function(r){
-      $scope.serie = r;
-    });
   }
 
 ]);

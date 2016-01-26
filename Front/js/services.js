@@ -4,6 +4,21 @@
 
 var cuddlyServices = angular.module('cuddlyServices', ['ngResource']);
 
+//cuddlyServices.service('serieService', function(){
+//    var serieService = {
+//        getMaxSeason: function(serie) {
+//            var seasons = serie.seasons;
+//            var maxseason=0;
+//            for (var i=0; i < seasons.length;i++){
+//              if (seasons[i].season_number > maxseason){
+//                maxseason = seasons[i].season_number;
+//              }
+//            }
+//            return maxseason;
+//        }
+//    }
+//});
+
 cuddlyServices.service('apiTmdb', function($http){
 	var apiTmdb = {
 		getSerieById: function(idSerie) {
