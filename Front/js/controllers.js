@@ -221,11 +221,6 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                 var episodedate = new Date(t.episodes[k].air_date);
                 if ($scope.currentmonth == 1){
                   if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth)){
-                    // var temp =  [];
-                    // temp.push(serie.id);
-                    // temp.push(serie.seasons[j].season_number);
-                    // temp.push(t.episodes[k]);
-                    //   month2.push(temp);
                       month2.push([serie.id, tseason_number, t.episodes[k]]);
                   };
                   if (episodedate.getYear() == $scope.currentyear  && episodedate.getMonth() == $scope.currentmonth + 1){
@@ -237,7 +232,6 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                 };
                 if ($scope.currentmonth == 12){
                   if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth)){
-                      // episodes.push(t.episodes[k])
                       month2.push([serie.id, t.season_number, t.episodes[k]]);
                   };
                   if (episodedate.getYear() == $scope.currentyear  && episodedate.getMonth() == $scope.currentmonth - 1){
