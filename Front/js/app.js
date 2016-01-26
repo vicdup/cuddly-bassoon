@@ -41,6 +41,11 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         url : '/calendar',
         templateUrl: 'partials/calendar.html',
         controller: 'calendarPageCtrl'
+      })
+      .state('calendar',{
+        url: '/search/:query',
+        templateUrl: 'partials/research.html',
+        controller: 'searchCtrl'
       });
       $urlRouterProvider.otherwise('/home');
   }]);
