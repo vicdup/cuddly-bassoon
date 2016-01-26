@@ -4,6 +4,18 @@
 
 var cuddlyControllers = angular.module('cuddlyControllers', []);
 
+cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', '$location',
+  function($scope, apiTmdb, $location){
+    $scope.searchSerieByName = function(name){
+      apiTmdb.getSerieByName(name).then(function(r){
+        $scope.serieId = r.results[0].id;
+        console.log('serie id');
+        console.log($scope.serieId);
+        $location.path('/serie/'+$scope.serieId);
+      })
+    }
+  }
+]);
 
 cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope, apiTmdb, $stateParams) {
