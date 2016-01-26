@@ -1,16 +1,13 @@
-        <div class="content container">
+        <div  ng-controller="searchCtrl" class="content container">
             <div class="row research_content darkened">
-
+            <div ng-hide="empty">
                 <div class="returned_serie col-md-6">
                     <div class="row">
                         <div class="col-md-4 serie_search_pic">
-                            <img src="../resources/images/Mi3x5.jpg">
+                            <!-- <img src="../resources/images/Mi3x5.jpg"> -->
                         </div>
                         <div>
-                        {{message}}
-                        </div>
-                        <div>
-                        {{series}}
+                            {{series}}
                         </div>
 
 
@@ -25,10 +22,10 @@
                                 Note : 
                                 <div class="stars search_stars">
                                         <div class="empty_stars search_stars">
-                                            <img src='../resources/images/empty_stars.png' > 
+                                            <!-- <img src='../resources/images/empty_stars.png' >  -->
                                         </div>
                                         <div class="filled_stars search_stars">
-                                            <img src='../resources/images/filled_stars.png' > 
+                                            <!-- <img src='../resources/images/filled_stars.png' >  -->
                                         </div>
                                 </div>
                                 4.5/5
@@ -38,9 +35,11 @@
                                 Une série où il y a du sang
                             </div>
                         </div>
-                    </div>
-                        
-                        
+                    </div>    
                 </div> 
             </div>
+            <div ng-show="empty">
+                Test : {{message}}
+            </div>
+             </div>
         </div>
