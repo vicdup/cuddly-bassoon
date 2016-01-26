@@ -16,9 +16,9 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', '$stateParams',
   function($scope, apiTmdb, $stateParams,  $location){
     apiTmdb.getSerieByName($stateParams.query).then(function(r){
         if (r.results.length == 0){
-          console.log(r.results.length);
-          $scope.empty = true;
-          $scope.apply();
+          $scope.filled = false;
+
+          console.log($scope.message);
         }
         if (r.results.length == 1){
           var idSerie = r.results[0].id;
@@ -28,7 +28,6 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', '$stateParams',
         else{
           $scope.empty = false;
           $scope.series = r.results;
-          $scope.apply();
         }
       })
   }
