@@ -9,14 +9,14 @@ cuddlyServices.service('apiTmdb', function($http) {
     var apiTmdb = {
         getSerieById: function(idSerie) {
             var promise = $http.get('https://api.themoviedb.org/3/tv/' + idSerie + '?api_key=1a3f1b0a8620851f42d4b1a95494d44d').then(function(response) {
-                console.log(response);
+                // console.log(response);
                 return response.data;
             })
             return promise;
         },
         getSeasonByNumberSeason: function(idSeason, idSerie) {
             var promise = $http.get('https://api.themoviedb.org/3/tv/' + idSerie + '/season/' + idSeason + '?api_key=1a3f1b0a8620851f42d4b1a95494d44d').then(function(response) {
-                console.log(response);
+                // console.log(response);
                 return response.data;
             })
             return promise;
@@ -24,7 +24,7 @@ cuddlyServices.service('apiTmdb', function($http) {
 
         getEpisodeByNumberSeasonByEpisodeId: function(seasonNumber, idSerie, episodeNumber) {
             var promise = $http.get('https://api.themoviedb.org/3/tv/' + idSerie + '/season/' + seasonNumber + '/episode/' + episodeNumber + '?api_key=1a3f1b0a8620851f42d4b1a95494d44d').then(function(response) {
-                console.log(response);
+                // console.log(response);
                 return response.data
             })
             return promise
@@ -33,7 +33,7 @@ cuddlyServices.service('apiTmdb', function($http) {
         getSerieByName: function(name) {
             console.log(encodeURIComponent(name));
             var promise = $http.get('https://api.themoviedb.org/3/search/tv?api_key=1a3f1b0a8620851f42d4b1a95494d44d&query=' + encodeURIComponent(name)).then(function(response) {
-                console.log(response);
+                // console.log(response);
                 return response.data;
             })
             return promise
@@ -56,27 +56,27 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             for (i in user.series) {
                 followedSeriesIds.push(user.series[i]['tmdbId']);
             }
-            console.log(followedSeriesIds);
+            // console.log(followedSeriesIds);
             return followedSeriesIds
         },
         getUserByEmail: function(emailUser) {
             var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
-                console.log(response);
+                // console.log(response);
                 user = response.data;
                 if (response.data == "") {
                     authenticated = false;
 
                 } else {
                     authenticated = true;
-                    console.log("coucou");
+                    // console.log("coucou");
 
                 }
-                console.log(authenticated);
+                // console.log(authenticated);
                 return response.data;
 
             }, function errorCallback(response) {
                 authenticated = false;
-                console.log("Mauvais user");
+                // console.log("Mauvais user");
             })
             return promise;
         },
@@ -93,16 +93,16 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             var content = {
                 "tmdbId": tmdbId
             };
-            console.log(content);
+            // console.log(content);
             var promise = $http.delete(addressIp + '/API/users/' + emailUser + '/series/' + tmdbId).then(function(response) {
                 return response.data;
             })
             return promise;
         },
         getCurrentUserSeriesDetails: function() {
+        	user = JSON.parse(sessionStorage.user);
             var series = [];
             var i;
-            console.log(user);
             for (i in user.series) {
                 apiTmdb.getSerieById(user.series[i]['tmdbId']).then(function(r) {
                     series.push(r);
@@ -111,11 +111,11 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             return series
         },
         getCurrentUser: function() {
-            console.log("fetching current user " + $cookies.get('CBemail'));
+            // console.log("fetching current user " + $cookies.get('CBemail'));
             if(user={}){
             apiUserDb.getUserByEmail($cookies.get('CBemail')).then(function(r) {
                 user = r;
-				console.log(user);
+				// console.log(user);
                 return user;
             })}
             else{
@@ -157,10 +157,10 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
         var deferred = $q.defer();
         if (condition) {
             for (var serie in series) {
-                console.log(serie)
+                // console.log(serie)
                 followedSeries[series[serie].tmdbId] = true;
             };
-            console.log(followedSeries);
+            // console.log(followedSeries);
             deferred.resolve("Success");
         } else {
             deferred.resolve("Error");
@@ -175,7 +175,7 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
             for (var serieId in followedSeries) {
                 $http.get('https://api.themoviedb.org/3/tv/' + serieId + '/similar?api_key=1a3f1b0a8620851f42d4b1a95494d44d&page=1').then(function(response) {
                     var tempSimilars = response.data.results;
-                    console.log(tempSimilars);
+                    // console.log(tempSimilars);
                     for (var i = 0; i < response.data.results.length; i++) {
                         var currentId = tempSimilars[i].id
                         if (currentId in recommendations) {

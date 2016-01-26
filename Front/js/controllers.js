@@ -4,8 +4,8 @@
 
 var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
-cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state',
-    function($scope, apiTmdb, $location, apiUserDb, $state) {
+cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state', '$cookies',
+    function($scope, apiTmdb, $location, apiUserDb, $state, $cookies) {
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
         }
@@ -15,16 +15,19 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
             sessionStorage.user = "";
             sessionStorage.connected = "";
             $state.go('login');
-            $scope.isConnected = false;
+            // $scope.isConnected = false;
             $cookies.put('CBemail', 'disconnected');
             console.log("User correctly disconnected")
         }
-        $scope.isConnected = Boolean(sessionStorage.connected);
+        $scope.isConnected =function(){
+        return Boolean(sessionStorage.connected);
+      }
     }
 ]);
 
 cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$location', '$state',
     function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state) {
+      // $scope.isConnected() = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
             apiTmdb.getSerieByName($stateParams.query).then(function(r) {
@@ -52,6 +55,7 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
 cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$cookies', '$state',
 
     function($scope, apiTmdb, apiUserDb, $stateParams, $cookies, $state) {
+      // $scope.isConnected = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
             var getMaxSeason = function(serie) {
@@ -124,6 +128,7 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
 
 cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies',
     function($scope, $state, apiUserDb, $stateParams, $cookies) {
+      // $scope.isConnected = Boolean(sessionStorage.connected);
         $scope.answer = "";
         $scope.doLogin = function(pseudo) {
             $cookies.put('CBemail', pseudo);
@@ -132,7 +137,7 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$st
                     if (apiUserDb.isAuthenticated() == true) {
                         sessionStorage.user = JSON.stringify(r);
                         sessionStorage.connected = true;
-                        $scope.isConnected = true;
+                        // $scope.isConnected = true;
                         $state.go('home');
                     } else {
                         $scope.answer = "Wrong pseudo, Try again"
@@ -148,6 +153,7 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$st
 
 cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$cookies', '$state', 'recommendations',
     function($scope, apiUserDb, $cookies, $state, recommendations) {
+      console.log($scope.isConnected);
         if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
             $scope.series = apiUserDb.getCurrentUserSeriesDetails();
@@ -168,6 +174,7 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$cookies', '$s
 
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams','$state',
     function($scope, apiTmdb, $stateParams, $state) {
+      // $scope.isConnected = Boolean(sessionStorage.connected);
               if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
         var getMaxSeason = function(serie) {
@@ -245,6 +252,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 
 cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$cookies', '$state',
     function($scope, apiUserDb, apiTmdb, $stateParams, $cookies, $state) {
+      // $scope.isConnected = Boolean(sessionStorage.connected);
       if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
         var getMaxSeason = function(serie) {
@@ -323,6 +331,7 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 
 cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state', '$cookies',
     function($scope, apiUserDb, apiTmdb, $stateParams, $state, $cookies) {
+      // $scope.isConnected = Boolean(sessionStorage.connected);
             if (Boolean(sessionStorage.connected)) {
             $scope.user = JSON.parse(sessionStorage.user);
 
