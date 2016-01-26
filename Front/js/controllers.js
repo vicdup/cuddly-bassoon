@@ -4,21 +4,28 @@
 
 var cuddlyControllers = angular.module('cuddlyControllers', []);
 
-cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', '$location',
+cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location',
   function($scope, apiTmdb, $location){
     $scope.searchSerieByName = function(name){
       $location.path('search/'+name);
     }
+  }
+]);
 
-
-
-      //     apiTmdb.getSerieByName(name).then(function(r){
-      //   console.log(r.results[0]);
-      //   $scope.serieId = r.results[0].id;
-      //   console.log('serie id');
-      //   console.log($scope.serieId);
-      //   $location.path('/serie/'+$scope.serieId);
-      // })
+cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', '$stateParams', '$location',
+  function($scope, apiTmdb, $stateParams,  $location){
+    apiTmdb.getSerieByName($stateParams.query).then(function(r){
+        if (r.results.length == 0){
+          $scope.empty = true;
+        }
+        if (r.results.length == 1){
+          var idSerie = r.results[0].id;
+          console.log(idSerie);
+          $location.path('serie/'+idSerie);
+        }
+        $scope.empty = false;
+        $scope.series = r.results;
+      })
   }
 ]);
 
