@@ -27,7 +27,15 @@ cuddlyServices.service('apiTmdb', function($http){
 				return response.data
 			})
 			return promise
-		}
+		},
+
+		getSerieByName: function(name){
+			var promise = $http.get('https://api.themoviedb.org/3/search/tv?api_key=1a3f1b0a8620851f42d4b1a95494d44d&query='+name).then(function(response){
+				console.log(response);
+				return response.data;
+			})
+			return promise
+		},
 
 
 	};
