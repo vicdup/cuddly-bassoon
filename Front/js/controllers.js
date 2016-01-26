@@ -313,79 +313,86 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
         } else {
             $state.go('login');
         }
-        apiUserDb.getUserByEmail($scope.emailUser).then(function(r) {
-            $scope.user = r;
-            $scope.series = $scope.user.series.tmdbId;
-            var seriesIds = [];
-            for (var i = $scope.user.series.length - 1; i >= 0; i--) {
-                if (typeof($scope.user.series[i].tmdbId) == 'number') {
-                    seriesIds.push($scope.user.series[i].tmdbId);
+    apiUserDb.getUserByEmail($scope.emailUser).then(function(r){
+      $scope.user = r;
+      $scope.series = $scope.user.series.tmdbId;
+      var seriesIds = [];
+      for (var i = $scope.user.series.length - 1; i >= 0; i--) {
+        if (typeof($scope.user.series[i].tmdbId) == 'number'){ 
+          seriesIds.push($scope.user.series[i].tmdbId);
+        }
+      };
+
+      var currentdate = new Date();
+      $scope.currentmonth = currentdate.getMonth()+1; 
+      $scope.currentyear = currentdate.getFullYear();
+      var month1 = [];
+      var month2 = [];
+      var month3 = [];
+
+      for (var i = seriesIds.length - 1; i >= 0; i--) {
+        apiTmdb.getSerieById(seriesIds[i]).then(function(d){
+          var serie = d;
+          for (var j = serie.seasons.length - 1; j >= 0; j--) {
+            apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number,serie.id).then(function(t){
+              for (var k = t.episodes.length - 1; k >= 0; k--) {
+                var episodedate = new Date(t.episodes[k].air_date);
+                if (episodedate.getFullYear() == 2015 ||episodedate.getFullYear() == 2016){
+                    console.log("date d'episode");
+                    console.log(episodedate);
+                    console.log(episodedate.getMonth()+1);
+                    console.log(episodedate.getFullYear());
                 }
-            };
-
-            var currentdate = new Date();
-            $scope.currentmonth = currentdate.getMonth();
-            console.log("mois courant");
-            console.log($scope.currentmonth);
-            console.log("année courant");
-            console.log($scope.currentyear);
-            $scope.currentyear = currentdate.getYear();
-            var month1 = [];
-            var month2 = [];
-            var month3 = [];
-
-            for (var i = seriesIds.length - 1; i >= 0; i--) {
-                apiTmdb.getSerieById(seriesIds[i]).then(function(d) {
-                    var serie = d;
-
-                    for (var j = serie.seasons.length - 1; j >= 0; j--) {
-                        apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number, serie.id).then(function(t) {
-
-                            for (var k = t.episodes.length - 1; k >= 0; k--) {
-
-                                var episodedate = new Date(t.episodes[k].air_date);
-                                console.log("date de l'épisode");
-                                console.log(episodedate);
-                                if ($scope.currentmonth == 1) {
-                                    if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth)) {
-                                        month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                    if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth + 1) {
-                                        month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                    if (episodedate.getMonth() == 12 && episodedate.getYear() == $scope.currentyear - 1) {
-                                        month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                };
-                                if ($scope.currentmonth == 12) {
-                                    if ((episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth)) {
-                                        month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                    if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth - 1) {
-                                        month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                    if (episodedate.getMonth() == 1 && episodedate.getYear() == $scope.currentyear + 1) {
-                                        month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                    };
-                                };
-                                if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() == $scope.currentmonth - 1) {
-                                    month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                };
-                                if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() <= $scope.currentmonth + 1) {
-                                    month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                };
-                                if (episodedate.getYear() == $scope.currentyear && episodedate.getMonth() <= $scope.currentmonth) {
-                                    month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
-                                };
-
-                            };
-                        })
+                if ($scope.currentmonth == 1){
+                    if (episodedate.getMonth()+1 == 12 && episodedate.getFullYear() == $scope.currentyear - 1) {
+                        month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month1");
                     };
-                });
-            };
-            $scope.month1 = month1;
-            $scope.month2 = month2;
-            $scope.month3 = month3;
-        });
-    }
+                    if ((episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth()+1 == $scope.currentmonth)){
+                        month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month2");
+                    };
+                    if (episodedate.getFullYear() == $scope.currentyear  && episodedate.getMonth()+1 == $scope.currentmonth+1){
+                        month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month3");                
+                    };
+                }
+                else if ($scope.currentmonth == 12){
+                    if (episodedate.getFullYear() == $scope.currentyear  && episodedate.getMonth()+1 == $scope.currentmonth-1){
+                        month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month1");
+                    };
+                    if ((episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth()+1 == $scope.currentmonth)){
+                        month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month2");                        
+                    };
+                    if (episodedate.getMonth()+1 == 1 && episodedate.getFullYear() == $scope.currentyear+1){
+                        month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month3");                        
+                    };
+                }
+                else{
+                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth()+1 == $scope.currentmonth-1){
+                        month1.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month1");
+                    };
+                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth()+1 <= $scope.currentmonth){
+                        month2.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month2");
+                    };
+                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth()+1 <= $scope.currentmonth+1){
+                        month3.push([serie.id, t.season_number, t.episodes[k].air_date]);
+                        console.log("Month3");
+                    }; 
+                };               
+              };
+            })
+          };
+        });      
+      };
+      $scope.month1  = month1;
+      $scope.month2  = month2;
+      $scope.month3  = month3;
+    });
+  }
 ]);
