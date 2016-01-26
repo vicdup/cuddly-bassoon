@@ -1,35 +1,27 @@
-<div class="container-fluid">
-    <div class="header container">
-        <div class="row">
-            <div class="col-md-6">
-                Prochaines sorties
-            </div>
-        </div>
-
-    </div>
-    
-    <div class="content container">
-        Mois - 1 : {{month1}}<br/>
-        <br/>
-        Mois 0 : {{month2}}<br/>
-        <br/>
-        Mois + 1 : {{month3}}
-        <!-- <div class="row serie_content">
-            <div class="serie_pic col-md-4" ng-repeat="episode in episodes">
-                <div class="row">
-                    <div class="col-md-12">
-                        Mois
-                    </div>
-                    <div class="col-md-12 release_month">
-                        <div class="row">
+<div class="content container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row serie_content">
+                <div class="col-md-4">
+                    <div class="row" ng-repeat="month in months">
+                        <div class="col-md-12 cal-month-title">
+                            <h3>
+                                Janvier 
+                            </h3>
+                        </div>
+                        <div class="col-md-12 cal-month-content" ng-repeat="episode in month">
+                            <div class="row darkened">
                                 <div class="col-md-12 passed">
-                                    {{episode.air_date}} - Name -  SNumberE{{episode.episode_number}} 
+                                {{episode[2]["air_date"] | date : 'd'}} - {{episode[2]["name"]}}- S{{episode[1]}}E{{episode[2]["episode_number"]}}
                                 </div>
+                            </div>
                         </div>
                     </div>
-                   
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
+
+
+   
