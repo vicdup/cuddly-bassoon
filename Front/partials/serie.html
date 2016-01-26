@@ -1,93 +1,87 @@
 <div class="container-fluid">
   <div class="header container">
     <div class="row">
-        <div class="col-md-6">
-            <h2> Fiche Série </h2>
-        </div>
+      <div class="col-md-6">
+        <h2> Fiche Série </h2>
+      </div>
     </div>
   </div>
-        
+  
   <div class="content container">
-      <div class="row serie_name">
-          <div class="col-md-12">
-              <h1> {{serie.name}} </h1>
-          </div>
+    <div class="row serie_name">
+      <div class="col-md-12">
+        <h1> {{serie.name}} </h1>
       </div>
-      <div class="row serie_content">
-          <div class="serie_pic col-md-3">
-              <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
+    </div>
+    <div class="row serie_content">
+      <div class="serie_pic col-md-3">
+        <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
+      </div>
+      <div class="serie_info col-md-5">
+        <div class="row">
+          <div class="col-md-12 serie_description">
+            <p>{{serie.overview.substring(0,200)}}...</p>
           </div>
-
-
-          <div class="serie_info col-md-5">
-              <div class="row">
-                  <div class="col-md-12 serie_description">
-                      <p>{{serie.overview.substring(0,200)}}...</p>
-                  </div>
-
-                  <div ng-hide="(userFollowedSeries.indexOf(serie.id) > -1)">
-                      <div class="col-md-12 serie_grade">
-                                Note : 
-                                <div class="stars">
-                                        <div class="empty_stars">
-                                            <img src='images/empty_stars.png' > 
-                                        </div>
-                                        <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
-                                            <img src='images/filled_stars.png' > 
-                                        </div>
-                                </div>
-                                {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
-                      </div>
-                      <br></br>
-                      <div class="col-md-12 serie_status">
-                           {{serieStatus}} - {{season.season_number}} saisons
-                      </div>
-                      <br></br>
-                      <div class="col-md-12">
-                          <div class="btn-group btn-group-justified" role="group">
-                              <div class="btn-group" role="group">
-                                  <button class="btn btn-default" ng-click="addSerie(serie.id)">Ajouter à mes séries</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)">
-                      <div class="col-md-12">
-                             <p><i class="fa fa-check"></i> followed</p>
-                          <a href="calendar.html">Calendar</a>
-                      </div>
-                      
-                      <div class="col-md-12 next_releases">
-                          <div class="row">
-                              <div class="col-md-12" ng-repeat="episode in season.episodes.slice().reverse().slice(0,5)">
-                                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4></a>
-                                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} > 0">
-                                    &nbsp Up in {{ episode.air_date | amDifference : currentdate: 'days' }} days
-                                  </h4>
-                                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} <= 0">
-                                    &nbsp Available !
-                                  </h4>
-                              </div>  
-                              
-                          </div>
-                      </div>
-                  
-                  
-                  </div>
-              </div>
-          </div>
-          <div class="serie_eps col-md-4">
-              <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
-              <div class="darkened scrollable">
-                <div class="row" ng-repeat="episode in seasonToShow.episodes">
-                  <a ui-sref="episode({serieId : serie.id, seasonNumber : seasonToShow.season_number, episodeNumber : episode.episode_number})">
-                  <h4>Episode {{episode.episode_number}}</h4>{{episode.name}}</a>
+          <div ng-hide="(userFollowedSeries.indexOf(serie.id) > -1)">
+            <div class="col-md-12 serie_grade">
+              Note :
+              <div class="stars">
+                <div class="empty_stars">
+                  <img src='images/empty_stars.png' >
+                </div>
+                <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
+                  <img src='images/filled_stars.png' >
                 </div>
               </div>
+              {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
+            </div>
+            <br></br>
+            <div class="col-md-12 serie_status">
+              {{serieStatus}} - {{season.season_number}} saisons
+            </div>
+            <br></br>
+            <div class="col-md-12">
+              <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                  <button class="btn btn-default" ng-click="addSerie(serie.id)">Ajouter à mes séries</button>
+                </div>
+              </div>
+            </div>
           </div>
+          <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)">
+            <div class="col-md-12">
+              <p ng-click="deleteSerie(serie.id)"><i class="fa fa-check"></i> followed</p>
+              <a href="calendar.html">Calendar</a>
+            </div>
+            
+            <div class="col-md-12 next_releases">
+              <div class="row">
+                <div class="col-md-12" ng-repeat="episode in season.episodes.slice().reverse().slice(0,5)">
+                  <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4></a>
+                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} > 0">
+                  &nbsp Up in {{ episode.air_date | amDifference : currentdate: 'days' }} days
+                  </h4>
+                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} <= 0">
+                  &nbsp Available !
+                  </h4>
+                </div>
+                
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
       </div>
+      <div class="serie_eps col-md-4">
+        <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
+        <div class="darkened scrollable">
+          <div class="row" ng-repeat="episode in seasonToShow.episodes">
+            <a ui-sref="episode({serieId : serie.id, seasonNumber : seasonToShow.season_number, episodeNumber : episode.episode_number})">
+            <h4>Episode {{episode.episode_number}}</h4>{{episode.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-        

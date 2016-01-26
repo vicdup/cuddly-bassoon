@@ -93,12 +93,16 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb){
 			return promise;
 		},
 		postSerie: function(emailUser, tmdbId){
-			console.log("post serie");
 			var content = {"tmdbId":tmdbId};
 			var promise = $http.post(addressIp+'/API/users/'+emailUser+'/series', content).then(function(response){
-				console.log(response.data);
-				console.log(emailUser);
-				console.log(tmdbId);
+				return response.data;
+			})
+			return promise;
+		},
+		deleteSerie: function(emailUser, tmdbId){
+			var content = {"tmdbId":tmdbId};
+			console.log(content);
+			var promise = $http.delete(addressIp+'/API/users/'+emailUser+'/series/'+tmdbId).then(function(response){
 				return response.data;
 			})
 			return promise;

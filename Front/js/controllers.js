@@ -45,7 +45,13 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
         $scope.addSerie = function(tmdbId) {
             var emailUser = apiUserDb.getCurrentUser().email;
             apiUserDb.postSerie(emailUser,tmdbId).then(function(r) {
-                $scope.userFollowedSeries.push(tmdbId);
+            $scope.userFollowedSeries.push(tmdbId);
+            })
+        }
+      $scope.deleteSerie = function(tmdbId) {
+            var emailUser = apiUserDb.getCurrentUser().email;
+            apiUserDb.deleteSerie(emailUser,tmdbId).then(function(r) {
+              $scope.userFollowedSeries.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
             })
         }
         $scope.previous_season = function() {

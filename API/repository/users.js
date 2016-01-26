@@ -74,7 +74,7 @@ function UsersRepository () {
         console.log(req.body);
         var conditions = {'email':req.params.email}
         Users.update(conditions,
-            {$pull: {"series": {tmdbId: req.body.tmdbId}}},
+            {$pull: {"series": {tmdbId: req.params.tmdbId}}},
             {safe: true, upsert: true},
             function(err, model) {
                 if (err) throw err;
