@@ -29,7 +29,7 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
     function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state) {
       // $scope.isConnected() = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
-            $scope.user = JSON.parse(sessionStorage.user);
+            $scope.user = apiUserDb.getCurrentUser();
             apiTmdb.getSerieByName($stateParams.query).then(function(r) {
                 if (r.results.length == 0) {
                     $scope.filled = false;
@@ -44,11 +44,32 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
                 }
             })
 
-        } else {
+        } else 
+        {
             $state.go('login');
         }
 
 
+    }
+]);
+
+cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$location', '$state', '$cookies',
+    function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state; $cookies) {
+        if (Boolean(sessionStorage.connected)) {
+            apiUserDb.disconnect();
+        }
+
+        $scope.postUser = function(email,name) {
+                apiUserDb.postUser(email,name).then(function(r) {
+                    console.log("user created")
+                    $cookies.put('CBemail', email);
+                    sessionStorage.user = JSON.stringify(r);
+                    sessionStorage.connected = true;
+                    // $scope.isConnected = true;
+                    $state.go('home');
+
+                })
+            };
     }
 ]);
 
@@ -57,7 +78,7 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
     function($scope, apiTmdb, apiUserDb, $stateParams, $cookies, $state) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
-            $scope.user = JSON.parse(sessionStorage.user);
+            $scope.user = apiUserDb.getCurrentUser();
             var getMaxSeason = function(serie) {
                 var seasons = serie.seasons;
                 var maxseason = 0;
@@ -69,9 +90,13 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                 return maxseason;
             }
             $scope.addSerie = function(tmdbId) {
-                var emailUser = $cookies.get('CBemail');
+                var user = apiUserDb.getCurrentUser(sessionStorage);
+                var emailUser = user.email;
                 apiUserDb.postSerie(emailUser, tmdbId).then(function(r) {
                     $scope.userFollowedSeries.push(tmdbId);
+                    var content = {"tmdbId":tmdbId};
+                    user.series.push(content);
+                    apiUserDb.updateCurrentUser(user);
                 })
             }
             $scope.deleteSerie = function(tmdbId) {

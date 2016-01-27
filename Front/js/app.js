@@ -42,6 +42,11 @@ cuddlyApp.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'partials/calendar.html',
         controller: 'calendarPageCtrl'
       })
+      .state('signup',{
+        url : '/signup',
+        templateUrl: 'partials/signup.html',
+        controller: 'signupPageCtrl'
+      })
       .state('search',{
         url: '/search/:query',
         templateUrl: 'partials/research.html',

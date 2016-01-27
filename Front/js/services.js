@@ -51,12 +51,13 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
     var authenticated = false;
     var apiUserDb = {
         getFollowedSeriesIds: function() {
+            var user = JSON.parse(sessionStorage.user);
             var followedSeriesIds = [];
             var i;
             for (i in user.series) {
                 followedSeriesIds.push(user.series[i]['tmdbId']);
             }
-            // console.log(followedSeriesIds);
+            console.log(followedSeriesIds);
             return followedSeriesIds
         },
         getUserByEmail: function(emailUser) {
@@ -89,6 +90,18 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             })
             return promise;
         },
+        postUser: function(email, name) {
+            var content = {
+                "email": email,
+                "name": name,
+                "avatar": "",
+                "series":[]
+            };
+            var promise = $http.post(addressIp + '/API/users/', content).then(function(response) {
+                return response.data;
+            })
+            return promise;
+        },
         deleteSerie: function(emailUser, tmdbId) {
             var content = {
                 "tmdbId": tmdbId
@@ -111,16 +124,12 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             return series
         },
         getCurrentUser: function() {
-            // console.log("fetching current user " + $cookies.get('CBemail'));
-            if(user={}){
-            apiUserDb.getUserByEmail($cookies.get('CBemail')).then(function(r) {
-                user = r;
-				// console.log(user);
-                return user;
-            })}
-            else{
-            	return user;
-            }
+            var user=JSON.parse(sessionStorage.user);
+            console.log(user);
+            return user;
+        },
+        updateCurrentUser: function(user) {
+            return sessionStorage.user = JSON.stringify(user);
         },
         isAuthenticated: function() {
 			if ($cookies.get('CBemail')!='disconnected')

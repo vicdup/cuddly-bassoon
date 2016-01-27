@@ -21,14 +21,14 @@ function UsersRepository () {
     this.postUsers = function(req, res, next) {
         console.log(req.body);
         var newUser = new Users(req.body);
-        newUser.save(function (err, newService){
+        newUser.save(function (err, newUser){
             if(err){
         	if (err.name == 'ValidationError') {
                 res.statusCode = 400;
                 res.json(err.errors);
             }
             else throw err;}
-            else res.json({'message': 'success'});
+            else res.json(newUser);
         });
         return;
     }
