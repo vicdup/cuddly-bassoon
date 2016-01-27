@@ -126,7 +126,7 @@ max-width: 100%;
 }
 
 .research_content{
-height:400px;
+min-height:400px;
 overflow-y: scroll;
 }
 
