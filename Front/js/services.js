@@ -73,7 +73,9 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             var followedSeriesIds = [];
             var i;
             for (i in user.series) {
-                followedSeriesIds.push(user.series[i]['tmdbId']);
+                if (user.series[i]['tmdbId']) {
+                    followedSeriesIds.push(user.series[i]['tmdbId']);
+                }
             }
             console.log(followedSeriesIds);
             return followedSeriesIds
@@ -88,7 +90,6 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
 
                 } else {
                     authenticated = true;
-                    console.log("coucou");
                 }
                 // console.log(authenticated);
                 return response.data;
@@ -143,7 +144,6 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
         },
         getCurrentUser: function() {
             var user=JSON.parse(sessionStorage.user);
-            console.log(user);
             return user;
         },
         updateCurrentUser: function(user) {
@@ -207,10 +207,13 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
         var deferred = $q.defer();
         if (condition) {
             for (var serie in series) {
+                console.log(series)
                 // console.log(serie)
-                followedSeries[series[serie].tmdbId] = true;
+                if (series[serie].tmdbId) {
+                    followedSeries[series[serie].tmdbId] = true;
+                }
             };
-            // console.log(followedSeries);
+             console.log(followedSeries);
             deferred.resolve("Success");
         } else {
             deferred.resolve("Error");
@@ -234,11 +237,26 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
                             recommendations[currentId] = {};
                             recommendations[currentId].score = 1;
                             recommendations[currentId].popularity = tempSimilars[i].popularity;
+                            recommendations[currentId].poster_path = tempSimilars[i].poster_path;
+                            recommendations[currentId].id = currentId;
                         }
                     };
                     completed_request++;
                     if (completed_request == Object.keys(followedSeries).length) {
-                        recommendedSeries = recommendations;
+                        var copy = recommendations
+                        var reco_list = []
+                        for (var i in recommendations) {
+                            var best = [0, 0]
+                            for (var key in copy) {
+                                if (recommendations[key].score > best[1]) {
+                                    best = [key, recommendations[key].score]
+                                }
+                            }
+                            reco_list.push(recommendations[best[0]])
+                            delete copy[best[0]]
+                        }
+                        recommendedSeries = reco_list;
+                        console.log(recommendedSeries)
                         deferred.resolve("Success");
                     }
                 });

@@ -220,12 +220,36 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$st
     }
 ]);
 
-cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$cookies', '$state', 'recommendations',
-    function($scope, apiUserDb, $cookies, $state, recommendations) {
-      console.log($scope.isConnected);
+cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$cookies', '$state', 'recommendations',
+    function($scope, apiUserDb, apiTmdb, $cookies, $state, recommendations) {
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
-            $scope.series = apiUserDb.getCurrentUserSeriesDetails();
+            $scope.emailUser = $scope.user.email;
+            $scope.series = $scope.user.series.tmdbId;
+            $scope.followed_series = apiUserDb.getCurrentUserSeriesDetails();
+
+            var seriesIds = apiUserDb.getFollowedSeriesIds();
+
+            var currentdate = new Date().getTime()
+            $scope.latest_episodes = []
+            for (var i = seriesIds.length - 1; i >= 0; i--) {
+                apiTmdb.getSerieById(seriesIds[i]).then(function(d) {
+                    var serie = d;
+                    var serieName = d.name;
+                    for (var j = serie.seasons.length - 1; j >= 0; j--) {
+                        apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number, serie.id).then(function(t) {
+                            for (var k = t.episodes.length - 1; k >= 0; k--) {
+                                if (t.episodes[k].air_date) {
+                                    var timestamp = new Date(t.episodes[k].air_date).getTime()
+                                    if (timestamp < currentdate) {
+                                        $scope.latest_episodes.push({ts: timestamp, serieName : serie.name, seriePoster: serie.poster_path, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id})
+                                    };
+                                }
+                            };
+                        })
+                    };
+                });
+            };            
             recommendations.updateFollowedSeries($scope.user.series, apiUserDb.isAuthenticated).then(function successCallBack(value) {
                 recommendations.updateRecommendations(apiUserDb.isAuthenticated).then(function successCallBack(value) {
                     $scope.recommendedSeries = recommendations.getRecommendations();
