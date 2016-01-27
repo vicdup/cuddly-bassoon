@@ -62,15 +62,14 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
         },
         getUserByEmail: function(emailUser) {
             var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
-                // console.log(response);
+                console.log(response);
                 user = response.data;
                 if (response.data == "") {
                     authenticated = false;
 
                 } else {
                     authenticated = true;
-                    // console.log("coucou");
-
+                    console.log("coucou");
                 }
                 // console.log(authenticated);
                 return response.data;
@@ -132,16 +131,45 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             return sessionStorage.user = JSON.stringify(user);
         },
         isAuthenticated: function() {
-			if ($cookies.get('CBemail')!='disconnected')
-			{
-				return true;
-			}
-			else {
-				return false;
-			}
-		},
+            if ($cookies.get('CBemail')!='disconnected')
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        },
 		disconnect: function() {
 			$cookies.put('CBemail','disconnected');
+        },
+        loginCookies: function(){
+            if ($cookies.get('CBemail')!='disconnected' &&  typeof($cookies.get('CBemail'))!='undefined' )
+            {
+                var emailUser = $cookies.get('CBemail');
+                var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
+                    console.log(response);
+                    user = response.data;
+                    sessionStorage.user = JSON.stringify(user);
+                    if (response.data == "") {
+                        authenticated = Boolean(false);
+
+                    } else {
+                        authenticated = Boolean(true);
+                    }
+                // console.log(authenticated);
+                return authenticated;
+
+            }, function errorCallback(response) {
+                authenticated = false;
+                // console.log("Mauvais user");
+            })
+            return promise;
+
+            }
+            else 
+            {
+                return Boolean(false);
+            }
         }
 
     };

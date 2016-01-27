@@ -54,7 +54,7 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
 ]);
 
 cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$location', '$state', '$cookies',
-    function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state; $cookies) {
+    function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state, $cookies) {
         if (Boolean(sessionStorage.connected)) {
             apiUserDb.disconnect();
         }
@@ -77,6 +77,8 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
 
     function($scope, apiTmdb, apiUserDb, $stateParams, $cookies, $state) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
+      // console.log(apiUserDb.loginCookies());
+      // apiUserDb.loginCookies().then(function(r){
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
             var getMaxSeason = function(serie) {
@@ -147,7 +149,6 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
         } else {
             $state.go('login');
         }
-
     }
 ]);
 

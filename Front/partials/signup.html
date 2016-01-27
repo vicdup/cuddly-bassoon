@@ -10,22 +10,19 @@
         <form>
             <div class="row pseudo-input">
                 <div class="col-md-4 col-md-offset-4">
-                    <input type="email" value="maxime@gmail.com" ng-model="email" id="email">
-                    
+                    <label>Nom</label><input type="name" value="Maxime" ng-model="name" id="name">
+                    <label>Email</label><input type="email" value="maxime@gmail.com" ng-model="email" id="email">
                 </div>
             </div>
             <div class="row login">
                 <div class="col-md-4 col-md-offset-4">
                 <br/>
-                    <input type="submit" ng-click="doLogin(email)" value="Login" class="btn btn-block btn-default" />
+                    <input type="submit" ng-click="postUser(email, name)" value="Login" class="btn btn-block btn-default" />
                     <br/>
                 </div>
             </div>
         </form>
-        <div class="row goto-sign-up">
-            <div class="col-md-4 col-md-offset-4">
-                <a ui-sref="signup"><button class="btn btn-block btn-default">Pas encore inscrit ?</button></a>
-            </div>
+        
         </div>
         <span> {{answer}} </span>
     </div>
