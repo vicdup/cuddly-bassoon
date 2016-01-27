@@ -387,33 +387,33 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                                 if (episodedate.getFullYear() == 2015 || episodedate.getFullYear() == 2016) {}
                                 if ($scope.currentmonth == 1) {
                                     if (episodedate.getMonth() + 1 == 12 && episodedate.getFullYear() == $scope.currentyear - 1) {
-                                        month1.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if ((episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth)) {
-                                        month2.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month2.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth + 1) {
-                                        month3.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month3.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                 } else if ($scope.currentmonth == 12) {
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth - 1) {
-                                        month1.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if ((episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth)) {
-                                        month2.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month2.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if (episodedate.getMonth() + 1 == 1 && episodedate.getFullYear() == $scope.currentyear + 1) {
-                                        month3.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month3.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                 } else {
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth - 1) {
-                                        month1.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 <= $scope.currentmonth) {
-                                        month2.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month2.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 <= $scope.currentmonth + 1) {
-                                        month3.push([serie.name, t.season_number, episodedate, t.episodes[k].episode_number, t.episodes[k].name, serie.id]);
+                                        month3.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                 };
                             };

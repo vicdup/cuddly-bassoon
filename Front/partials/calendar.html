@@ -6,10 +6,10 @@
                             <div class="col-md-12 cal-month-title">
                                 <h3>{{monthsNames[0]}} </h3>
                             </div>
-                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month1  |orderBy : episode[2]">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month1 | orderBy:'+episodeDate'">
                                 <div class="row">
                                     <div class="col-md-12 passed">
-                                    <a ui-sref="episode({serieId : episode[5], seasonNumber : episode[1], episodeNumber : episode[3]})">{{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}</a>
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - {{episode["serieName"]}} - {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -18,10 +18,10 @@
                             <div class="col-md-12 cal-month-title">
                                 <h3>{{monthsNames[1]}} </h3>
                             </div>
-                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month2 | orderBy : episode[2]">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month2 | orderBy:'+episodeDate'">
                                 <div class="row">
                                     <div class="col-md-12 passed">
-                                    <a ui-sref="episode({serieId : episode[5], seasonNumber : episode[1], episodeNumber : episode[3]})">{{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}</a>
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - {{episode["serieName"]}} - {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -30,10 +30,10 @@
                             <div class="col-md-12 cal-month-title">
                                 <h3>{{monthsNames[2]}}</h3>
                             </div>
-                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month3 | orderBy : episode[2]">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month3 | orderBy:'+episodeDate'">
                                 <div class="row">
                                     <div class="col-md-12 passed">
-                                    <a ui-sref="episode({serieId : episode[5], seasonNumber : episode[1], episodeNumber : episode[3]})">{{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}</a>
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - {{episode["serieName"]}} - {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}</a>
                                     </div>
                                 </div>
                             </div>
