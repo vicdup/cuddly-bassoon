@@ -32,13 +32,15 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
             $scope.user = apiUserDb.getCurrentUser();
             apiTmdb.getSerieByName($stateParams.query).then(function(r) {
                 if (r.results.length == 0) {
-                    $scope.filled = false;
+                    $scope.empty = true;
+                    console.log($scope.empty);
                 }
-                if (r.results.length == 1) {
+                else if (r.results.length == 1) {
                     var idSerie = r.results[0].id;
                     $location.path('serie/' + idSerie);
                 } else {
-                    $scope.empty = false;
+                    $scope.empty= false;
+                    console.log($scope.empty)
                     $scope.series = r.results;
                     $scope.userFollowedSeries = apiUserDb.getFollowedSeriesIds();
                 }

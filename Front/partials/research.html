@@ -1,6 +1,5 @@
 <div  ng-controller="searchCtrl" class="content container">
     <div class="row research_content darkened">
-        <div ng-hide="empty">
             <div class="returned_serie col-md-6" ng-repeat="serie in series">
                 <div class="row">
                     <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
@@ -39,8 +38,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div ng-hide="test">
+        <div ng-show="empty == true">
             <div class="returned_serie col-md-6">
                 <div class="row">
                     Veuillez écrire une autre requête, celle ci ne renvoie aucun résultat !
