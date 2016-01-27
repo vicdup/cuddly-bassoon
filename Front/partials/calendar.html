@@ -1,6 +1,6 @@
 <div class="content container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="row serie_content">
                         <div class="col-md-4">
                             <div class="col-md-12 cal-month-title">
@@ -8,8 +8,8 @@
                                     {{monthsNames[0]}}
                                 </h3>
                             </div>
-                            <div class="col-md-12 cal-month-content" ng-repeat="episode in month1  |orderBy : episode[2]">
-                                <div class="row darkened">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month1  |orderBy : episode[2]">
+                                <div class="row">
                                     <div class="col-md-12 passed">
                                     {{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}
                                     </div>
@@ -22,8 +22,8 @@
                                 {{monthsNames[1]}}
                                 </h3>
                             </div>
-                            <div class="col-md-12 cal-month-content" ng-repeat="episode in month2 | orderBy : episode[2]">
-                                <div class="row darkened">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month2 | orderBy : episode[2]">
+                                <div class="row">
                                     <div class="col-md-12 passed">
                                     {{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}
                                     </div>
@@ -36,8 +36,8 @@
                                 {{monthsNames[2]}}
                                 </h3>
                             </div>
-                            <div class="col-md-12 cal-month-content" ng-repeat="episode in month3 | orderBy : episode[2]">
-                                <div class="row darkened">
+                            <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month3 | orderBy : episode[2]">
+                                <div class="row">
                                     <div class="col-md-12 passed">
                                     {{episode[2] | date : 'd'}} - {{episode[0]}} - {{episode[4]}}- S{{episode[1]}}E{{episode[3]}}
                                     </div>
