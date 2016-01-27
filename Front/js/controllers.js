@@ -393,13 +393,73 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                             };
                         })
                     };
-                });
+                })
             };
-
+            var monthsNames = [];
+            if ($scope.currentmonth == 1){
+                monthsNames.push("Décembre");
+                monthsNames.push("Janvier");
+                monthsNames.push("Février");
+            }
+            if ($scope.currentmonth == 2){
+                monthsNames.push("Janvier");
+                monthsNames.push("Février");
+                monthsNames.push("Mars");
+            }
+            if ($scope.currentmonth == 3){
+                monthsNames.push("Février");
+                monthsNames.push("Mars");
+                monthsNames.push("Avril");
+            }
+            if ($scope.currentmonth == 4){
+                monthsNames.push("Mars");
+                monthsNames.push("Avril");
+                monthsNames.push("Mai");
+            }
+            if ($scope.currentmonth == 5){
+                monthsNames.push("Avril");
+                monthsNames.push("Mai");
+                monthsNames.push("Juin");
+            }
+            if ($scope.currentmonth == 6){
+                monthsNames.push("Mai");
+                monthsNames.push("Juin");
+                monthsNames.push("Juillet");
+            }
+            if ($scope.currentmonth == 7){
+                monthsNames.push("Juin");
+                monthsNames.push("Juillet");
+                monthsNames.push("Aout");
+            }
+            if ($scope.currentmonth == 8){
+                monthsNames.push("Juillet");
+                monthsNames.push("Aout");
+                monthsNames.push("Septembre");
+            }
+            if ($scope.currentmonth == 9){
+                monthsNames.push("Aout");
+                monthsNames.push("Septembre");
+                monthsNames.push("Octobre");
+            }
+            if ($scope.currentmonth == 10){
+                monthsNames.push("Septembre");
+                monthsNames.push("Octobre");
+                monthsNames.push("Novembre");
+            }
+            if ($scope.currentmonth == 11){
+                monthsNames.push("Octobre");
+                monthsNames.push("Novembre");
+                monthsNames.push("Décembre");
+            }
+            if ($scope.currentmonth == 12){
+                monthsNames.push("Novembre");
+                monthsNames.push("Décembre");
+                monthsNames.push("Janvier");
+            }
             $scope.month1 = month1;
             $scope.month2 = month2;
             $scope.month3 = month3;
-            var monthsNames = [];
+            $scope.monthsNames = monthsNames;
         }
         else {
             $state.go('login');

@@ -5,7 +5,7 @@
                         <div class="col-md-4">
                             <div class="col-md-12 cal-month-title">
                                 <h3>
-                                    Month - 1 
+                                    {{monthsNames[0]}}
                                 </h3>
                             </div>
                             <div class="col-md-12 cal-month-content" ng-repeat="episode in month1  |orderBy : episode[2]">
@@ -19,7 +19,7 @@
                         <div class="col-md-4">
                             <div class="col-md-12 cal-month-title">
                                 <h3>
-                                    Month 0
+                                {{monthsNames[1]}}
                                 </h3>
                             </div>
                             <div class="col-md-12 cal-month-content" ng-repeat="episode in month2 | orderBy : episode[2]">
@@ -33,7 +33,7 @@
                         <div class="col-md-4">
                             <div class="col-md-12 cal-month-title">
                                 <h3>
-                                    Month 1
+                                {{monthsNames[2]}}
                                 </h3>
                             </div>
                             <div class="col-md-12 cal-month-content" ng-repeat="episode in month3 | orderBy : episode[2]">
