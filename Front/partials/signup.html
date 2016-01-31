@@ -8,6 +8,11 @@
     </div>
     <div class="content container">
         <form>
+            <div class="row avatar-choice">
+                <div class="col-md-4 col-md-offset-4">
+                    <span ng-click="previousAvatar()">&lt;  </span><img class="avatar-signup" src="images/avatars/{{avatarNumber}}.jpg"><span ng-click="nextAvatar()">  &gt;</span><br/>
+                </div>
+            </div>
             <div class="row pseudo-input">
                 <div class="col-md-4 col-md-offset-4">
                     <label>Nom</label><input type="name" value="Maxime" ng-model="name" id="name">
@@ -17,8 +22,9 @@
             <div class="row login">
                 <div class="col-md-4 col-md-offset-4">
                 <br/>
-                    <input type="submit" ng-click="postUser(email, name)" value="Login" class="btn btn-block btn-default" />
+                    <input type="submit" ng-click="postUser(email, name)" value="S'inscrire" class="btn btn-block btn-primary" />
                     <br/>
+                    <a ui-sref="login"><button class="btn btn-block btn-default">Déjà inscrit ?</button></a>
                 </div>
             </div>
         </form>

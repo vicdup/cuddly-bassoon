@@ -60,7 +60,27 @@ cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb'
         if (Boolean(sessionStorage.connected)) {
             apiUserDb.disconnect();
         }
-
+        $scope.avatarNumber = 0;
+        
+        $scope.nextAvatar = function(){
+            if ($scope.avatarNumber==14){
+                $scope.avatarNumber=0;
+            }
+            else {
+                $scope.avatarNumber +=1;
+            }
+        }
+        
+        $scope.previousAvatar = function(){
+            if ($scope.avatarNumber==0){
+                $scope.avatarNumber=14;
+            }
+            else {
+                $scope.avatarNumber += -1;
+            }
+        }
+        
+        
         $scope.postUser = function(email,name) {
                 apiUserDb.postUser(email,name).then(function(r) {
                     console.log("user created")
