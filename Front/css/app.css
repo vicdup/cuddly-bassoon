@@ -62,7 +62,12 @@ h3 {
 }
 
 .AvatarIcon {
-    max-width:20%;
+    height : 40px;
+    border-radius: 4px;
+}
+.account-navbar > h4 {
+    display : inline;
+    vertical-align: middle;
 }
 
 .header {

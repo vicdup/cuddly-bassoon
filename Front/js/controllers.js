@@ -6,6 +6,7 @@ var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
 cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state', '$cookies',
     function($scope, apiTmdb, $location, apiUserDb, $state, $cookies) {
+        
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
         }
@@ -21,7 +22,9 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
         }
         $scope.isConnected =function(){
         return Boolean(sessionStorage.connected);
-      }
+        }
+        $scope.user = apiUserDb.getCurrentUser();
+
     }
 ]);
 
@@ -272,6 +275,9 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                             apiTmdb.getSeasonByNumberSeason($scope.seasonNumber, $scope.serieId).then(function(r) {
                                 maxEpisodeNumber = r.episodes.length;
                                 $scope.episodeNumber = maxEpisodeNumber;
+                                apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
+                                    $scope.episode = d;
+                                });
                             })
                         }
                     }
@@ -279,16 +285,22 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                     apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
                         $scope.episode = d;
                     });
+                    apiTmdb.getSerieById($scope.serieId).then(function(r) {
+                        $scope.serie = r;
+                    });
                 }
                 $scope.next_episode = function() {
                     if ($scope.episodeNumber < maxEpisodeNumber) {
                         $scope.episodeNumber = parseInt($scope.episodeNumber) + 1;
                     } else { //On est au dernier episode de la saison
-                        if ($scope.seasonNumber < maxSeasonNumber) {
+                        if ($scope.seasonNumber < maxSeasonNumber) { //Si on n'est pas à la dernière saison
                             $scope.seasonNumber = parseInt($scope.seasonNumber) + 1;
                             apiTmdb.getSeasonByNumberSeason($scope.seasonNumber, $scope.serieId).then(function(r) {
                                 maxEpisodeNumber = r.episodes.length;
                                 $scope.episodeNumber = 1;
+                                apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
+                                    $scope.episode = d;
+                                });
                             })
                         }
                     }
