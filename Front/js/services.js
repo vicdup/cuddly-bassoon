@@ -89,11 +89,11 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             })
             return promise;
         },
-        postUser: function(email, name) {
+        postUser: function(email, name, avatar) {
             var content = {
                 "email": email,
                 "name": name,
-                "avatar": "",
+                "avatar": avatar,
                 "series":[]
             };
             var promise = $http.post(addressIp + '/API/users/', content).then(function(response) {

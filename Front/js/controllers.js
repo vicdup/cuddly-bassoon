@@ -82,8 +82,8 @@ cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb'
         
         
         $scope.postUser = function(email,name) {
-                apiUserDb.postUser(email,name).then(function(r) {
-                    console.log("user created")
+                apiUserDb.postUser(email,name, $scope.avatarNumber).then(function(r) {
+                    console.log("user created "+ $scope.avatarNumber)
                     $cookies.put('CBemail', email);
                     sessionStorage.user = JSON.stringify(r);
                     sessionStorage.connected = true;
