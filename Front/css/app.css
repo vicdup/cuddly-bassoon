@@ -304,13 +304,16 @@ display:none;
 }
 
 .passed ,.passed > a {
-    color: #8d8d8d;
+    color: #676767;
+}
+.passed > a:hover{
+    color:#535252;
 }
 .last_episode ,.last_episode > a{
     color: lightcoral;
 }
 .first_episode , .first_episode > a{
-    color:lightgreen;
+    color:#6cb26c;
 }
 .Followed > div {
     padding: 0px;
@@ -324,17 +327,15 @@ display:none;
     padding: 0px 3px 10px 3px;
 }
 
-.first-episode > a:hover{
-    color:forestgreen;
+.first_episode > a:hover{
+    color:#225722;
 }
 
-.last-episode > a:hover{
+.last_episode > a:hover{
     color:#a75858;
 }
 
-.passed > a:hover{
-    color:#5a5a5a;
-}
+
 .navbar{
     height:55px;
 }
@@ -403,3 +404,23 @@ a:hover > .navbar-brand {
     }
 }
 
+
+/*Tests*/
+/*
+.Recommanded{
+    background-color: aqua;
+    position:absolute;
+    height : 100%;
+    width :100%;
+}
+.Released{
+    background-color: #DC2987;
+    height : 100%;
+    width :100%;
+}
+.Followed{
+    background-color: #225722;
+    bottom : 0px;
+    height : 100%;
+    width :100%;
+}*/
