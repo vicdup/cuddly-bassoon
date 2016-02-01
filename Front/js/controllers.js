@@ -138,7 +138,7 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                 var emailUser = user.email;
                 apiUserDb.deleteSerie(emailUser, tmdbId).then(function(r) {
                     $scope.userFollowedSeries.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
-                    user.series.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
+                    user.series.splice(user.series.indexOf(tmdbId), 1);
                     apiUserDb.updateCurrentUser(user);
                 })
             }
@@ -268,7 +268,7 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$co
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams','$state', 'apiUserDb',
     function($scope, apiTmdb, $stateParams, $state, apiUserDb) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
-              if (Boolean(sessionStorage.connected)) {
+        if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
         var getMaxSeason = function(serie) {
             var seasons = serie.seasons;
@@ -285,7 +285,11 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
         $scope.serieId = $stateParams.serieId;
         $scope.seasonNumber = $stateParams.seasonNumber;
         $scope.episodeNumber = $stateParams.episodeNumber;
-        $scope.getArrayStar = apiTmdb.getArrayStar;
+        if (typeof rate != 'undefined'){
+        $scope.getArrayStar=function(rate){
+            console.log(rate);
+            return apiTmdb.getArrayStar(rate)
+            }}
         $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
 
         $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
