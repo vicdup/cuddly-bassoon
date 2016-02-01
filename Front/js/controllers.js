@@ -24,7 +24,8 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
         return Boolean(sessionStorage.connected);
         }
         $scope.user = apiUserDb.getCurrentUser();
-        } else 
+        } 
+        else 
         {
             $state.go('login');
         }
@@ -195,8 +196,8 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
     }
 ]);
 
-cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies',
-    function($scope, $state, apiUserDb, $stateParams, $cookies) {
+cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies', '$location', 
+    function($scope, $state, apiUserDb, $stateParams, $cookies, $location) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
         $scope.answer = "";
         $scope.doLogin = function(pseudo) {
@@ -207,7 +208,9 @@ cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$st
                         sessionStorage.user = JSON.stringify(r);
                         sessionStorage.connected = true;
                         // $scope.isConnected = true;
-                        $state.go('home');
+                        // $state.go('home');
+                        $location.url('home');
+                        // $location.path('/home')
                     } else {
                         $scope.answer = "Wrong pseudo, Try again"
                     }
@@ -224,7 +227,7 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$cookies', '$s
     function($scope, apiUserDb, $cookies, $state, recommendations) {
       console.log($scope.isConnected);
         if (Boolean(sessionStorage.connected)) {
-            $scope.user = JSON.parse(sessionStorage.user);
+            $scope.user = apiUserDb.getCurrentUser();
             $scope.series = apiUserDb.getCurrentUserSeriesDetails();
             recommendations.updateFollowedSeries($scope.user.series, apiUserDb.isAuthenticated).then(function successCallBack(value) {
                 recommendations.updateRecommendations(apiUserDb.isAuthenticated).then(function successCallBack(value) {

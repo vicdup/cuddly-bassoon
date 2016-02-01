@@ -40,7 +40,7 @@ cuddlyServices.service('apiTmdb', function($http) {
         },
 
         getArrayStar: function(rate) {
-            console.log(rate);
+            // console.log(rate);
                 return new Array(Math.floor(rate/2)); 
             },
 

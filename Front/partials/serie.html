@@ -31,9 +31,7 @@
             <div class="col-md-12 serie_grade">
               Note :
               <div class="stars">
-                <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i>
-                <i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i>
-                <i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>
+                <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i><i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i><i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>
               </div>
               {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
             </div>
