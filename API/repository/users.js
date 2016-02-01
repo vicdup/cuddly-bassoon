@@ -79,7 +79,7 @@ function UsersRepository () {
             function(err, model) {
                 if (err) throw err;
                 else {
-                    console.log(model.series);
+                    console.log(model);
                     res.json(model.series);
                 }
             });
