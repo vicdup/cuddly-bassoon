@@ -13,7 +13,12 @@
         <h1> {{serie.name}} </h1>
       </div>
     </div>
-    <div class="row serie_content">
+    <div class="row serie_seasons">
+        <div class="col-md-4 col-md-offset-8">
+            <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
+        </div>
+    </div>
+    <div class="row row-eq-height serie_content"> 
       <div class="serie_pic col-md-3">
         <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
       </div>
@@ -43,7 +48,7 @@
             <div class="col-md-12">
               <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group" role="group">
-                  <button class="btn btn-default" ng-click="addSerie(serie.id)">Suivre cette série</button>
+                  <button class="btn btn-primary" ng-click="addSerie(serie.id)">Suivre cette série</button>
                 </div>
               </div>
             </div>
@@ -51,11 +56,11 @@
           <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)">
             <div class="col-md-12">
             <button class="btn btn-default" ng-click="deleteSerie(serie.id)">Ne plus suivre</button><br/>
-              <a href="calendar.html">Calendar</a>
+                <a href="calendar.html"><h3>Calendar</h3></a>
             </div>
             
             <div class="col-md-12 next_releases">
-              <div class="row">
+              <div class="row darkened">
                 <div class="col-md-12" ng-repeat="episode in season.episodes.slice().reverse().slice(0,5)">
                   <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4></a>
                   <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} > 0">
@@ -74,8 +79,7 @@
         </div>
       </div>
       <div class="serie_eps col-md-4">
-        <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
-        <div class="darkened scrollable">
+        <div class="darkened scrollable episode_scroll">
           <div class="row" ng-repeat="episode in seasonToShow.episodes">
             <a ui-sref="episode({serieId : serie.id, seasonNumber : seasonToShow.season_number, episodeNumber : episode.episode_number})">
             <h4>Episode {{episode.episode_number}}</h4>{{episode.name}}</a>

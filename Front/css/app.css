@@ -54,6 +54,13 @@ h3 {
 	margin-right: 0px;
 }
 
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
 .AvatarIcon {
     max-width:20%;
 }
@@ -97,7 +104,7 @@ h3 {
 }
 /* Series page */ 
 .serie_name {
-    margin-bottom: 20px;
+    margin-bottom: -10px;
 }
 
 .serie_pic > img{
@@ -112,12 +119,20 @@ max-width: 100%;
 min-height: 300px;
 }
 
+.episode_scroll{
+    position : absolute;
+    height:100%;
+    width:100%;
+}
 
 .episode_preview > img{
 max-height: 100%;
 max-width: 70%;
 }
 
+.next_releases > .row{
+    width: 100%;
+}
 
 /* Research */
 
@@ -209,16 +224,35 @@ display:none;
 .released-episode > a > img , .followed-serie > a > img , .recommanded-serie > a > img {
     max-width:100%;
 }
-.avatar-choice > div > img {
-    width: 30%;
-}
 
+/*Signup page */
+
+.avatar-choice > div > span > h3 {
+    text-align: inherit;
+    display: inline;
+}
+.avatar-choice > div > img {
+    width: 40%;
+}
+.avatar-choice > div > h4{
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
 .avatar-choice {
     text-align: center;
-    font-size: 50px;
+    margin-bottom: 15px;
 }
 .pseudo-input > div > input {
     width:100%;
+    margin-top: 10px;
+}
+.welcome{
+    text-align : center;
+}
+.welcome > img{
+    width: 20%;
+    min-width: 200px;
+    margin-top: -40px;
 }
 
 .passed ,.passed > a {
