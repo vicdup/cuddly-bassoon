@@ -137,7 +137,13 @@ max-width: 100%;
 .episode_name{
     margin-top: 30px;
 }
-
+.episode_name > div > .row > .col-md-1 {
+    padding:0px;
+    text-align: center;
+}
+.episode_title {
+    text-align: left;
+}
 .episode_scroll{
     position : absolute;
     height:100%;

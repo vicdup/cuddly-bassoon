@@ -17,10 +17,10 @@
         </div> 
         <div class="row episode_name">
             <div class="col-md-12">
-                <h2>
-                <a ng-click="previous_episode()" href=""> &lt; </a>
-                S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
-                <a ng-click="next_episode()" href=""> &gt; </a>
+                <h2 class="row row-eq-height">
+                    <div class="col-md-1"><a ng-click="previous_episode()" href=""> &lt; </a></div>
+                    <div class="col-md-10 episode_title">S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}</div>
+                    <div class="col-md-1"><a ng-click="next_episode()" href=""> &gt; </a></div>
                 </h2>
             </div>
         </div>
