@@ -15,10 +15,10 @@
                         serie.status -->
                         <div class="row">
                             <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
-                                <img src="images/Mi3x5.jpg">
+                                <a ui-sref="serie({serieId : serie.id})"><img src="images/Mi3x5.jpg"></a>
                             </div>
                             <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
-                                <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
+                                <a ui-sref="serie({serieId : serie.id})"><img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}"></a>
                             </div>
                             
                             <div class="col-md-8 serie_info_followed">

@@ -8,10 +8,11 @@
         <div class="Left-Block col-md-7">
             <h4>Last releases</h4>
             <div class="Released row">
-                <div class="released-episode col-md-2 first-episode" ng-repeat="episode in latest_episodes | orderBy: '-ts' | limitTo:6">
-                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})"><img src="http://image.tmdb.org/t/p/w500/{{episode.seriePoster}}">
-                    </a>
+                <div class="released-episode col-md-2" ng-repeat="episode in latest_episodes | orderBy: '-ts' | limitTo:6">
+                    <a href="" ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})"><img src="http://image.tmdb.org/t/p/w500/{{episode.seriePoster}}">
                     S{{episode['seasonNumber']}}E{{episode['episodeNumber']}}
+                    </a>
+                    
                 </div>
             </div>
 

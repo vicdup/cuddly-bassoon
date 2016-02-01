@@ -7,16 +7,12 @@
     <div class="row research_content darkened">
         <div class="row">
             <div class="returned_serie col-md-6" ng-repeat="serie in series">
-                <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
-                    <img src="images/Mi3x5.jpg">
-                </div>
-                <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
-                    <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
-                </div>
-                <div class="col-md-8 serie_info_search">
-                    <div class="row serie_search_title">
-                        <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
-                        
+                    <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
+                        <a ui-sref="serie({serieId : serie.id})"><img src="images/Mi3x5.jpg"></a>
+                    </div>
+                    <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
+                        <a ui-sref="serie({serieId : serie.id})"><img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}"></a>
+
                     </div>
 
                     <div class="col-md-8 serie_info_search">
