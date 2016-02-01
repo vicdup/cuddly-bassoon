@@ -1,31 +1,38 @@
 <div  ng-controller="searchCtrl" class="content container">
-<div class="row">
-<h3 class="pull-left">Résultat de recherche pour {{query}}</h3>
-</div>
+    <div class="row">
+        <h3 class="pull-left">Résultat de recherche pour {{query}}</h3>
+    </div>
     <div class="row research_content darkened">
-                <div class="row">
+        <div class="row">
             <div class="returned_serie col-md-6" ng-repeat="serie in series">
-                    <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
-                        <img src="images/Mi3x5.jpg">
+                <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path == null">
+                    <img src="images/Mi3x5.jpg">
+                </div>
+                <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
+                    <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
+                </div>
+                <div class="col-md-8 serie_info_search">
+                    <div class="row serie_search_title">
+                        <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
+                        
                     </div>
-                    <div class="col-md-4 serie_search_pic" ng-show="serie.poster_path != null">
-                        <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
-                    </div>
-                    <div class="col-md-8 serie_info_search">
-                        <div class="row serie_search_title">
-                            <a ui-sref="serie({serieId : serie.id})">{{serie.name}}</a>
-                            
-                        </div>
                     <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)"><i class="fa fa-check"></i> suivie</div>
-                        <div class="row serie_search_tags">
-                            <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
-                                {{genre.name}}
+                    <div class="row serie_search_tags">
+                        <div class="row serie_followed_tags" ng-repeat="genre in serie.genres">
+                            {{genre.name}}
+                        </div>
+                    </div>
+                    <div class="row serie_search_grade">
+                        Note :
+                        <div class="stars">
+                            <div class="empty_stars">
+                                <img src='images/empty_stars.png' >
+                            </div>
+                            <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
+                                <img src='images/filled_stars.png' >
                             </div>
                         </div>
-                        <div class="row serie_search_grade" >
-                            Note : 
-                            <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i><i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i><i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>&nbsp ({{serie.vote_count}} votes)
-                        </div>
+                        {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
                         
                         <div class="row serie_search_description">
                             {{serie.overview.substring(0,200)}}...
@@ -33,12 +40,12 @@
                     </div>
                 </div>
             </div>
-        <div ng-show="empty == true">
-            <div class="returned_serie col-md-6">
-                <div class="row">
-                    Veuillez écrire une autre requête, celle ci ne renvoie aucun résultat !
+            <div ng-show="empty == true">
+                <div class="returned_serie col-md-6">
+                    <div class="row">
+                        Veuillez écrire une autre requête, celle ci ne renvoie aucun résultat !
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

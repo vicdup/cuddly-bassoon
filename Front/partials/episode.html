@@ -5,9 +5,8 @@
                 <h2> Fiche Episode </h2>
             </div>
         </div>
-
     </div>
-        
+    
     <div class="content container">
         <div class="row serie_name">
             <div class="col-md-12">
@@ -19,11 +18,10 @@
         <div class="row episode_name">
             <div class="col-md-12">
                 <h2>
-                    <a ng-click="previous_episode()" href=""> &lt; </a>
-                    S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
-                    <a ng-click="next_episode()" href=""> &gt; </a>
+                <a ng-click="previous_episode()" href=""> &lt; </a>
+                S{{seasonNumber}}E{{episodeNumber}} - {{episode.name}}
+                <a ng-click="next_episode()" href=""> &gt; </a>
                 </h2>
-
             </div>
         </div>
         <div class="row episode_content">
@@ -33,10 +31,14 @@
                         {{episode.overview.substring(0,400)}}...
                     </div>
                     <div class="col-md-12 episode_grade">
-                        Note : 
-
+                        Note :
                         <div class="stars">
-                        <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i><i class="fa fa-star-half-o" ng-show="getArrayHalfStar(episode.vote_average)"></i><i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(episode.vote_average) track by $index"></i>&nbsp
+                            <div class="empty_stars">
+                                <img src='images/empty_stars.png' >
+                            </div>
+                            <div class="filled_stars" style = "width: {{episode.vote_average*10}}%">
+                                <img src='images/filled_stars.png' >
+                            </div>
                         </div>
                         {{episode.vote_count}} votes
                     </div>

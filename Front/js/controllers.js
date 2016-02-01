@@ -51,11 +51,6 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
                     $scope.userFollowedSeries = apiUserDb.getFollowedSeriesIds();
                 }
             })
-            $scope.getArrayStar = apiTmdb.getArrayStar;
-
-            $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
-
-            $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
 
         } else 
         {
@@ -180,11 +175,6 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                     }
                 })
             })
-            $scope.getArrayStar = apiTmdb.getArrayStar;
-
-            $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
-
-            $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
 
 
         } else {
@@ -285,14 +275,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
         $scope.serieId = $stateParams.serieId;
         $scope.seasonNumber = $stateParams.seasonNumber;
         $scope.episodeNumber = $stateParams.episodeNumber;
-        if (typeof rate != 'undefined'){
-        $scope.getArrayStar=function(rate){
-            console.log(rate);
-            return apiTmdb.getArrayStar(rate)
-            }}
-        $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
 
-        $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
         apiTmdb.getSerieById($scope.serieId).then(function(r) {
             $scope.serie = r;
             var maxSeasonNumber = getMaxSeason(r);
@@ -514,64 +497,64 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
             };
             var monthsNames = [];
             if ($scope.currentmonth == 1){
-                monthsNames.push("December");
-                monthsNames.push("January");
-                monthsNames.push("February");
+                monthsNames.push("Décembre");
+                monthsNames.push("Janvier");
+                monthsNames.push("Février");
             }
             if ($scope.currentmonth == 2){
-                monthsNames.push("January");
-                monthsNames.push("February");
-                monthsNames.push("March");
+                monthsNames.push("Janvier");
+                monthsNames.push("Février");
+                monthsNames.push("Mars");
             }
             if ($scope.currentmonth == 3){
-                monthsNames.push("February");
-                monthsNames.push("March");
-                monthsNames.push("April");
+                monthsNames.push("Février");
+                monthsNames.push("Mars");
+                monthsNames.push("Avril");
             }
             if ($scope.currentmonth == 4){
-                monthsNames.push("March");
-                monthsNames.push("April");
-                monthsNames.push("May");
+                monthsNames.push("Mars");
+                monthsNames.push("Avril");
+                monthsNames.push("Mai");
             }
             if ($scope.currentmonth == 5){
-                monthsNames.push("April");
-                monthsNames.push("May");
-                monthsNames.push("June");
+                monthsNames.push("Avril");
+                monthsNames.push("Mai");
+                monthsNames.push("Juin");
             }
             if ($scope.currentmonth == 6){
-                monthsNames.push("May");
-                monthsNames.push("June");
-                monthsNames.push("July");
+                monthsNames.push("Mai");
+                monthsNames.push("Juin");
+                monthsNames.push("Juillet");
             }
             if ($scope.currentmonth == 7){
-                monthsNames.push("June");
-                monthsNames.push("July");
-                monthsNames.push("August");
+                monthsNames.push("Juin");
+                monthsNames.push("Juillet");
+                monthsNames.push("Aout");
             }
             if ($scope.currentmonth == 8){
-                monthsNames.push("July");
-                monthsNames.push("August");
-                monthsNames.push("September");
+                monthsNames.push("Juillet");
+                monthsNames.push("Aout");
+                monthsNames.push("Septembre");
             }
             if ($scope.currentmonth == 9){
-                monthsNames.push("August");
-                monthsNames.push("September");
-                monthsNames.push("October");
+                monthsNames.push("Aout");
+                monthsNames.push("Septembre");
+                monthsNames.push("Octobre");
             }
             if ($scope.currentmonth == 10){
-                monthsNames.push("September");
-                monthsNames.push("October");
-                monthsNames.push("November");
+                monthsNames.push("Septembre");
+                monthsNames.push("Octobre");
+                monthsNames.push("Novembre");
             }
             if ($scope.currentmonth == 11){
-                monthsNames.push("October");
-                monthsNames.push("November");
-                monthsNames.push("December");
+                monthsNames.push("Octobre");
+                monthsNames.push("Novembre");
+                monthsNames.push("Décembre");
             }
             if ($scope.currentmonth == 12){
-                monthsNames.push("November");
-                monthsNames.push("December");
-                monthsNames.push("January");
+                monthsNames.push("Novembre");
+                monthsNames.push("Décembre");
+                monthsNames.push("Janvier");
             }
             $scope.month1 = month1;
             $scope.month2 = month2;
