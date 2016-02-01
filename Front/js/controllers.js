@@ -261,7 +261,10 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
         $scope.serieId = $stateParams.serieId;
         $scope.seasonNumber = $stateParams.seasonNumber;
         $scope.episodeNumber = $stateParams.episodeNumber;
+        $scope.getArrayStar = apiTmdb.getArrayStar;
+        $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
 
+        $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
         apiTmdb.getSerieById($scope.serieId).then(function(r) {
             $scope.serie = r;
             var maxSeasonNumber = getMaxSeason(r);

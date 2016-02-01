@@ -34,15 +34,11 @@
                     </div>
                     <div class="col-md-12 episode_grade">
                         Note : 
+
                         <div class="stars">
-                                 <div class="empty_stars">
-                                    <img src='images/empty_stars.png' > 
-                                </div>
-                                <div class="filled_stars" style = "width: {{episode.vote_average*10}}%">
-                                    <img src='images/filled_stars.png' > 
-                                </div> 
+                        <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i><i class="fa fa-star-half-o" ng-show="getArrayHalfStar(episode.vote_average)"></i><i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(episode.vote_average) track by $index"></i>&nbsp
                         </div>
-                        {{episode.vote_average}}/10 avec {{episode.vote_count}} votes
+                        {{episode.vote_count}} votes
                     </div>
                     <div class="col-md-12 episode_release">
                         Sortie : {{episode.air_date}}
