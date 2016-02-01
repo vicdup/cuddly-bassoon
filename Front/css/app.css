@@ -213,9 +213,10 @@ display:none;
 /*Paramètre pour les notations*/
 /*Général*/
 .stars, .empty_stars > img , .filled_stars > img {
-    width: 150px;
-    height : 30px;
+    width: 100px;
+    height : 20px;
     box-sizing: border-box;
+    position: absolute;
 }
 .stars {    
     position : relative;
@@ -234,25 +235,28 @@ display:none;
 }
 
 /*Pour regler sur les différentes pages*/
-.search_stars, .search_stars > img {
-    width: 125px;
-    height : 25px;
+.serie_search_grade > .stars, .serie_search_grade > .stars > div > img {
+    width: 70px;
+    height : 14px;
 }
-
+.serie_search_grade > .stars > div > img{
+    position:absolute;
+}
 /*General*/
 .stars > img {
     position: absolute;
     box-sizing: border-box;
+    width: 100%
 }
 
 .empty_stars {
     z-index: 0;
-    overflow : hidden;
 }
 
 .filled_stars {
     z-index: 1;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
     width: 90%;
 }
 
