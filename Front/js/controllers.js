@@ -290,6 +290,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                         $scope.episodeNumber = parseInt($scope.episodeNumber) - 1;
                         apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
                             $scope.episode = d;
+                            $state.go('episode',{"serieId":$scope.serieId,"seasonNumber":$scope.seasonNumber,"episodeNumber":$scope.episodeNumber});
                         });
                     } else {
                         if ($scope.seasonNumber > 1) {
@@ -299,6 +300,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                                 $scope.episodeNumber = maxEpisodeNumber;
                                 apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
                                     $scope.episode = d;
+                                    $state.go('episode',{"serieId":$scope.serieId,"seasonNumber":$scope.seasonNumber,"episodeNumber":$scope.episodeNumber});
                                 });
                             })
                         }
@@ -314,6 +316,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                         $scope.episodeNumber = parseInt($scope.episodeNumber) + 1;
                         apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
                             $scope.episode = d;
+                            $state.go('episode',{"serieId":$scope.serieId,"seasonNumber":$scope.seasonNumber,"episodeNumber":$scope.episodeNumber});
                         });
                     } else { //On est au dernier episode de la saison
                         if ($scope.seasonNumber < maxSeasonNumber) { //Si on n'est pas à la dernière saison
@@ -323,6 +326,7 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                                 $scope.episodeNumber = 1;
                                 apiTmdb.getEpisodeByNumberSeasonByEpisodeId($scope.seasonNumber, $scope.serieId, $scope.episodeNumber).then(function(d) {
                                     $scope.episode = d;
+                                    $state.go('episode',{"serieId":$scope.serieId,"seasonNumber":$scope.seasonNumber,"episodeNumber":$scope.episodeNumber});
                                 });
                             })
                         }

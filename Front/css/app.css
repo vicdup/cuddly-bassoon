@@ -270,8 +270,17 @@ display:none;
 
 .released-episode > a > img , .followed-serie > a > img , .recommanded-serie > a > img {
     max-width:100%;
+    max-height:200px;
 }
-
+.released-episode, .followed-serie{
+    text-align: center;
+}
+.followed-serie{
+    margin-bottom: 20px;
+}
+.next-followed{
+    text-align: center;
+}
 /*Signup page */
 
 .avatar-choice > div > span > h3 {
@@ -404,23 +413,9 @@ a:hover > .navbar-brand {
     }
 }
 
+.empty_account_welcome{
+    text-align: center;
+    margin-top:80px;
+}
 
-/*Tests*/
-/*
-.Recommanded{
-    background-color: aqua;
-    position:absolute;
-    height : 100%;
-    width :100%;
-}
-.Released{
-    background-color: #DC2987;
-    height : 100%;
-    width :100%;
-}
-.Followed{
-    background-color: #225722;
-    bottom : 0px;
-    height : 100%;
-    width :100%;
-}*/
+
