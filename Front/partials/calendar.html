@@ -7,9 +7,24 @@
                                 <h3>{{monthsNames[0]}} </h3>
                             </div>
                             <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month1 | orderBy:'+episodeDate'">
-                                <div class="row">
-                                    <div class="col-md-12 last_episode">
-                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}</a>
+                                <div class="row" ng-if="episode['styleCSS'] == 'last_episode'">
+                                    <div class="col-md-12 passed last_episode">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'first_episode'">
+                                    <div class="col-md-12 passed first_episode">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'passed'">
+                                    <div class="col-md-12 passed">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'upcoming'">
+                                    <div class="col-md-12">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -19,9 +34,24 @@
                                 <h3>{{monthsNames[1]}} </h3>
                             </div>
                             <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month2 | orderBy:'+episodeDate'">
-                                <div class="row">
+                                <div class="row" ng-if="episode['styleCSS'] == 'last_episode'">
                                     <div class="col-md-12 last_episode">
-                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong> - {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}} - {{episode["styleCSS"]}}</a>
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'first_episode'">
+                                    <div class="col-md-12 first_episode">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'passed'">
+                                    <div class="col-md-12 passed">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'upcoming'">
+                                    <div class="col-md-12">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -32,9 +62,26 @@
                             </div>
                             <div class="col-md-12 cal-month-content darkened" ng-repeat="episode in month3 | orderBy:'+episodeDate'">
                                 <div class="row">
-                                    <div class="col-md-12 passed">
-                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}} - {{episode["styleCSS"]}} </a>
+                                    <div class="row" ng-if="episode['styleCSS'] == 'last_episode'">
+                                    <div class="col-md-12 last_episode">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
                                     </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'first_episode'">
+                                    <div class="col-md-12 first_episode">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'passed'">
+                                    <div class="col-md-12 passed">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="episode['styleCSS'] == 'upcoming'">
+                                    <div class="col-md-12">
+                                    <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})">{{episode["episodeDate"]}} - <strong>{{episode["serieName"]}} </strong>- {{episode["episodeName"]}}- S{{episode["seasonNumber"]}}E{{episode["episodeNumber"]}}- {{episode["styleCSS"]}}</a>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

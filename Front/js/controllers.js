@@ -456,17 +456,22 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                     var serieName = d.name;
                     for (var j = serie.seasons.length - 1; j >= 0; j--) {
                         apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number, serie.id).then(function(t) {
+                            console.log("t.episodes");
+                            console.log(t.episodes);
                             for (var k = t.episodes.length - 1; k >= 0; k--) {
+                                var episodedate = new Date(t.episodes[k].air_date);
+                                if (episodedate.getTime() < currentdate.getTime()){
+                                    var styleEpisode = "passed";
+                                }
+                                else{
+                                    var styleEpisode = "upcoming";
+                                };
                                 if (k == 0){
                                     var styleEpisode = "first_episode";
                                 }
-                                else if (k == serie.seasons.length - 1){
+                                else if (k == t.episodes.length - 1){
                                     var styleEpisode = "last_episode";
                                 }
-                                else{
-                                    var styleEpisode = "passed";
-                                };
-                                var episodedate = new Date(t.episodes[k].air_date);
                                 if ($scope.currentmonth == 1) {
                                     if (episodedate.getMonth() + 1 == 12 && episodedate.getFullYear() == $scope.currentyear - 1) {
                                         month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id, styleCSS : styleEpisode});

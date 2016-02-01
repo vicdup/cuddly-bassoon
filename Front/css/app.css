@@ -283,10 +283,10 @@ display:none;
 .passed ,.passed > a {
     color: #8d8d8d;
 }
-.last_episode ,.last-episode > a{
+.last_episode ,.last_episode > a{
     color: lightcoral;
 }
-.first_episode , .first-episode > a{
+.first_episode , .first_episode > a{
     color:lightgreen;
 }
 .Followed > div {
