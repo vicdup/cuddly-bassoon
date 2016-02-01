@@ -312,11 +312,18 @@ display:none;
 .passed > a:hover{
     color:#5a5a5a;
 }
-
+.navbar{
+    height:55px;
+}
+.navbar-nav{
+    margin-top: 3px;  
+}
 .logo {
     height: 50px;
 }
-
+.divLogo {
+    margin-top: 2px;
+}
 .navbar-inverse .navbar-brand{
     color: #DC2987;
 }
@@ -330,3 +337,42 @@ display:none;
 .navbar{
     margin-bottom: 15px
 }
+
+@media (max-width: 991px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+}
+

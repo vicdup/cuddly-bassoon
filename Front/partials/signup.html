@@ -2,7 +2,7 @@
     <div class="header container">
         <div class="row">
             <div class="col-md-6">
-                <h2>S'inscrire</h2>
+                <h2>Signing up</h2>
             </div>
         </div>
     </div>
@@ -10,22 +10,22 @@
         <form>
             <div class="row avatar-choice">
                 <div class="col-md-4 col-md-offset-4">
-                    <h4>Choisir un avatar</h4><br/>
+                    <h4>Pick an avatar</h4><br/>
                     <span ng-click="previousAvatar()" style = "cursor: pointer;"><h3>&lt;  </h3></span><img class="avatar-signup" src="images/avatars/{{avatarNumber}}.jpg"><span ng-click="nextAvatar()" style = "cursor: pointer;"><h3>  &gt;</h3></span><br/>
                 </div>
             </div>
             <div class="row pseudo-input">
                 <div class="col-md-4 col-md-offset-4">
-                    <input type="name" placeholder="Votre pseudo" value="Maxime" ng-model="name" id="name">
-                    <input type="email" placeholder="Votre email" value="maxime@gmail.com" ng-model="email" id="email">
+                    <input type="name" placeholder="Your pseudo" value="Maxime" ng-model="name" id="name">
+                    <input type="email" placeholder="Your email" value="maxime@gmail.com" ng-model="email" id="email">
                 </div>
             </div>
             <div class="row login">
                 <div class="col-md-4 col-md-offset-4">
                 <br/>
-                    <input type="submit" ng-click="postUser(email, name)" value="S'inscrire" class="btn btn-block btn-primary" />
+                    <input type="submit" ng-click="postUser(email, name)" value="Sign up" class="btn btn-block btn-primary" />
                     <br/>
-                    <a ui-sref="login"><button class="btn btn-block btn-default">Déjà inscrit ?</button></a>
+                    <a ui-sref="login"><button class="btn btn-block btn-default">Already signed up ?</button></a>
                 </div>
             </div>
         </form>

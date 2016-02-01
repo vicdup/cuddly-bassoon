@@ -44,16 +44,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a ui-sref="calendar">Calendrier</a></li>
-            <li><a ui-sref="followed_series">Mes séries</a></li>
+            <li><a ui-sref="calendar">Calendar</a></li>
+            <li><a ui-sref="followed_series">My series</a></li>
           </ul>
           
           <form ng-controller="indexCtrl" class="navbar-form navbar-right" role="search" ng-show="isConnected()">
             <div class="form-group">
                 <a href="#" class="account-navbar"><h4>{{user.name}}  </h4><img src='images/avatars/{{user.avatar}}.jpg' class='AvatarIcon'></a>
-              <input type="text" class="form-control" placeholder="Série" ng-model="serieName">
+              <input type="text" class="form-control" placeholder="Serie" ng-model="serieName">
             </div>
-            <button type="submit" class="btn btn-default" ng-click="searchSerieByName(serieName)">Rechercher</button>
+            <button type="submit" class="btn btn-default" ng-click="searchSerieByName(serieName)">Search</button>
             <button class="btn btn-default" ng-click="disconnect()">Disconnect</button>
           </form>
           
