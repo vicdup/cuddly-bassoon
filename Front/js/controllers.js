@@ -45,6 +45,20 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
                     $scope.userFollowedSeries = apiUserDb.getFollowedSeriesIds();
                 }
             })
+            $scope.getArrayStar = function(rate) {
+                return new Array(Math.floor(rate/2)); 
+            }
+            $scope.getArrayHalfStar = function(rate) {
+                if (Math.floor(rate/2)-Math.round(rate/2)==0){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+            $scope.getArrayEmptyStar = function(rate) {
+                return new Array(5 - Math.round(rate/2)); 
+            }
 
         } else 
         {

@@ -140,6 +140,14 @@ max-width: 70%;
 max-width: 100%;
 }
 
+.serie_search_title {
+    font-size: 1.5em;
+}
+
+.serie_search_description {
+    padding-top: 10px;
+}
+
 .research_content{
 min-height:400px;
 overflow-y: scroll;
@@ -188,6 +196,10 @@ display:none;
 .stars {    
     position : relative;
     display: inline-block;
+}
+
+.fa-star, .fa-star-half-o, .fa-star-o{
+    color: #FAB23A;
 }
 
 .empty_stars, .filled_stars {   
