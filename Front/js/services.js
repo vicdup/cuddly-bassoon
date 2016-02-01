@@ -79,6 +79,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             return followedSeriesIds
         },
         getUserByEmail: function(emailUser) {
+            console.log(emailUser);
             var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
                 console.log(response);
                 user = response.data;

@@ -6,7 +6,7 @@ var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
 cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state', '$cookies',
     function($scope, apiTmdb, $location, apiUserDb, $state, $cookies) {
-        if (Boolean(sessionStorage.connected)) {
+
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
         }
@@ -15,20 +15,18 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
             apiUserDb.disconnect();
             sessionStorage.user = "";
             sessionStorage.connected = "";
+            delete $scope.user;
             $state.go('login');
             console.log("User correctly disconnected")
         }
+        
         $scope.isConnected =function(){
-            if (Boolean(sessionStorage.connected)) {
-                $scope.user = apiUserDb.getCurrentUser();
-            }
-        return Boolean(sessionStorage.connected);
+            return Boolean(sessionStorage.connected);
         }
-        } 
-        else 
-        {
-            $state.go('login');
+        if (Boolean(sessionStorage.connected)) {
+            $scope.user = apiUserDb.getCurrentUser();
         }
+        
     }
 ]);
 
@@ -195,19 +193,21 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
     }
 ]);
 
-cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies', '$location', 
-    function($scope, $state, apiUserDb, $stateParams, $cookies, $location) {
+cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies', '$location','$window', 
+    function($scope, $state, apiUserDb, $stateParams, $cookies, $location, $window) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
         $scope.answer = "";
         $scope.doLogin = function(pseudo) {
             apiUserDb.getUserByEmail(pseudo).then(function successCallBack(r) {
                     if (apiUserDb.isAuthenticated() == true) {
-                        sessionStorage.user = JSON.stringify(r);
+                        apiUserDb.updateCurrentUser(r);
                         sessionStorage.connected = true;
-                        // $scope.isConnected = true;
-                        // $state.go('home');
+                        $scope.user=apiUserDb.getCurrentUser();
                         $location.url('home');
+                        $window.location.reload();
                         // $location.path('/home')
+
+
                     } else {
                         $scope.answer = "Wrong pseudo, Try again"
                     }
