@@ -116,7 +116,17 @@ max-width: 100%;
 .research_content{
     margin-top:10px;
 }
-
+.no-results{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.no-results > div {
+    width :100%;
+}
+.no-results > div > div{
+    margin-top:100px;
+}
 .episode_content{
     min-height: 300px;
     margin-top:15px;

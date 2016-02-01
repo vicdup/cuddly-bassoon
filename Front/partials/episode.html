@@ -2,7 +2,7 @@
     <div class="header container">
         <div class="row">
             <div class="col-md-6">
-                <h2> Fiche Episode </h2>
+                <h2> Episode </h2>
             </div>
         </div>
     </div>
@@ -31,7 +31,9 @@
                         {{episode.overview.substring(0,400)}}...
                     </div>
                     <div class="col-md-12 episode_grade">
-                        Note :
+
+                        Ratings : 
+
                         <div class="stars">
                             <div class="empty_stars">
                                 <img src='images/empty_stars.png' >
@@ -43,7 +45,7 @@
                         {{episode.vote_count}} votes
                     </div>
                     <div class="col-md-12 episode_release">
-                        Sortie : {{episode.air_date}}
+                        Release date : {{episode.air_date}}
                     </div>
                 </div>
             </div>

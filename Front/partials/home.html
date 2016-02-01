@@ -1,12 +1,12 @@
 <div class="dashboard container">
     <div class="row">
         <div class="col-md-12">
-            <h2> Bonjour {{user.name}}, </h2>
+            <h2> Hello {{user.name}}, </h2>
         </div>
     </div>
     <div class="row row-eq-height">
         <div class="Left-Block col-md-7">
-            <h4>Dernières sorties</h4>
+            <h4>Last releases</h4>
             <div class="Released row">
                 <div class="released-episode col-md-2 first-episode" ng-repeat="episode in latest_episodes | orderBy: '-ts' | limitTo:6">
                     <a ui-sref="episode({serieId : episode['serieId'], seasonNumber : episode['seasonNumber'], episodeNumber : episode['episodeNumber']})"><img src="http://image.tmdb.org/t/p/w500/{{episode.seriePoster}}">
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <h4>Séries suivies</h4>
+            <h4>Your series</h4>
             <div class="Followed row">
                 <div class="col-md-11">
                     <div class="row">
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="Right-Block col-md-5">
-            <h4>Recommandées</h4>
+            <h4>Recommanded</h4>
             <div class="Recommanded row">
                 <div class="row">
                     <div class="col-md-12">
