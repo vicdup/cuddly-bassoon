@@ -152,7 +152,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             return authenticated;
         },
 		disconnect: function() {
-			$cookies.put('CBemail','disconnected');
+			return true;
         },
         loginCookies: function(){
             if ($cookies.get('CBemail')!='disconnected' &&  typeof($cookies.get('CBemail'))!='undefined' )
