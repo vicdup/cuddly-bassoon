@@ -387,12 +387,7 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
 
             $scope.emailUser = $scope.user.email;
             $scope.series = $scope.user.series.tmdbId;
-            var seriesIds = [];
-            for (var i = $scope.user.series.length - 1; i >= 0; i--){
-                if (typeof($scope.user.series[i].tmdbId) == 'number'){
-                    seriesIds.push($scope.user.series[i].tmdbId);
-                }
-            };
+            var seriesIds = apiUserDb.getFollowedSeriesIds();
 
             var currentdate = new Date();
             $scope.currentmonth = currentdate.getMonth()+1;
