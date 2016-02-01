@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="row serie_seasons">
-        <div class="col-md-4 col-md-offset-8">
-            <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
-        </div>
+      <div class="col-md-4 col-md-offset-8">
+        <h3> <a href="" ng-click="previous_season()">&lt;</a> Saison {{seasonToShow.season_number}} <a href="" ng-click="next_season()">&gt;</a> </h3>
+      </div>
     </div>
-    <div class="row row-eq-height serie_content"> 
+    <div class="row row-eq-height serie_content">
       <div class="serie_pic col-md-3">
         <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
       </div>
@@ -31,12 +31,9 @@
             <div class="col-md-12 serie_grade">
               Note :
               <div class="stars">
-                <div class="empty_stars">
-                  <img src='images/empty_stars.png' >
-                </div>
-                <div class="filled_stars" style = "width: {{serie.vote_average*10}}%">
-                  <img src='images/filled_stars.png' >
-                </div>
+                <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i>
+                <i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i>
+                <i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>
               </div>
               {{serie.vote_average/2}}/5 ({{serie.vote_count}} votes)
             </div>
@@ -55,8 +52,8 @@
           </div>
           <div ng-show="(userFollowedSeries.indexOf(serie.id) > -1)">
             <div class="col-md-12">
-            <button class="btn btn-default" ng-click="deleteSerie(serie.id)">Ne plus suivre</button><br/>
-                <a ui-sref="calendar" style = "cursor: pointer;"><h3>Calendar</h3></a>
+              <button class="btn btn-default" ng-click="deleteSerie(serie.id)">Ne plus suivre</button><br/>
+              <a ui-sref="calendar" style = "cursor: pointer;"><h3>Calendar</h3></a>
             </div>
             
             <div class="col-md-12 next_releases">

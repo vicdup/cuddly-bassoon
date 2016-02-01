@@ -39,26 +39,17 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
                     var idSerie = r.results[0].id;
                     $location.path('serie/' + idSerie);
                 } else {
-                    $scope.empty= false;
+                        $scope.empty= false;
                     console.log($scope.empty)
                     $scope.series = r.results;
                     $scope.userFollowedSeries = apiUserDb.getFollowedSeriesIds();
                 }
             })
-            $scope.getArrayStar = function(rate) {
-                return new Array(Math.floor(rate/2)); 
-            }
-            $scope.getArrayHalfStar = function(rate) {
-                if (Math.floor(rate/2)-Math.round(rate/2)==0){
-                    return false;
-                }
-                else{
-                    return true;
-                }
-            }
-            $scope.getArrayEmptyStar = function(rate) {
-                return new Array(5 - Math.round(rate/2)); 
-            }
+            $scope.getArrayStar = apiTmdb.getArrayStar;
+
+            $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
+
+            $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
 
         } else 
         {
@@ -184,6 +175,12 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                     }
                 })
             })
+            $scope.getArrayStar = apiTmdb.getArrayStar;
+
+            $scope.getArrayHalfStar = apiTmdb.getArrayHalfStar;
+
+            $scope.getArrayEmptyStar = apiTmdb.getArrayEmptyStar;
+
 
         } else {
             $state.go('login');

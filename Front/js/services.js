@@ -39,6 +39,24 @@ cuddlyServices.service('apiTmdb', function($http) {
             return promise
         },
 
+        getArrayStar: function(rate) {
+            console.log(rate);
+                return new Array(Math.floor(rate/2)); 
+            },
+
+        getArrayHalfStar: function(rate) {
+                if (Math.floor(rate/2)-Math.round(rate/2)==0){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            },
+
+        getArrayEmptyStar: function(rate) {
+                return new Array(5 - Math.round(rate/2)); 
+            }
+
 
     };
     return apiTmdb;
