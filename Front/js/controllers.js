@@ -88,13 +88,17 @@ cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb'
         
         
         $scope.postUser = function(email,name) {
-                apiUserDb.postUser(email,name, $scope.avatarNumber).then(function(r) {
+                apiUserDb.postUser(email,name, $scope.avatarNumber).then(function successCallBack(r) {
                     console.log("user created "+ $scope.avatarNumber)
                     sessionStorage.user = JSON.stringify(r);
                     sessionStorage.connected = true;
                     // $scope.isConnected = true;
                     $state.go('home');
 
+                },
+                function errorCallBack(r){
+                    $scope.message = "Something went wrong, your email may be already used";
+                    console.log(r.data);
                 })
             };
     }
