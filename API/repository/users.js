@@ -78,7 +78,10 @@ function UsersRepository () {
             {safe: true, upsert: true, new:true},
             function(err, model) {
                 if (err) throw err;
-                else res.json(model.series);
+                else {
+                    console.log(model.series);
+                    res.json(model.series);
+                }
             });
     }
 

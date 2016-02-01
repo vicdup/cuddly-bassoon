@@ -108,6 +108,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             };
             // console.log(content);
             var promise = $http.delete(addressIp + '/API/users/' + emailUser + '/series/' + tmdbId).then(function(response) {
+                // console.log(response.data);
                 return response.data;
             })
             return promise;
