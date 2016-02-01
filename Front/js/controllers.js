@@ -241,8 +241,8 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', '$cookies', '$s
     }
 ]);
 
-cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams','$state',
-    function($scope, apiTmdb, $stateParams, $state) {
+cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams','$state', 'apiUserDb',
+    function($scope, apiTmdb, $stateParams, $state, apiUserDb) {
       // $scope.isConnected = Boolean(sessionStorage.connected);
               if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
