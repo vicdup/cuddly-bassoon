@@ -458,7 +458,6 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                         apiTmdb.getSeasonByNumberSeason(serie.seasons[j].season_number, serie.id).then(function(t) {
                             for (var k = t.episodes.length - 1; k >= 0; k--) {
                                 var episodedate = new Date(t.episodes[k].air_date);
-                                if (episodedate.getFullYear() == 2015 || episodedate.getFullYear() == 2016) {}
                                 if ($scope.currentmonth == 1) {
                                     if (episodedate.getMonth() + 1 == 12 && episodedate.getFullYear() == $scope.currentyear - 1) {
                                         month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
