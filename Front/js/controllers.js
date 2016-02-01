@@ -429,10 +429,10 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
                                     if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth - 1) {
                                         month1.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
-                                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 <= $scope.currentmonth) {
+                                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth) {
                                         month2.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
-                                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 <= $scope.currentmonth + 1) {
+                                    if (episodedate.getFullYear() == $scope.currentyear && episodedate.getMonth() + 1 == $scope.currentmonth + 1) {
                                         month3.push({episodeDate: episodedate.getDate(), serieName : serie.name, seasonNumber : t.season_number, episodeNumber : t.episodes[k].episode_number, episodeName : t.episodes[k].name, serieId : serie.id});
                                     };
                                 };
