@@ -114,7 +114,7 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                 return maxseason;
             }
             $scope.addSerie = function(tmdbId) {
-                var user = apiUserDb.getCurrentUser(sessionStorage);
+                var user = apiUserDb.getCurrentUser();
                 var emailUser = user.email;
                 apiUserDb.postSerie(emailUser, tmdbId).then(function(r) {
                     $scope.userFollowedSeries.push(tmdbId);
@@ -124,9 +124,12 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                 })
             }
             $scope.deleteSerie = function(tmdbId) {
-                var emailUser = $cookies.get('CBemail');
+                var user = apiUserDb.getCurrentUser();
+                var emailUser = user.email;
                 apiUserDb.deleteSerie(emailUser, tmdbId).then(function(r) {
                     $scope.userFollowedSeries.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
+                    user.series.splice($scope.userFollowedSeries.indexOf(tmdbId), 1);
+                    apiUserDb.updateCurrentUser(user);
                 })
             }
             $scope.previous_season = function() {
