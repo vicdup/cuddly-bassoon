@@ -30,6 +30,7 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
       // $scope.isConnected() = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
+            $scope.query=$stateParams.query;
             apiTmdb.getSerieByName($stateParams.query).then(function(r) {
                 if (r.results.length == 0) {
                     $scope.empty = true;
