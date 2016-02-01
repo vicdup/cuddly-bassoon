@@ -510,64 +510,64 @@ cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmd
             };
             var monthsNames = [];
             if ($scope.currentmonth == 1){
-                monthsNames.push("Décembre");
-                monthsNames.push("Janvier");
-                monthsNames.push("Février");
+                monthsNames.push("December");
+                monthsNames.push("January");
+                monthsNames.push("February");
             }
             if ($scope.currentmonth == 2){
-                monthsNames.push("Janvier");
-                monthsNames.push("Février");
-                monthsNames.push("Mars");
+                monthsNames.push("January");
+                monthsNames.push("February");
+                monthsNames.push("March");
             }
             if ($scope.currentmonth == 3){
-                monthsNames.push("Février");
-                monthsNames.push("Mars");
-                monthsNames.push("Avril");
+                monthsNames.push("February");
+                monthsNames.push("March");
+                monthsNames.push("April");
             }
             if ($scope.currentmonth == 4){
-                monthsNames.push("Mars");
-                monthsNames.push("Avril");
-                monthsNames.push("Mai");
+                monthsNames.push("March");
+                monthsNames.push("April");
+                monthsNames.push("May");
             }
             if ($scope.currentmonth == 5){
-                monthsNames.push("Avril");
-                monthsNames.push("Mai");
-                monthsNames.push("Juin");
+                monthsNames.push("April");
+                monthsNames.push("May");
+                monthsNames.push("June");
             }
             if ($scope.currentmonth == 6){
-                monthsNames.push("Mai");
-                monthsNames.push("Juin");
-                monthsNames.push("Juillet");
+                monthsNames.push("May");
+                monthsNames.push("June");
+                monthsNames.push("July");
             }
             if ($scope.currentmonth == 7){
-                monthsNames.push("Juin");
-                monthsNames.push("Juillet");
-                monthsNames.push("Aout");
+                monthsNames.push("June");
+                monthsNames.push("July");
+                monthsNames.push("August");
             }
             if ($scope.currentmonth == 8){
-                monthsNames.push("Juillet");
-                monthsNames.push("Aout");
-                monthsNames.push("Septembre");
+                monthsNames.push("July");
+                monthsNames.push("August");
+                monthsNames.push("September");
             }
             if ($scope.currentmonth == 9){
-                monthsNames.push("Aout");
-                monthsNames.push("Septembre");
-                monthsNames.push("Octobre");
+                monthsNames.push("August");
+                monthsNames.push("September");
+                monthsNames.push("October");
             }
             if ($scope.currentmonth == 10){
-                monthsNames.push("Septembre");
-                monthsNames.push("Octobre");
-                monthsNames.push("Novembre");
+                monthsNames.push("September");
+                monthsNames.push("October");
+                monthsNames.push("November");
             }
             if ($scope.currentmonth == 11){
-                monthsNames.push("Octobre");
-                monthsNames.push("Novembre");
-                monthsNames.push("Décembre");
+                monthsNames.push("October");
+                monthsNames.push("November");
+                monthsNames.push("December");
             }
             if ($scope.currentmonth == 12){
-                monthsNames.push("Novembre");
-                monthsNames.push("Décembre");
-                monthsNames.push("Janvier");
+                monthsNames.push("November");
+                monthsNames.push("December");
+                monthsNames.push("January");
             }
             $scope.month1 = month1;
             $scope.month2 = month2;
