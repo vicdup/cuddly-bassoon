@@ -151,6 +151,7 @@ display:none;
 
 .returned_serie {
     padding: 4px;
+    min-height: 250px;
 
 }
 
