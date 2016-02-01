@@ -6,7 +6,7 @@ var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
 cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state', '$cookies',
     function($scope, apiTmdb, $location, apiUserDb, $state, $cookies) {
-        
+        if (Boolean(sessionStorage.connected)) {
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
         }
@@ -24,7 +24,10 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
         return Boolean(sessionStorage.connected);
         }
         $scope.user = apiUserDb.getCurrentUser();
-
+        } else 
+        {
+            $state.go('login');
+        }
     }
 ]);
 
