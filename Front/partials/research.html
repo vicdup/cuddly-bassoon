@@ -24,9 +24,7 @@
                         </div>
                         <div class="row serie_search_grade" >
                             Note : 
-                            <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i>
-                            <i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i>
-                            <i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>&nbsp ({{serie.vote_count}} votes)
+                            <i class="fa fa-star" ng-repeat="i in getArrayStar(serie.vote_average) track by $index"></i><i class="fa fa-star-half-o" ng-show="getArrayHalfStar(serie.vote_average)"></i><i class="fa fa-star-o" ng-repeat="i in getArrayEmptyStar(serie.vote_average) track by $index"></i>&nbsp ({{serie.vote_count}} votes)
                         </div>
                         
                         <div class="row serie_search_description">
