@@ -31,7 +31,6 @@ cuddlyServices.service('apiTmdb', function($http) {
         },
 
         getSerieByName: function(name) {
-            console.log(encodeURIComponent(name));
             var promise = $http.get('https://api.themoviedb.org/3/search/tv?api_key=1a3f1b0a8620851f42d4b1a95494d44d&query=' + encodeURIComponent(name)).then(function(response) {
                 // console.log(response);
                 return response.data;
@@ -57,20 +56,19 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             for (i in user.series) {
                 followedSeriesIds.push(user.series[i]['tmdbId']);
             }
-            console.log(followedSeriesIds);
+            // console.log(followedSeriesIds);
             return followedSeriesIds
         },
         getUserByEmail: function(emailUser) {
-            console.log(emailUser);
+            // console.log(emailUser);
             var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
-                console.log(response);
+                //console.log(response);
                 user = response.data;
                 if (response.data == "") {
                     authenticated = false;
 
                 } else {
                     authenticated = true;
-                    console.log("coucou");
                 }
                 // console.log(authenticated);
                 return response.data;
@@ -126,7 +124,6 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
         },
         getCurrentUser: function() {
             var user=JSON.parse(sessionStorage.user);
-            console.log(user);
             return user;
         },
         updateCurrentUser: function(user) {
@@ -143,7 +140,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
             {
                 var emailUser = $cookies.get('CBemail');
                 var promise = $http.get(addressIp + '/API/users/' + emailUser).then(function successCallback(response) {
-                    console.log(response);
+                    //console.log(response);
                     user = response.data;
                     sessionStorage.user = JSON.stringify(user);
                     if (response.data == "") {
@@ -174,9 +171,6 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
 });
 
 cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $q) {
-    // not ready yet
-
-
     var recommendedSeries = {};
     var followedSeries = {};
     var recommendationService = {};
@@ -189,11 +183,10 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
     recommendationService.updateFollowedSeries = function(series, condition) {
         var deferred = $q.defer();
         if (condition) {
+            followedSeries = {};
             for (var serie in series) {
-                // console.log(serie)
                 followedSeries[series[serie].tmdbId] = true;
             };
-            // console.log(followedSeries);
             deferred.resolve("Success");
         } else {
             deferred.resolve("Error");
@@ -217,11 +210,25 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
                             recommendations[currentId] = {};
                             recommendations[currentId].score = 1;
                             recommendations[currentId].popularity = tempSimilars[i].popularity;
+                            recommendations[currentId].poster_path = tempSimilars[i].poster_path;
+                            recommendations[currentId].id = currentId;
                         }
                     };
                     completed_request++;
                     if (completed_request == Object.keys(followedSeries).length) {
-                        recommendedSeries = recommendations;
+                        var copy = recommendations;
+                        var reco_list = [];
+                        for (var i in recommendations) {
+                            var best = [0, 0];
+                            for (var key in copy) {
+                                if (recommendations[key].score > best[1]) {
+                                    best = [key, recommendations[key].score];
+                                }
+                            }
+                            reco_list.push(recommendations[best[0]]);
+                            delete copy[best[0]];
+                        }
+                        recommendedSeries = reco_list;
                         deferred.resolve("Success");
                     }
                 });

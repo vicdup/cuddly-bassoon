@@ -49,8 +49,11 @@
                     </div>
                 </div>
             </div>
-            <div class="episode_preview col-md-5">
+            <div class="episode_preview col-md-5" ng-show="episode.still_path != null">
                 <img ng-src="http://image.tmdb.org/t/p/w500/{{episode.still_path}}">
+            </div>
+            <div class="episode_preview col-md-5" ng-show="episode.still_path == null">
+                <img src="images/Mi3x5.jpg">
             </div>
         </div>
     </div>

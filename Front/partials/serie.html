@@ -19,7 +19,10 @@
       </div>
     </div>
     <div class="row row-eq-height serie_content">
-      <div class="serie_pic col-md-3">
+      <div class="serie_pic col-md-3" ng-show="serie.poster_path == null">
+        <img src="images/Mi3x5.jpg">
+      </div>
+      <div class="serie_pic col-md-3" ng-show="serie.poster_path != null">
         <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
       </div>
       <div class="serie_info col-md-5">
