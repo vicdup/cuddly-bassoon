@@ -75,10 +75,10 @@ function UsersRepository () {
         var conditions = {'email':req.params.email}
         Users.update(conditions,
             {$pull: {"series": {tmdbId: req.params.tmdbId}}},
-            {safe: true, upsert: true},
+            {safe: true, upsert: true, new:true},
             function(err, model) {
                 if (err) throw err;
-                else res.json({'message': 'successly deleted serie'});
+                else res.json(model.series);
             });
     }
 
