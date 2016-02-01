@@ -50,7 +50,7 @@
           
           <form ng-controller="indexCtrl" class="navbar-form navbar-right" role="search" ng-show="isConnected()">
             <div class="form-group">
-                <span class="account-navbar"><h4>{{user.name}}  </h4><img src='images/avatars/{{user.avatar}}.jpg' class='AvatarIcon'></span>
+                <a href="#" class="account-navbar"><h4>{{user.name}}  </h4><img src='images/avatars/{{user.avatar}}.jpg' class='AvatarIcon'></a>
               <input type="text" class="form-control" placeholder="Série" ng-model="serieName">
             </div>
             <button type="submit" class="btn btn-default" ng-click="searchSerieByName(serieName)">Rechercher</button>

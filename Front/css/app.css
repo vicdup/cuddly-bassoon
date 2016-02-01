@@ -20,7 +20,7 @@ body {
     color: #bdbdbd;
 }
 
-a , a:visited, a:active, a:visited{
+a , a:visited, a:active, a:focus{
     color: #bdbdbd;
     text-decoration: none;
 }
@@ -250,7 +250,7 @@ display:none;
 
 /*Signup page */
 
-.avatar-choice > div > span > h3 {
+.avatar-choice > div > a > h3 {
     text-align: inherit;
     display: inline;
 }
