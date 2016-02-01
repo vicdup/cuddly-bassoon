@@ -85,9 +85,6 @@ h3 {
 
 }
 
-.category_content {
-    
-}
 
 .darkened{
     border-radius: 3px;
@@ -116,12 +113,16 @@ h3 {
 max-width: 100%;
 }
 
-.serie_content, .episode_content, .research_content{
-
+.research_content{
+    margin-top:10px;
 }
 
 .episode_content{
-min-height: 300px;
+    min-height: 300px;
+    margin-top:15px;
+}
+.episode_name{
+    margin-top: 30px;
 }
 
 .episode_scroll{
@@ -250,12 +251,13 @@ display:none;
 
 /*Signup page */
 
-.avatar-choice > div > a > h3 {
+.avatar-choice > div > span > h3 {
     text-align: inherit;
     display: inline;
 }
 .avatar-choice > div > img {
     width: 40%;
+    border-radius: 3px;
 }
 .avatar-choice > div > h4{
     margin-bottom: 0px;
@@ -318,6 +320,9 @@ display:none;
     color: #FFFFFF;
 }
 
-.navbar-inverse .navbar-nav>li>a:hover {
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-form > div >a:hover {
     color: #DC2987;
+}
+.navbar{
+    margin-bottom: 15px
 }
