@@ -21,9 +21,11 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
             console.log("User correctly disconnected")
         }
         $scope.isConnected =function(){
+            if (Boolean(sessionStorage.connected)) {
+                $scope.user = apiUserDb.getCurrentUser();
+            }
         return Boolean(sessionStorage.connected);
         }
-        $scope.user = apiUserDb.getCurrentUser();
         } 
         else 
         {
