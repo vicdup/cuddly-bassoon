@@ -280,6 +280,7 @@ display:none;
 }
 .next-followed{
     text-align: center;
+    height:20px;
 }
 /*Signup page */
 
@@ -334,6 +335,9 @@ display:none;
 
 .recommanded-serie {
     padding: 0px 3px 10px 3px;
+}
+.recommanded-serie > a >img {
+    vertical-align: middle;
 }
 
 .first_episode > a:hover{
