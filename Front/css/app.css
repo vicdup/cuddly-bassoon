@@ -65,6 +65,11 @@ h3 {
     height : 40px;
     border-radius: 4px;
 }
+@media (max-width: 991px) {
+    .AvatarIcon{ 
+        margin-bottom: 5px;
+    }
+}
 .account-navbar > h4 {
     display : inline;
     vertical-align: middle;
@@ -349,9 +354,7 @@ display:none;
 }
 
 
-.navbar{
-    height:55px;
-}
+
 .navbar-nav{
     margin-top: 3px;  
 }
