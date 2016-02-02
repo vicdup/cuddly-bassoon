@@ -19,16 +19,16 @@
       </div>
     </div>
     <div class="row row-eq-height serie_content">
-      <div class="serie_pic col-md-3" ng-show="serie.poster_path == null">
+      <div class="serie_pic col-md-3" ng-show="(serie !== undefined && serie.poster_path === null)">
         <img src="images/Mi3x5.jpg">
       </div>
-      <div class="serie_pic col-md-3" ng-show="serie.poster_path != null">
+      <div class="serie_pic col-md-3" ng-show="(serie !== undefined && serie.poster_path !== null)">
         <img ng-src="http://image.tmdb.org/t/p/w500/{{serie.poster_path}}">
       </div>
       <div class="serie_info col-md-5">
         <div class="row">
           <div class="col-md-12 serie_description">
-            <p>{{serie.overview.substring(0,200)}}...</p>
+            <p>{{serie.overview.substring(0,200)}}... </p>
           </div>
           <div ng-hide="(userFollowedSeries.indexOf(serie.id) > -1)">
             <div class="col-md-12 serie_grade">
@@ -66,10 +66,10 @@
               <div class="row darkened">
                 <div class="col-md-12" ng-repeat="episode in season.episodes.slice().reverse().slice(0,5)">
                   <a ui-sref="episode({serieId : serie.id, seasonNumber : season.season_number, episodeNumber : episode.episode_number})">                                  <h4>S{{season.season_number}}E{{episode.episode_number}} - {{episode.air_date}}</h4></a>
-                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} > 0">
+                  <h4 ng-show="{{ (episode.air_date!=null)? (episode.air_date | amDifference : currentdate: 'days'):0 }} > 0">
                   &nbsp Up in {{ episode.air_date | amDifference : currentdate: 'days' }} days
                   </h4>
-                  <h4 ng-show="{{ episode.air_date | amDifference : currentdate: 'days' }} <= 0">
+                  <h4 ng-show="{{ (episode.air_date!=null)? (episode.air_date | amDifference : currentdate: 'days'):0 }} <= 0">
                   &nbsp Available !
                   </h4>
                 </div>

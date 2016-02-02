@@ -177,10 +177,15 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
                     $scope.seasonToShow = r;
                     $scope.seasonNumberToShow = $scope.seasonToShow.season_number;
                     var lastepisodedate = new Date($scope.season.episodes[$scope.season.episodes.length - 1].air_date);
-                    if ($scope.currentdate.getTime() > lastepisodedate.getTime()) {
-                        $scope.serieStatus = "Finished";
-                    } else {
-                        $scope.serieStatus = "On going";
+                    if (lastepisodedate != null) {    
+                        if ($scope.currentdate.getTime() > lastepisodedate.getTime()) {
+                            $scope.serieStatus = "Finished";
+                        } else {
+                            $scope.serieStatus = "On going";
+                        } 
+                    }
+                    else {
+                        $scope.serieStatus = "";
                     }
                 })
             })
