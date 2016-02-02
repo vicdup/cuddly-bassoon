@@ -207,11 +207,13 @@ cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $
                         if (currentId in recommendations) {
                             recommendations[currentId].score += 1;
                         } else {
-                            recommendations[currentId] = {};
-                            recommendations[currentId].score = 1;
-                            recommendations[currentId].popularity = tempSimilars[i].popularity;
-                            recommendations[currentId].poster_path = tempSimilars[i].poster_path;
-                            recommendations[currentId].id = currentId;
+                            if (!(currentId in followedSeries)){
+                                recommendations[currentId] = {};
+                                recommendations[currentId].score = 1;
+                                recommendations[currentId].popularity = tempSimilars[i].popularity;
+                                recommendations[currentId].poster_path = tempSimilars[i].poster_path;
+                                recommendations[currentId].id = currentId;
+                            }
                         }
                     };
                     completed_request++;
