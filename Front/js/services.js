@@ -6,6 +6,7 @@ var cuddlyServices = angular.module('cuddlyServices', ['ngResource', 'ngCookies'
 var addressIp = 'http://188.166.78.202:3000';
 
 cuddlyServices.service('apiTmdb', function($http) {
+    // Used to make queries to the Tmdb API
     var apiTmdb = {
         getSerieById: function(idSerie) {
             var promise = $http.get('https://api.themoviedb.org/3/tv/' + idSerie + '?api_key=1a3f1b0a8620851f42d4b1a95494d44d').then(function(response) {
@@ -46,6 +47,7 @@ cuddlyServices.service('apiTmdb', function($http) {
 
 
 cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
+    // Handle the user's data
     var user = {};
     var authenticated = false;
     var apiUserDb = {
@@ -171,6 +173,7 @@ cuddlyServices.service('apiUserDb', function($http, apiTmdb, $cookies) {
 });
 
 cuddlyServices.service('recommendations', function($http, apiUserDb, $timeout, $q) {
+    //Compute the recommended series
     var recommendedSeries = {};
     var followedSeries = {};
     var recommendationService = {};

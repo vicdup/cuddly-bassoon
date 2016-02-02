@@ -1,11 +1,14 @@
 'use strict';
 
 /* Controllers */
+/* One controller for each html page, using mostly 3 of our own services : apiUserDb, apiTmdb and recommendations*/
 
 var cuddlyControllers = angular.module('cuddlyControllers', ['ngCookies']);
 
+
 cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'apiUserDb', '$state', '$cookies', 
     function($scope, apiTmdb, $location, apiUserDb, $state, $cookies) {
+        //Handle the nav-bar menu with disconnect and search
 
         $scope.searchSerieByName = function(name) {
             $location.path('search/' + name);
@@ -25,6 +28,7 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
         }
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
+            //We stock the data of the user in the sessionStorage so that he doesn't have to relogin after a refresh
         }
         $scope.$watch(function () {
            return sessionStorage;
@@ -38,7 +42,7 @@ cuddlyControllers.controller('indexCtrl', ['$scope', 'apiTmdb', '$location', 'ap
 
 cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$location', '$state',
     function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state) {
-      // $scope.isConnected() = Boolean(sessionStorage.connected);
+      // handle the search page
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
             $scope.query=$stateParams.query;
@@ -67,6 +71,7 @@ cuddlyControllers.controller('searchCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$
 
 cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$location', '$state', '$cookies',
     function($scope, apiTmdb, apiUserDb, $stateParams, $location, $state, $cookies) {
+        //handle the signup
         if (Boolean(sessionStorage.connected)) {
             apiUserDb.disconnect();
         }
@@ -92,16 +97,16 @@ cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb'
         
         
         $scope.postUser = function(email,name) {
+            //post the new user to the API and authenticate him on the app
                 apiUserDb.postUser(email,name, $scope.avatarNumber).then(function successCallBack(r) {
                     console.log("user created "+ $scope.avatarNumber)
                     sessionStorage.user = JSON.stringify(r);
                     sessionStorage.connected = true;
-                    // $scope.isConnected = true;
                     $state.go('home');
 
                 },
                 function errorCallBack(r){
-                    $scope.message = "Something went wrong, your email may be already used";
+                    $scope.message = "Something went wrong, your email may be already used"; //the API answers with an error message if the email is already used
                 })
             };
     }
@@ -110,9 +115,6 @@ cuddlyControllers.controller('signupPageCtrl', ['$scope', 'apiTmdb', 'apiUserDb'
 cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb', '$stateParams', '$cookies', '$state',
 
     function($scope, apiTmdb, apiUserDb, $stateParams, $cookies, $state) {
-      // $scope.isConnected = Boolean(sessionStorage.connected);
-      // console.log(apiUserDb.loginCookies());
-      // apiUserDb.loginCookies().then(function(r){
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
             var getMaxSeason = function(serie) {
@@ -199,7 +201,6 @@ cuddlyControllers.controller('seriePageCtrl', ['$scope', 'apiTmdb', 'apiUserDb',
 
 cuddlyControllers.controller('loginCtrl', ['$scope', '$state', 'apiUserDb', '$stateParams', '$cookies', '$location','$window', 
     function($scope, $state, apiUserDb, $stateParams, $cookies, $location, $window) {
-      // $scope.isConnected = Boolean(sessionStorage.connected);
         $scope.answer = "";
         $scope.doLogin = function(pseudo) {
             apiUserDb.getUserByEmail(pseudo).then(function successCallBack(r) {
@@ -271,7 +272,6 @@ cuddlyControllers.controller('homeCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$co
 
 cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$stateParams','$state', 'apiUserDb',
     function($scope, apiTmdb, $stateParams, $state, apiUserDb) {
-      // $scope.isConnected = Boolean(sessionStorage.connected);
         if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
         var getMaxSeason = function(serie) {
@@ -330,8 +330,8 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
                             $scope.episode = d;
                             $state.go('episode',{"serieId":$scope.serieId,"seasonNumber":$scope.seasonNumber,"episodeNumber":$scope.episodeNumber});
                         });
-                    } else { //On est au dernier episode de la saison
-                        if ($scope.seasonNumber < maxSeasonNumber) { //Si on n'est pas à la dernière saison
+                    } else { //it's the last episode of the season
+                        if ($scope.seasonNumber < maxSeasonNumber) { //if it's not the last season
                             $scope.seasonNumber = parseInt($scope.seasonNumber) + 1;
                             apiTmdb.getSeasonByNumberSeason($scope.seasonNumber, $scope.serieId).then(function(r) {
                                 maxEpisodeNumber = r.episodes.length;
@@ -359,7 +359,6 @@ cuddlyControllers.controller('episodePageCtrl', ['$scope', 'apiTmdb', '$statePar
 
 cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$cookies', '$state',
     function($scope, apiUserDb, apiTmdb, $stateParams, $cookies, $state) {
-      // $scope.isConnected = Boolean(sessionStorage.connected);
       if (Boolean(sessionStorage.connected)) {
             $scope.user = apiUserDb.getCurrentUser();
         var getMaxSeason = function(serie) {
@@ -438,6 +437,8 @@ cuddlyControllers.controller('followedSeriesPageCtrl', ['$scope', 'apiUserDb', '
 
 cuddlyControllers.controller('calendarPageCtrl', ['$scope', 'apiUserDb', 'apiTmdb', '$stateParams', '$state', '$cookies',
     function($scope, apiUserDb, apiTmdb, $stateParams, $state, $cookies){
+    // The calendar page's goal is to get all the episodes from your followed series 
+    // and to show you which one are in the following, past or current month
         if (Boolean(sessionStorage.connected)){
             $scope.user = apiUserDb.getCurrentUser();
 
